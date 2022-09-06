@@ -1,0 +1,28 @@
+#root,
+body {
+  margin: 0;
+  display: -ms-grid;
+  display: grid;
+  min-height: 100vh;
+  -ms-grid-rows: auto 1fr auto;
+      grid-template-rows: auto 1fr auto;
+  background-color: #fbfbe4;
+}
+
+.nav {
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+.nav__container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
+
+container {
+  margin: 20px auto;
+  max-width: 1200px;
+}
+/*# sourceMappingURL=base.css.map */

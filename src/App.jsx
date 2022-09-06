@@ -1,30 +1,21 @@
-import { useEffect, useState } from "react";
-import { apiHotels } from "./constants/api";
-function App() {
-  const [hotels, setHotels] = useState([]);
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Home from "./components/Home/Home";
+import Contact from "./components/Contact/Contact";
+import Login from "./components/Forms/Login";
+import Nav from "./common/Nav";
+import Footer from "./common/Footer";
 
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const response = await fetch(apiHotels);
-        if (response.ok) {
-          const data = await response.json();
-          console.log(data);
-          setHotels(data.data);
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    }
-    fetchData();
-  }, []);
-  console.log(hotels);
+function App() {
   return (
-    <div>
-      {hotels.map(function (hotel) {
-        return hotel.attributes.name;
-      })}
-    </div>
+    <Router>
+      <Nav />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="contact" element={<Contact />} />
+        <Route path="login" element={<Login />} />
+      </Routes>
+      <Footer />
+    </Router>
   );
 }
 

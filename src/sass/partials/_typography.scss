@@ -1,0 +1,33 @@
+body,
+input {
+  font-family: $font-main;
+}
+
+.nav__logo,
+h1,
+h2 {
+  font-family: $font-secondary;
+}
+h1 {
+  color: $color-secondary;
+}
+.nav__logo,
+.nav__links > * {
+  text-decoration: none;
+}
+
+.nav__logo {
+  color: $color-main;
+  font-size: 30px;
+  @extend %darktext-shadow;
+}
+
+.nav__links,
+.hamburger__links {
+  font-size: 18px;
+  text-transform: uppercase;
+}
+.hamburger__link {
+  @extend %darktext-shadow;
+  font-weight: bold;
+}
