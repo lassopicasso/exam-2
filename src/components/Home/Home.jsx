@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Header from "../../common/Header";
 import { apiHotels } from "../../constants/api";
 import Carousel from "./Carousel";
+import Search from "./Search";
 function Home() {
   const [hotels, setHotels] = useState([]);
   const [newHotels, setNewHotels] = useState([]);
@@ -32,23 +33,16 @@ function Home() {
 
   function hotelSearch(event) {
     console.log("Search box interacts");
-    console.log(event.target.value);
-    console.log(hotels);
     let filteredSearch = hotels.filter((hotel) => {
       hotel = hotel.attributes.name.toLowerCase();
       let input = event.target.value.toLowerCase();
-      if (hotel.includes(input)) {
-        return hotel;
-      }
+      return hotel.includes(input);
     });
     console.log(filteredSearch.length);
     if (filteredSearch.length === hotels.length) {
       filteredSearch = [];
       console.log("it is ZERO!");
     }
-
-    // (filteredSearch === filteredSearch.length) === 0 ? setSearchResults([]) : setSearchResults(filteredSearch);
-    // document.querySelector(".search__results").style.opacity = "0";
     setSearchResults(filteredSearch);
   }
   return (
@@ -66,17 +60,18 @@ function Home() {
           </div>
         </div>
         <div className="home__search">
-          <button>
-            <i className="fas fa-search"></i>
-          </button>
-
-          <input type="text" placeholder="Search for a stay in Bergen" onChange={hotelSearch} />
-        </div>
-        <div className="search__results">
-          {searchResults &&
-            searchResults.map((hotel) => {
-              return <div>{hotel.attributes.name}</div>;
-            })}
+          <div className="search__input">
+            <button>
+              <i className="fas fa-search"></i>
+            </button>
+            <input type="text" placeholder="Search for a stay in Bergen" onChange={hotelSearch} />
+          </div>
+          <div className="search__results">
+            {searchResults &&
+              searchResults.slice(0, 5).map((hotel) => {
+                return <Search hotel={hotel} key={hotel.id} />;
+              })}
+          </div>
         </div>
       </main>
     </>
