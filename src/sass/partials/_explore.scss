@@ -1,0 +1,221 @@
+.explore__hero {
+  position: absolute;
+  z-index: -1;
+  height: 250px;
+  width: 100%;
+  background-image: url("../../img/explore_hero.jpg");
+  background-position: center;
+  background-size: cover;
+  opacity: 0.6;
+}
+
+.explore {
+  width: 100%;
+  margin: 20px auto;
+  h1 {
+    text-align: center;
+    margin: auto;
+    max-width: 300px;
+    background-color: rgba(255, 255, 255, 0.7);
+  }
+  .search__input {
+    display: flex;
+    justify-content: center;
+    margin: 20px auto;
+    height: 45px;
+    width: 90%;
+    max-width: 400px;
+  }
+  button,
+  input {
+    border: 1px solid $color-black;
+    @extend %darkbox-shadow;
+  }
+  input {
+    flex-grow: 2;
+    font-size: 20px;
+    padding-left: 10px;
+    border-radius: 0 5px 5px 0;
+    border-left: none;
+  }
+  .search__button {
+    border-radius: 5px 0 0 5px;
+    border-right: none;
+    padding: 0 10px;
+    .fa-search {
+      font-size: 28px;
+      color: $color-main;
+    }
+  }
+}
+
+.filterSort {
+  display: block;
+  position: relative;
+  border-radius: 10px;
+  width: 200px;
+  margin: auto;
+  z-index: 2;
+  &-active {
+    width: 95%;
+    max-width: 350px;
+  }
+  &__button {
+    display: flex;
+    padding: 5px 10px;
+    font-size: 18px;
+    align-items: center;
+    width: 100%;
+    background-color: white;
+    border-radius: 5px;
+    // background-color: white;
+    justify-content: center;
+    transition: 0.5s;
+    &__header {
+      display: flex;
+    }
+    .fas {
+      margin-left: 10px;
+      font-size: 30px;
+    }
+    &:hover,
+    &-active {
+      color: $color-main;
+      font-weight: bold;
+      border-color: $color-main;
+    }
+    &-active {
+      border-radius: 10px 10px 0 0;
+      width: 100%;
+      max-width: 400px;
+    }
+  }
+
+  form {
+    background-color: white;
+    border-radius: 0 0 10px 10px;
+    border: 1px solid $color-main;
+    border-color: $color-main;
+    position: absolute;
+    transition: 0.6s;
+    left: 50%;
+    width: 100%;
+    transform: translateX(-50%);
+  }
+
+  .filterSort__content {
+    padding: 10px 5px 20px 5px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-around;
+    h2 {
+      margin: 0px 0px 10px 0px;
+    }
+    span {
+      display: inline-block;
+      font-size: 18px;
+      margin-top: 7px;
+    }
+  }
+
+  &__filter {
+    label {
+      display: block;
+      margin-top: 10px;
+      grid-area: "price";
+    }
+    input[type="radio"] {
+      vertical-align: middle;
+      margin: -3px 3px 0 0;
+      box-shadow: none;
+      border: 1px solid black;
+      height: 18px;
+      border-radius: 0px;
+      appearance: none;
+      width: 18px;
+      &:checked {
+        background-color: $color-buttons;
+      }
+    }
+  }
+  &__sort {
+    .sortBtn {
+      padding: 2px 0px;
+      text-align: center;
+      width: 60px;
+      border: 1px solid black;
+      border-radius: 5px;
+      font-weight: bold;
+      background-color: white;
+      font-family: $font-main;
+      font-size: 16px;
+      box-shadow: none;
+      &:hover,
+      &-active {
+        background-color: $color-buttons;
+      }
+    }
+    .btn1 {
+      margin-right: 5px;
+    }
+  }
+  .submit-container {
+    text-align: center;
+    .cta {
+      margin-bottom: 20px;
+      width: 90%;
+      max-width: 250px;
+      padding: 3px 0;
+      border-radius: 5px;
+      font-family: $font-main;
+      background-color: $color-buttons;
+      font-weight: bold;
+      font-size: 18px;
+      text-transform: uppercase;
+    }
+  }
+}
+
+.cards {
+  width: 90%;
+  margin: 20px auto;
+  .card {
+    position: relative;
+  }
+  .card__carousel {
+    overflow: hidden;
+    position: relative;
+    height: 200px;
+    width: 100%;
+    .card__carousel_wrapper {
+      display: flex;
+      height: 100%;
+    }
+    .card__img {
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      background-position: center;
+      border-radius: 10px;
+    }
+    .card__buttons {
+      position: absolute;
+      display: flex;
+      gap: 2px;
+      width: 100%;
+      bottom: 0;
+      border-radius: 0 0 10px 10px;
+      overflow: hidden;
+      button {
+        border: none;
+        flex: 1;
+        font-size: 24px;
+        background-color: rgba(255, 255, 255, 0.5);
+
+        &:hover {
+          background-color: rgba(255, 255, 255, 1);
+        }
+      }
+    }
+  }
+}

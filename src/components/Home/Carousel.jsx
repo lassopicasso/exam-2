@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function Carousel({ hotel }) {
   const name = hotel.attributes.name;
@@ -8,9 +9,11 @@ function Carousel({ hotel }) {
   return (
     <div className="home__carousel-item">
       <div className="home__carousel-img" style={{ backgroundImage: `url(${image})` }}>
-        <div>
-          <span>{name}</span>
-        </div>
+        <Link to={`/details/${hotel.id}`}>
+          <div>
+            <span>{name}</span>
+          </div>
+        </Link>
       </div>
       <div className="home__carousel-text">From {price} NOK</div>
     </div>

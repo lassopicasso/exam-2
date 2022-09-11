@@ -7,6 +7,8 @@ function Home() {
   const [hotels, setHotels] = useState([]);
   const [newHotels, setNewHotels] = useState([]);
   const [searchResults, setSearchResults] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   useEffect(() => {
     async function fetchData() {
       try {
@@ -24,7 +26,9 @@ function Home() {
           setNewHotels(sortedHotels.slice(0, 4));
         }
       } catch (error) {
-        console.log(error);
+        setError(error);
+      } finally {
+        setLoading(false);
       }
     }
     fetchData();
@@ -45,6 +49,14 @@ function Home() {
     }
     setSearchResults(filteredSearch);
   }
+
+  if (loading) {
+    return <main>Loading...</main>;
+  }
+  if (error) {
+    return <main>{error}</main>;
+  }
+
   return (
     <>
       <div className="home__backgroundImg" />

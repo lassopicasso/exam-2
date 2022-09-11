@@ -30,6 +30,7 @@
   }
   &-img {
     position: relative;
+    font-family: $font-secondary;
     height: 100px;
     background-position: center;
     background-size: cover;
@@ -91,6 +92,9 @@
       justify-content: space-between;
       align-items: center;
       font-weight: bold;
+      text-decoration: none;
+      font-family: $font-secondary;
+      font-size: 18px;
       border-bottom: 1px solid black;
       img {
         width: 80px;

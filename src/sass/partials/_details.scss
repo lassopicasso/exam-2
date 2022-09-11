@@ -1,0 +1,108 @@
+.details__carousel {
+  position: relative;
+  overflow: hidden;
+  height: 240px;
+  width: 100%;
+  .carousel__wrapper {
+    position: relative;
+    display: flex;
+    height: 200px;
+    width: 400%;
+    transition: 0.5s;
+    .carousel__img {
+      position: relative;
+      background-position: center;
+      background-size: cover;
+      height: 100%;
+      width: 100%;
+    }
+  }
+  .carousel__elements {
+    z-index: 2;
+    .carousel__buttons {
+      width: 100%;
+      position: absolute;
+      margin-top: -20px;
+      left: 50%;
+      transform: translate(-50%);
+      text-align: center;
+      z-index: 10;
+      button {
+        font-size: 20px;
+        padding: 7px 50px;
+        opacity: 0.9;
+      }
+      .carousel__button-left {
+        border-radius: 10px 0 0 10px;
+      }
+      .carousel__button-right {
+        border-radius: 0 10px 10px 0;
+      }
+    }
+    span {
+      position: absolute;
+      right: 10px;
+      margin-top: -40px;
+      font-weight: bold;
+      color: white;
+      padding: 5px;
+      background-color: rgba(14, 8, 7, 0.6);
+    }
+  }
+}
+.details__text {
+  width: 90%;
+  margin: 20px auto;
+  margin-bottom: 60px;
+}
+.details__intro {
+  h1 {
+    margin: 10px 0;
+  }
+  span {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+    .fa-star {
+      color: $color-main;
+    }
+  }
+}
+
+.details__order {
+  padding: 10px;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.9);
+  &-text {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-end;
+    h2,
+    span {
+      margin: 10px;
+    }
+    span {
+      font-size: 18px;
+      font-weight: bold;
+    }
+  }
+  &-button {
+    display: flex;
+    font-size: 20px;
+    font-weight: bold;
+    border-radius: 10px;
+    padding: 10px;
+    width: 80%;
+    border: transparent;
+    background-color: $color-buttons;
+    margin: auto;
+    justify-content: center;
+    @extend %darkbox-shadow;
+    &:hover {
+      background-color: #35b982;
+    }
+  }
+}
