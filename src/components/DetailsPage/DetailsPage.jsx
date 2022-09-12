@@ -100,7 +100,7 @@ function Details() {
               <Header header="Order" type="sub" />
               <span>{`${hotel.attributes.price} NOK pp`}</span>
             </div>
-            <button className="details__order-button">Order</button>
+            <button className="cta">Order</button>
           </div>
         </div>
       </main>

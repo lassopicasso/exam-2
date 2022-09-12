@@ -86,23 +86,6 @@
     }
     span {
       font-size: 18px;
-      font-weight: bold;
-    }
-  }
-  &-button {
-    display: flex;
-    font-size: 20px;
-    font-weight: bold;
-    border-radius: 10px;
-    padding: 10px;
-    width: 80%;
-    border: transparent;
-    background-color: $color-buttons;
-    margin: auto;
-    justify-content: center;
-    @extend %darkbox-shadow;
-    &:hover {
-      background-color: #35b982;
     }
   }
 }
