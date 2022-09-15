@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import Header from "../../common/Header";
+import EnquiriesModal from "./EnquiriesModal";
 
 function Details() {
   const [hotel, setHotel] = useState("");
@@ -11,7 +12,7 @@ function Details() {
   const [maxedRight, setMaxedRight] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
+  const [showModul, setShowModul] = useState(false);
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -47,6 +48,11 @@ function Details() {
     setImageIndex(carouselMargin === 0 ? 1 : Math.abs(carouselMargin / 100) + 1);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [carouselMargin]);
+
+  function handleSubmit(data) {
+    data.preventDefault();
+    console.log(data);
+  }
 
   if (loading) {
     return <main>Loading...</main>;
@@ -100,9 +106,12 @@ function Details() {
               <Header header="Order" type="sub" />
               <span>{`${hotel.attributes.price} NOK pp`}</span>
             </div>
-            <button className="cta">Order</button>
+            <button className="cta" onClick={() => setShowModul(true)}>
+              Order
+            </button>
           </div>
         </div>
+        {showModul && <EnquiriesModal setShowModul={setShowModul} handleSubmit={handleSubmit} price={hotel.attributes.price} />}
       </main>
     </>
   );

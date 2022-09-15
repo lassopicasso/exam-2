@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import Header from "../../common/Header";
 import { apiHotels } from "../../constants/api";
 import { priceList, buttonList } from "../../constants/arrays";
-import Cards from "./Cards";
 
 function Explore() {
   const [expandFilterSort, setExpandFilterSort] = useState(false);
@@ -12,7 +11,8 @@ function Explore() {
   const [error, setError] = useState(false);
   const [priceRange, setPriceRange] = useState({ label: "No Limit", min: 0, max: Infinity });
   const [sort, setSort] = useState({ type: "date", btn: "btn1" });
-
+  const [disableLeftCarouselBtn, setDisableLeftCarouselBtn] = useState(true);
+  console.log(buttonList);
   useEffect(() => {
     async function fetchData() {
       try {
@@ -31,9 +31,12 @@ function Explore() {
     fetchData();
   }, []);
 
+  // useEffect(() => {
+  //   console.log(expandFilterSort);
+  // }, [expandFilterSort]);
+
   function handleSubmit(e) {
     e.preventDefault();
-    console.log(hotels);
 
     const priceFiltered = hotels.filter((hotel) => {
       return hotel.attributes.price <= priceRange.max && hotel.attributes.price >= priceRange.min;
@@ -60,6 +63,36 @@ function Explore() {
     }
     setSortFilterHotels(priceFiltered);
     setExpandFilterSort(!expandFilterSort);
+  }
+
+  // useEffect(() => {
+  //   console.log(carouselMargin);
+  //   // carouselMargin === 0 ? setMaxedLeft(true) : setMaxedLeft(false);
+  //   // carouselMargin - 100 === numberOfImages * -100 ? setMaxedRight(true) : setMaxedRight(false);
+  //   // console.log(numberOfImages);
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [carouselMargin]);
+
+  function handleCarousel(event, amountImages) {
+    const carousel = document.getElementById(event.currentTarget.dataset.id);
+    const carouselWrapper = carousel.querySelector(".card__carousel_wrapper");
+    const leftButton = carousel.querySelector(".carousel__button-left");
+    const rightButton = carousel.querySelector(".carousel__button-right");
+    const marginLeft = parseFloat(getComputedStyle(carouselWrapper).marginLeft.slice(0, -2));
+    const wrapperWidth = parseFloat(getComputedStyle(carouselWrapper).width.slice(0, -2));
+    const swingLength = wrapperWidth / amountImages;
+    const targetIsLeftButton = event.currentTarget.classList.contains("carousel__button-left");
+    setDisableLeftCarouselBtn(false);
+    console.log(marginLeft);
+    rightButton.disabled = marginLeft === -(wrapperWidth - swingLength * 2) ? true : false;
+    leftButton.disabled = marginLeft === -swingLength ? true : false;
+    if (targetIsLeftButton) {
+      console.log("left");
+      carouselWrapper.style.marginLeft = marginLeft + swingLength + "px";
+    } else {
+      console.log("right");
+      carouselWrapper.style.marginLeft = marginLeft - swingLength + "px";
+    }
   }
 
   if (loading) {
@@ -134,17 +167,40 @@ function Explore() {
                   })}
                 </div>
               </div>
-              <button className="cta__update cta" type="submit">
-                Update
-              </button>
+              <div className="submit-container">
+                <button className="cta__update cta" type="submit">
+                  Update
+                </button>
+              </div>
             </form>
           )}
         </div>
         <div className="cards">
           {sortFilterHotels.map((hotel, index) => {
-            return <Cards hotel={hotel} key={index} />;
+            const images = hotel.attributes.images.data;
+            return (
+              <div className="card">
+                <div className="card__carousel" id={hotel.id}>
+                  <div className="card__carousel_wrapper" style={{ width: images.length * 100 + "%" }}>
+                    {images.map((image) => {
+                      return <div className="card__img" style={{ backgroundImage: `url(${image.attributes.url})` }}></div>;
+                    })}
+                  </div>
+                  <div className="card__buttons">
+                    <button className="carousel__button-left" disabled={disableLeftCarouselBtn} data-id={hotel.id} onClick={(event) => handleCarousel(event, images.length)}>
+                      <i className="fas fa-chevron-left left" disabled></i>
+                    </button>
+                    <button className="carousel__button-right" data-id={hotel.id} onClick={(event) => handleCarousel(event, images.length)}>
+                      <i className="fas fa-chevron-right right" disabled></i>
+                    </button>
+                  </div>
+                </div>
+                <div key={index}>
+                  <div>{hotel.attributes.name}</div>
+                </div>
+              </div>
+            );
           })}
-          <button className="cta">Load More</button>
         </div>
       </main>
     </>

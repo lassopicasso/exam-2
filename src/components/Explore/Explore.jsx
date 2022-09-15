@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
 import Header from "../../common/Header";
 import { apiHotels } from "../../constants/api";
-import { priceList, buttonList } from "../../constants/arrays";
 import Cards from "./Cards";
-
+import FilterSort from "./FilterSort";
 function Explore() {
   const [expandFilterSort, setExpandFilterSort] = useState(false);
   const [hotels, setHotels] = useState([]);
@@ -33,7 +32,6 @@ function Explore() {
 
   function handleSubmit(e) {
     e.preventDefault();
-
     const priceFiltered = hotels.filter((hotel) => {
       return hotel.attributes.price <= priceRange.max && hotel.attributes.price >= priceRange.min;
     });
@@ -83,61 +81,7 @@ function Explore() {
           <button className={`filterSort__button ${expandFilterSort ? "filterSort__button-active" : ""}`} onClick={() => setExpandFilterSort(!expandFilterSort)}>
             <span>Filter & Sort </span> {expandFilterSort ? <i className="fas fa-caret-up"></i> : <i className="fas fa-caret-down"></i>}
           </button>
-          {expandFilterSort && (
-            <form onSubmit={handleSubmit}>
-              <div className="filterSort__content">
-                <div className="filterSort__filter">
-                  <Header type="sub" header="Filter" />
-                  <div className="filterSort__price">
-                    <span> Total Price </span>
-                    {priceList.map((price, index) => {
-                      return (
-                        <label key={index}>
-                          <input
-                            type="radio"
-                            name="filter_price"
-                            checked={priceRange.label === price.label}
-                            onChange={() => {
-                              setPriceRange(price);
-                            }}
-                          />
-                          {price.label}
-                        </label>
-                      );
-                    })}
-                  </div>
-                </div>
-                <div className="filterSort__sort">
-                  <Header type="sub" header="Sort" />
-                  {buttonList.map((button, index) => {
-                    return (
-                      <>
-                        <span key={index}>{button.title}</span>
-                        <div key={index - 10} className="filterSort__buttons">
-                          {button.btns.map((btn, index2) => {
-                            return (
-                              <input
-                                key={index2}
-                                className={`${btn.btn} sortBtn ${sort.type === button.type && sort.btn === btn.btn ? "sortBtn-active" : ""}`}
-                                type="button"
-                                value={btn.value}
-                                onClick={() => {
-                                  setSort({ type: button.type, btn: btn.btn });
-                                }}
-                              />
-                            );
-                          })}
-                        </div>
-                      </>
-                    );
-                  })}
-                </div>
-              </div>
-              <button className="cta__update cta" type="submit">
-                Update
-              </button>
-            </form>
-          )}
+          {expandFilterSort && <FilterSort handleSubmit={handleSubmit} setPriceRange={setPriceRange} priceRange={priceRange} sort={sort} setSort={setSort} />}
         </div>
         <div className="cards">
           {sortFilterHotels.map((hotel, index) => {
