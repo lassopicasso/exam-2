@@ -1,3 +1,4 @@
+import moment from "moment";
 import React, { useState, useEffect } from "react";
 import Header from "../../common/Header";
 import { apiHotels } from "../../constants/api";
@@ -11,11 +12,11 @@ function Explore() {
   const [error, setError] = useState(false);
   const [priceRange, setPriceRange] = useState({ label: "No Limit", min: 0, max: Infinity });
   const [sort, setSort] = useState({ type: "date", btn: "btn1" });
-
+  const apiUrl = apiHotels + "?populate=*";
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await fetch(apiHotels);
+        const response = await fetch(apiUrl);
         if (response.ok) {
           const data = await response.json();
           setHotels(data.data);
@@ -71,17 +72,17 @@ function Explore() {
       <div className="explore__hero" />
       <main className="explore">
         <Header header="Find your next stay" type="main" />
-        <div className="search__input">
-          <button className="search__button">
+        <div className="search__wrapper">
+          <label htmlFor="search__input">
             <i className="fas fa-search"></i>
-          </button>
-          <input type="text" placeholder="Search for a place" />
+          </label>
+          <input type="text" id="search__input" placeholder="Search for a place" />
         </div>
         <div className={`filterSort ${expandFilterSort ? "filterSort-active" : ""}`}>
           <button className={`filterSort__button ${expandFilterSort ? "filterSort__button-active" : ""}`} onClick={() => setExpandFilterSort(!expandFilterSort)}>
             <span>Filter & Sort </span> {expandFilterSort ? <i className="fas fa-caret-up"></i> : <i className="fas fa-caret-down"></i>}
           </button>
-          {expandFilterSort && <FilterSort handleSubmit={handleSubmit} setPriceRange={setPriceRange} priceRange={priceRange} sort={sort} setSort={setSort} />}
+          {expandFilterSort && <FilterSort key={moment} handleSubmit={handleSubmit} setPriceRange={setPriceRange} priceRange={priceRange} sort={sort} setSort={setSort} />}
         </div>
         <div className="cards">
           {sortFilterHotels.map((hotel, index) => {

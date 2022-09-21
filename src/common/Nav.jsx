@@ -1,10 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Link, useLocation } from "react-router-dom";
-
+import AuthContext from "../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 function Nav() {
   const [dropLinks, setDropLinks] = useState(false);
-
+  const [auth, setAuth] = useContext(AuthContext);
   const location = useLocation().pathname;
+
+  const navigate = useNavigate();
+
+  function logout() {
+    console.log(auth);
+    setAuth(null);
+    navigate("/");
+  }
 
   return (
     <nav className="nav">
@@ -29,9 +38,32 @@ function Nav() {
               <Link className={`hamburger__link${location === "/contact" ? "-active" : ""}`} to="/contact">
                 Contact
               </Link>
-              <Link className={`hamburger__link${location === "/login" ? "-active" : ""}`} to="/login">
-                Login
-              </Link>
+              {auth ? (
+                <>
+                  {auth.user.username === "Admin" ? (
+                    <>
+                      <Link className={`hamburger__link${location === "/messages" ? "-active" : ""}`} to="/messages">
+                        Messages
+                      </Link>
+                      <Link className={`hamburger__link${location === "/add_hotel" ? "-active" : ""}`} to="/add_hotel">
+                        Add Hotel
+                      </Link>
+                    </>
+                  ) : (
+                    <Link className={`hamburger__link${location === "/messages" ? "-active" : ""}`} to="/messages">
+                      Enquiries
+                    </Link>
+                  )}
+
+                  <button className="hamburger__link" onClick={logout}>
+                    Logout
+                  </button>
+                </>
+              ) : (
+                <Link className={`hamburger__link${location === "/login" ? "-active" : ""}`} to="/login">
+                  Login
+                </Link>
+              )}
             </div>
           )}
         </div>

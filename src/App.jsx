@@ -6,20 +6,26 @@ import Nav from "./common/Nav";
 import Footer from "./common/Footer";
 import Details from "./components/DetailsPage/DetailsPage";
 import Explore from "./components/Explore/Explore";
-
+import { AuthProvider } from "./context/AuthContext";
+import MessagePage from "./components/Admin/MessagePage";
+import AddHotelPage from "./components/Admin/AddHotelPage";
 function App() {
   return (
-    <Router>
-      <Nav />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="contact" element={<Contact />} />
-        <Route path="login" element={<Login />} />
-        <Route path="details/:id" element={<Details />} />
-        <Route path="explore" element={<Explore />} />
-      </Routes>
-      <Footer />
-    </Router>
+    <AuthProvider>
+      <Router>
+        <Nav />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="contact" element={<Contact />} />
+          <Route path="login" element={<Login />} />
+          <Route path="details/:id" element={<Details />} />
+          <Route path="explore" element={<Explore />} />
+          <Route path="messages" element={<MessagePage />} />
+          <Route path="add_hotel" element={<AddHotelPage />} />
+        </Routes>
+        <Footer />
+      </Router>
+    </AuthProvider>
   );
 }
 

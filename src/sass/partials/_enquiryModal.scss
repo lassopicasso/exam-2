@@ -1,11 +1,11 @@
 .enquiries {
   z-index: 10;
-  position: absolute;
+  position: fixed;
   inset: 0;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgba(255, 255, 255, 0.9);
+  background: linear-gradient(180deg, #d1e7ec 20%, rgba(209, 231, 236, 0.9) 35%, rgba(209, 231, 236, 1) 60%, rgba(114, 185, 196, 0.5) 70%, rgba(96, 175, 188, 0.62) 80%, rgba(68, 158, 175, 0.81) 100%);
   &__price {
     display: flex;
     align-items: baseline;
@@ -19,46 +19,79 @@
     h1 {
       margin: 10px;
     }
+    h2 {
+      margin: 0 0 10px 0;
+    }
     position: relative;
     display: flex;
-    background-color: rgba(255, 255, 255, 1);
+    background-color: rgba(255, 255, 255, 0.7);
     width: 90%;
-    max-width: 800px;
+    max-width: 600px;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     border: 1px solid black;
     padding: 10px;
     border-radius: 5px;
+    padding: 20px;
+    form {
+      // width: 100%;
+      // max-width: 700px;
+      // display: flex;
+      // flex-direction: column;
+      // align-items: center;
+      // margin: auto;
+      // .form__input {
+      //   width: 100%;
+      //   max-width: 400px;
+      // }
+    }
 
-    input,
-    textarea {
-      width: 95%;
-      max-width: 500px;
-      font-family: $font-main;
+    // input,
+    // textarea,
+    // .guests {
+    //   display: block;
+    //   width: 95%;
+    //   max-width: 400px;
+    //   font-family: $font-main;
+    //   border: 1px solid black;
+    //   @extend %darkbox-shadow;
+    //   border-radius: 5px;
+    //   padding: 5px 5px 5px 10px;
+    // }
+    .enquiries__input {
+      margin-bottom: 20px;
     }
     textarea {
       resize: none;
     }
-    input,
-    textarea,
-    .guests {
-      border: 1px solid black;
-      @extend %darkbox-shadow;
-      margin-bottom: 20px;
-      border-radius: 5px;
-      padding: 5px 5px 5px 10px;
-    }
 
+    .error-input {
+      color: red;
+    }
     input[type="number"] {
       text-align: center;
     }
     .date {
+      font-weight: bold;
       text-align: center;
+    }
+    .react-datepicker__day {
+      &--in-range,
+      &--in-range,
+      &--in-selecting-range,
+      &--keyboard-selected {
+        background-color: $color-main;
+        transition: 1s;
+      }
+    }
+    label {
+      display: block;
     }
     .enquiries__button {
       display: flex;
       gap: 10px;
+      width: 80%;
     }
 
     .guests__container {
@@ -68,18 +101,21 @@
         border: 1px solid black;
         font-size: 14px;
         text-align: center;
+        background: white;
+        width: 95%;
       }
       .guests__expand {
         z-index: 10;
         position: absolute;
         top: 54px;
+        // border: 1px solid black;
+        // border-radius: 5px;
+        // background: white;
         width: 95%;
-        border: 1px solid black;
-        border-radius: 5px;
-        background: white;
-        width: 90%;
-        padding: 15px 10px 10px 10px;
+        @extend %darkbox-shadow;
+        // padding: 15px 10px 10px 10px;
         input {
+          font-weight: bold;
           padding: 4px;
           width: 20px;
           text-align: center;
@@ -88,7 +124,19 @@
           display: flex;
           justify-content: space-between;
           align-items: center;
-          margin-bottom: 12px;
+          background: white;
+          width: 100%;
+          padding: 8px;
+          border-radius: 5px;
+
+          // margin-bottom: 12px;
+          border: 1px solid black;
+          .guest__label-small {
+            font-size: 12px;
+          }
+          div {
+            display: flex;
+          }
           .fas {
             padding: 5px;
           }

@@ -1,0 +1,57 @@
+/* Search Input */
+.search__wrapper {
+  display: flex;
+  height: 45px;
+  width: 90%;
+  max-width: 400px;
+  margin: 20px auto;
+  label,
+  #search__input {
+    border: 1px solid $color-black;
+    @extend %darkbox-shadow;
+  }
+  #search__input {
+    flex: 1;
+    font-size: 20px;
+    padding-left: 10px;
+    border-radius: 0 5px 5px 0;
+    border-left: none;
+  }
+  label {
+    display: flex;
+    border-radius: 5px 0 0 5px;
+    border-right: none;
+    padding: 0 10px;
+    background-color: rgba(239, 239, 240, 1);
+    .fa-search {
+      margin: auto;
+      font-size: 28px;
+      color: $color-main;
+    }
+  }
+}
+
+/* Forms - enquiry, contact, add hotel*/
+.form {
+  width: 100%;
+  max-width: 700px;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  align-items: center;
+
+  &__input--wrapper {
+    width: 100%;
+    max-width: 400px;
+  }
+  .input {
+    display: block;
+    width: 95%;
+    max-width: 400px;
+    font-family: $font-main;
+    border: 1px solid black;
+    border-radius: 5px;
+    @extend %darkbox-shadow;
+    padding: 5px 5px 5px 10px;
+  }
+}

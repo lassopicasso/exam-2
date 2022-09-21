@@ -1,55 +1,80 @@
-import React from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { apiAuth } from "../../constants/api";
+import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+import AuthContext from "../../context/AuthContext";
 
+const schema = yup.object().shape({
+  email: yup.string().required("Please enter your email"),
+  password: yup.string().required("Please enter your password").min(5, "Minimum 5 characters"),
+});
 function Login() {
-  function checkInput(event) {
-    event.preventDefault();
-    const email = document.querySelector("#email").value;
-    const password = document.querySelector("#password").value;
-    async function login() {
-      let data = JSON.stringify({
-        identifier: email,
-        password: password,
-      });
-      const options = {
-        method: "POST",
-        body: data,
-        headers: {
-          "Content-Type": "application/json",
-        },
-      };
-      try {
-        const response = await fetch(apiAuth, options);
-        const json = await response.json();
+  const [auth, setAuth] = useContext(AuthContext);
+  const [loginFailed, setLoginFailed] = useState(false);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(schema),
+  });
 
-        console.log(json.user);
-      } catch (error) {
-        console.log(error);
-      }
-      console.log(data);
-      console.log(options);
+  const navigate = useNavigate();
+  useEffect(() => {
+    console.log(auth);
+    if (auth) {
+      navigate("/messages");
     }
-    login();
+    // eslint-disable-next-line
+  }, [auth]);
+
+  async function onSubmit(input) {
+    // event.preventDefault();
+    let data = JSON.stringify({
+      identifier: input.email,
+      password: input.password,
+    });
+    const options = {
+      method: "POST",
+      body: data,
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    try {
+      const response = await fetch(apiAuth, options);
+      const json = await response.json();
+      console.log(json);
+      if (json.user) {
+        setLoginFailed(false);
+        setAuth(json);
+      } else {
+        setLoginFailed(true);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   return (
     <>
-      <div className="form__container">
+      <div className="login">
         <h1>Login</h1>
-        <div className="form__error-message"></div>
-        <form>
-          <label htmlFor="email" className="label-email">
-            Email:
-          </label>
-          <input type="text" id="email" />
-          <p className="email-error input-error">Format: "example@example.com"</p>
-          <label htmlFor="password" className="label-password">
-            Password:
-          </label>
-          <input type="password" id="password" />
-          <p className="password-error input-error">Minimum 3 characters</p>
-
-          <button type="submit" className="btn cta" onClick={(event) => checkInput(event)}>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          {loginFailed && <div className="login__error--login">The email or password is invalid. Please try again.</div>}
+          <div>
+            <label className="login__label">Email: </label>
+            <input {...register("email")} type="email" id="email" />
+            {errors.email && <span className="error-input">{errors.email.message}</span>}
+          </div>
+          <div>
+            <label className="login__label">Password:</label>
+            <input {...register("password")} type="password" id="password" />
+            {errors.password && <span className="error-input">{errors.password.message}</span>}
+          </div>
+          <button type="submit" className="btn cta">
             Login
           </button>
         </form>

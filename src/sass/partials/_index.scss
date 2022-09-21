@@ -77,10 +77,6 @@
   transform: translateX(-50%);
   width: 90%;
   max-width: 400px;
-  .search__input {
-    display: flex;
-    height: 45px;
-  }
   .search__results {
     background-color: rgba(255, 255, 255, 0.8);
     border-radius: 5px;
@@ -94,6 +90,7 @@
       font-weight: bold;
       text-decoration: none;
       font-family: $font-secondary;
+      color: $color-black;
       font-size: 18px;
       border-bottom: 1px solid black;
       img {
@@ -106,27 +103,6 @@
         color: $color-secondary;
         background-color: rgba(0, 255, 255, 1);
       }
-    }
-  }
-  button,
-  input {
-    border: 1px solid $color-black;
-    @extend %darkbox-shadow;
-  }
-  input {
-    flex-grow: 2;
-    font-size: 20px;
-    padding-left: 10px;
-    border-radius: 0 5px 5px 0;
-    border-left: none;
-  }
-  button {
-    border-radius: 5px 0 0 5px;
-    border-right: none;
-    padding: 0 10px;
-    .fa-search {
-      font-size: 28px;
-      color: $color-main;
     }
   }
 }

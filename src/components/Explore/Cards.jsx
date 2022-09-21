@@ -20,8 +20,8 @@ function Cards({ hotel }) {
     <div className="card">
       <div className="card__carousel" id={hotel.id}>
         <div className="card__carousel_wrapper" style={{ width: images.length * 100 + "%", marginLeft: `${carouselMargin}%` }}>
-          {images.map((image) => {
-            return <div className="card__img" style={{ backgroundImage: `url(${image.attributes.url})` }}></div>;
+          {images.map((image, index) => {
+            return <div className="card__img" key={index} style={{ backgroundImage: `url(${image.attributes.url})` }}></div>;
           })}
         </div>
         <div className="card__buttons">

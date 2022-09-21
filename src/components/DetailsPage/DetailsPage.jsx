@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import Header from "../../common/Header";
+import { apiEnquiry } from "../../constants/api";
 import EnquiriesModal from "./EnquiriesModal";
 
 function Details() {
@@ -15,7 +16,11 @@ function Details() {
   const [showModul, setShowModul] = useState(false);
   const { id } = useParams();
   const navigate = useNavigate();
-
+  const [errorName, setErrorName] = useState(false);
+  const [errorEmail, setErrorEmail] = useState(false);
+  const [errorDate, setErrorDate] = useState(false);
+  const [dateRange, setDateRange] = useState([null, null]);
+  const [bookingPrice, setBookingPrice] = useState(null);
   if (!id) {
     navigate("/");
   }
@@ -27,9 +32,9 @@ function Details() {
         const response = await fetch(pageUrl);
         if (response.ok) {
           const data = await response.json();
-          console.log(data.data);
           setHotel(data.data);
           setImages(data.data.attributes.images.data);
+          setBookingPrice(data.data.attributes.price);
         }
       } catch (error) {
         setError(error.message);
@@ -44,14 +49,58 @@ function Details() {
   useEffect(() => {
     carouselMargin === 0 ? setMaxedLeft(true) : setMaxedLeft(false);
     carouselMargin - 100 === images.length * -100 ? setMaxedRight(true) : setMaxedRight(false);
-    console.log(carouselMargin);
     setImageIndex(carouselMargin === 0 ? 1 : Math.abs(carouselMargin / 100) + 1);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [carouselMargin]);
 
-  function handleSubmit(data) {
-    data.preventDefault();
-    console.log(data);
+  async function handleSubmit(event) {
+    event.preventDefault();
+    const inputName = document.querySelector("#name").value.trim();
+    const inputEmail = document.querySelector("#email").value.trim();
+    const inputDate = document.querySelector("#date").value;
+    const inputAdult = document.querySelector("#adult").value;
+    const inputChildren = document.querySelector("#children").value;
+    const inputRoom = document.querySelector("#room").value;
+    const inputMessage = document.querySelector("#message").value;
+    const validated = validationForm(inputName, inputEmail);
+    console.log(validated);
+    if (validated) {
+      let data = JSON.stringify({
+        data: { hotel: hotel.attributes.name, name: inputName, email: inputEmail, date: inputDate, message: inputMessage, adult: inputAdult, children: inputChildren, room: inputRoom, price: bookingPrice },
+      });
+      const options = {
+        method: "POST",
+        body: data,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
+      try {
+        const response = await fetch(apiEnquiry, options);
+        const json = await response.json();
+        console.log(json);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  }
+
+  function validationForm(inputName, inputEmail) {
+    //Only check if name, email and booking dates are valid. Guests has a valid default and message is optional.
+    let nameValid = inputName.length >= 3 ? true : false;
+    if (!nameValid) {
+      setErrorName(true);
+    }
+    let bookingValid = (dateRange[1] - dateRange[0]) / 8.64e7 >= 1 ? true : false;
+    if (!bookingValid) {
+      setErrorDate(true);
+    }
+    const emailExpression = /\S+@\S+\.\S+/;
+    let emailValid = emailExpression.test(inputEmail) ? true : false;
+    if (!emailValid) {
+      setErrorEmail(true);
+    }
+    return nameValid && bookingValid && emailValid ? true : false;
   }
 
   if (loading) {
@@ -65,8 +114,8 @@ function Details() {
       <main>
         <div className="details__carousel">
           <div className="carousel__wrapper" style={{ marginLeft: `${carouselMargin}%` }}>
-            {images.map((image) => {
-              return <div className="carousel__img" key={image.id} style={{ backgroundImage: `url(${image.attributes.url})` }}></div>;
+            {images.map((image, index) => {
+              return <div className="carousel__img" key={index} style={{ backgroundImage: `url(${image.attributes.url})` }}></div>;
             })}
           </div>
           <div className="carousel__elements">
@@ -111,7 +160,23 @@ function Details() {
             </button>
           </div>
         </div>
-        {showModul && <EnquiriesModal setShowModul={setShowModul} handleSubmit={handleSubmit} price={hotel.attributes.price} />}
+        {showModul && (
+          <EnquiriesModal
+            setShowModul={setShowModul}
+            handleSubmit={handleSubmit}
+            price={hotel.attributes.price}
+            bookingPrice={bookingPrice}
+            setBookingPrice={setBookingPrice}
+            errorName={errorName}
+            setErrorName={setErrorName}
+            errorEmail={errorEmail}
+            setErrorEmail={setErrorEmail}
+            dateRange={dateRange}
+            setDateRange={setDateRange}
+            errorDate={errorDate}
+            setErrorDate={setErrorDate}
+          />
+        )}
       </main>
     </>
   );

@@ -9,16 +9,17 @@ function Home() {
   const [searchResults, setSearchResults] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const apiUrl = apiHotels + "?populate=*";
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await fetch(apiHotels);
+        const response = await fetch(apiUrl);
         if (response.ok) {
           const data = await response.json();
           console.log(data.data);
           let sortedHotels = data.data
             .map((hotel) => {
-              return { ...hotel, date: new Date(hotel.attributes.createdAt) };
+              return { ...hotel, date: new Date(hotel.attributes.publishedAt) };
             })
             .sort((a, b) => b.date - a.date);
           console.log(newHotels);
@@ -72,11 +73,11 @@ function Home() {
           </div>
         </div>
         <div className="home__search">
-          <div className="search__input">
-            <button>
+          <div className="search__wrapper">
+            <label htmlFor="search__input">
               <i className="fas fa-search"></i>
-            </button>
-            <input type="text" placeholder="Search for a stay in Bergen" onChange={hotelSearch} />
+            </label>
+            <input type="text" id="search__input" placeholder="Search for a stay in Bergen" onChange={hotelSearch} />
           </div>
           <div className="search__results">
             {searchResults &&
