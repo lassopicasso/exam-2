@@ -17,17 +17,18 @@ function ContactCard(props) {
 
   useEffect(() => {
     async function updateRead() {
-      const data = JSON.stringify({
+      let data = JSON.stringify({
         data: { read: read },
       });
+      console.log(data);
       const options = {
         method: "PUT",
         body: data,
         headers: {
+          "Content-Type": "application/json",
           Authorization: `Bearer ${props.user.jwt} `,
         },
       };
-      console.log(data);
       try {
         const response = await fetch(api, options);
         console.log(response);

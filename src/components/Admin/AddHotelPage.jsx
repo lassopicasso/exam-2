@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import Header from "../../common/Header";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { apiHotels } from "../../constants/api";
+import AuthContext from "../../context/AuthContext";
+
 const schema = yup.object().shape({
   name: yup.string().required("Enter hotel name").min(5, "Minimum 5 characters"),
   price: yup.number().integer().typeError("Enter price"),
@@ -14,6 +16,7 @@ const schema = yup.object().shape({
 });
 
 function AddHotelPage() {
+  const user = useContext(AuthContext)[0];
   const {
     register,
     handleSubmit,
@@ -48,6 +51,7 @@ function AddHotelPage() {
       headers: {
         "Content-Type": "multipart/form-data",
         // "Content-Type": "application/json",
+        Authorization: `Bearer ${user.jwt} `,
       },
     };
     try {

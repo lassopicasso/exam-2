@@ -24,10 +24,8 @@ function EnquiryCard(props) {
     const options = {
       method: "PUT",
       body: data,
-      // headers: {
-      //   "Content-Type": "application/json",
-      // },
       headers: {
+        "Content-Type": "application/json",
         Authorization: `Bearer ${props.user.jwt} `,
       },
     };
