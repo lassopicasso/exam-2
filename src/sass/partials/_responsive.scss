@@ -8,8 +8,17 @@
   .cards {
     .card {
       display: flex;
+      &__carousel {
+        height: 100%;
+      }
       &__text {
         display: flex;
+        align-items: flex-end;
+        &--text {
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+        }
       }
     }
   }

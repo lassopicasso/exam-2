@@ -38,6 +38,7 @@ function ContactCard(props) {
       }
     }
     updateRead();
+    // eslint-disable-next-line
   }, [read]);
 
   if (props.filter === "unread" && read === true) {

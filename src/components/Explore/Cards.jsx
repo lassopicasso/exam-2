@@ -34,7 +34,7 @@ function Cards({ hotel }) {
         </div>
       </div>
       <div className="card__text">
-        <div>
+        <div className="card__text--text">
           <Header type="sub" header={name} />
 
           <span>{distance} km to downtown</span>
@@ -44,7 +44,7 @@ function Cards({ hotel }) {
 
           <span className="card__price">From {price} NOK </span>
         </div>
-        <div>
+        <div className="card__text--button">
           <Link className="cta" to={`/details/${hotel.id}`}>
             Details
           </Link>
