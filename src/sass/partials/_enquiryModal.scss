@@ -34,50 +34,11 @@
     padding: 10px;
     border-radius: 5px;
     padding: 20px;
-    form {
-      // width: 100%;
-      // max-width: 700px;
-      // display: flex;
-      // flex-direction: column;
-      // align-items: center;
-      // margin: auto;
-      // .form__input {
-      //   width: 100%;
-      //   max-width: 400px;
-      // }
-    }
 
-    // input,
-    // textarea,
-    // .guests {
-    //   display: block;
-    //   width: 95%;
-    //   max-width: 400px;
-    //   font-family: $font-main;
-    //   border: 1px solid black;
-    //   @extend %darkbox-shadow;
-    //   border-radius: 5px;
-    //   padding: 5px 5px 5px 10px;
-    // }
-    .enquiries__input {
-      margin-bottom: 20px;
-    }
-    textarea {
-      resize: none;
-    }
-
-    .error-input {
-      color: red;
-    }
-    input[type="number"] {
-      text-align: center;
-    }
     .date {
-      font-weight: bold;
       text-align: center;
     }
     .react-datepicker__day {
-      &--in-range,
       &--in-range,
       &--in-selecting-range,
       &--keyboard-selected {
@@ -85,9 +46,7 @@
         transition: 1s;
       }
     }
-    label {
-      display: block;
-    }
+
     .enquiries__button {
       display: flex;
       gap: 10px;
@@ -96,10 +55,7 @@
 
     .guests__container {
       position: relative;
-
       .guests {
-        border: 1px solid black;
-        font-size: 14px;
         text-align: center;
         background: white;
         width: 95%;
@@ -108,40 +64,33 @@
         z-index: 10;
         position: absolute;
         top: 54px;
-        // border: 1px solid black;
-        // border-radius: 5px;
-        // background: white;
         width: 95%;
         @extend %darkbox-shadow;
-        // padding: 15px 10px 10px 10px;
-        input {
-          font-weight: bold;
-          padding: 4px;
-          width: 20px;
-          text-align: center;
-        }
-        .guest__expand_input {
+        .guest__expand--wrapper {
           display: flex;
           justify-content: space-between;
           align-items: center;
           background: white;
-          width: 100%;
+          width: 98%;
           padding: 8px;
           border-radius: 5px;
-
-          // margin-bottom: 12px;
           border: 1px solid black;
           .guest__label-small {
             font-size: 12px;
           }
-          div {
-            display: flex;
-          }
           .fas {
             padding: 5px;
           }
-          input {
+          .guest__expand--input {
+            align-items: center;
             margin: 0 5px 0 5px;
+            input {
+              font-size: 16px;
+              padding: 4px;
+              width: 20px;
+              text-align: center;
+              align-items: center;
+            }
           }
         }
       }

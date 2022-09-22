@@ -24,6 +24,7 @@ function Home() {
             .sort((a, b) => b.date - a.date);
           console.log(newHotels);
           setHotels(sortedHotels);
+          console.log(sortedHotels);
           setNewHotels(sortedHotels.slice(0, 4));
         }
       } catch (error) {
@@ -81,7 +82,7 @@ function Home() {
           </div>
           <div className="search__results">
             {searchResults &&
-              searchResults.slice(0, 5).map((hotel) => {
+              searchResults.slice(0, 4).map((hotel) => {
                 return <Search hotel={hotel} key={hotel.id} />;
               })}
           </div>

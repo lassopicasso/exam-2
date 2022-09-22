@@ -2,9 +2,10 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 function Carousel({ hotel }) {
+  console.log(hotel);
   const name = hotel.attributes.name;
   const price = hotel.attributes.price;
-  const image = hotel.attributes.image.data !== null ? hotel.attributes.image.data.attributes.url : "";
+  const image = hotel.attributes.images.data !== null ? hotel.attributes.images.data[0].attributes.url : "";
 
   return (
     <div className="home__carousel-item">

@@ -1,1 +1,55 @@
-/*Nav*/
+@media screen and (min-width: 500px) {
+  .home__carousel-content {
+    width: 150%;
+  }
+}
+
+@media screen and (min-width: 600px) {
+  .cards {
+    .card {
+      display: flex;
+      &__text {
+        display: flex;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 800px) {
+  /*Nav*/
+  .nav {
+    &__links {
+      display: flex;
+      gap: 20px;
+    }
+    &__hamburger {
+      display: none;
+    }
+  }
+
+  /*Home*/
+  .home__main {
+    margin: 0 auto 20px auto;
+  }
+  .home__carousel {
+    margin: auto;
+    border-radius: 0 0 10px 10px;
+    width: 800px;
+    height: 200px;
+    &-wrapper {
+      overflow: auto;
+    }
+    &-content {
+      width: 100%;
+    }
+    &-img {
+      height: 120px;
+    }
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .nav__container {
+    max-width: 1100px;
+  }
+}

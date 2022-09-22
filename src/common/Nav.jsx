@@ -21,15 +21,22 @@ function Nav() {
         <Link to="/" className="nav__logo">
           Holidaze
         </Link>
-        {/* <div className="nav__links">
-          <Link to="/">Home</Link>
-          <Link to="contact">Contact</Link>
-        </div> */}
+        <div className="nav__links">
+          <Link to="/" className={`nav__link${location === "/" ? "-active" : ""}`}>
+            Home
+          </Link>
+          <Link to="/explore" className={`nav__link${location === "/explore" ? "-active" : ""}`}>
+            Explore
+          </Link>
+          <Link to="/explore" className={`nav__link${location === "/explore" ? "-active" : ""}`}>
+            <i className="fas fa-user"></i>
+          </Link>
+        </div>
         <div className="nav__hamburger" onClick={() => setDropLinks(!dropLinks)}>
           <i className="fas fa-bars"></i>
           {dropLinks && (
             <div className="hamburger__links">
-              <Link className={`hamburger__link${location === "/" ? "-active" : ""}`} to="/">
+              <Link className={`hamburger__lin${location === "/" ? "-active" : ""}`} to="/">
                 Home
               </Link>
               <Link className={`hamburger__link${location === "/explore" ? "-active" : ""}`} to="/explore">

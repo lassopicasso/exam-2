@@ -31,17 +31,15 @@ function AddHotelPage() {
 
     Array.from(images).forEach((image) => {
       console.log(image);
-      formData.append("data.images", image, image.name);
+      formData.append("files.images", image, image.name);
     });
 
     const data = JSON.stringify({
-      data: {
-        name: input.name,
-        price: input.price,
-        about: input.about,
-        facilities: input.facilities,
-        distance: input.distance,
-      },
+      name: input.name,
+      price: input.price,
+      about: input.about,
+      facilities: input.facilities,
+      distance: input.distance,
     });
     formData.append("data", data);
 
@@ -49,7 +47,7 @@ function AddHotelPage() {
       method: "POST",
       body: formData,
       headers: {
-        "Content-Type": "multipart/form-data",
+        // "Content-Type": "multipart/form-data",
         // "Content-Type": "application/json",
         Authorization: `Bearer ${user.jwt} `,
       },
@@ -67,36 +65,36 @@ function AddHotelPage() {
     <main>
       <Header type="main" header="Add Hotel" />
       <form className="form add-hotel" onSubmit={handleSubmit(onSubmit)}>
-        <div>
+        <div className="form__input--wrapper">
           <label>Hotel Name</label>
-          <input {...register("name")} type="text" />
+          <input className="input" {...register("name")} type="text" />
           {errors.name && <span className="error-input">{errors.name.message}</span>}
         </div>
-        <div className="add-hotel__small--input">
-          <div>
+        <div className="form__small-input--wrapper ">
+          <div className="form__input--wrapper">
             <label>Price</label>
-            <input {...register("price")} type="number" />
+            <input className="input" {...register("price")} type="number" />
             {errors.price && <span className="error-input">{errors.price.message}</span>}
           </div>
-          <div>
+          <div className="form__input--wrapper">
             <label>Distance</label>
-            <input {...register("distance")} type="number" step="0.01" />
+            <input className="input" {...register("distance")} type="number" step="0.01" />
             {errors.distance && <span className="error-input">{errors.distance.message}</span>}
           </div>
         </div>
-        <div>
+        <div className="form__input--wrapper">
           <label>About</label>
-          <textarea {...register("about")} rows="5" />
+          <textarea className="input" {...register("about")} rows="5" />
           {errors.about && <span className="error-input">{errors.about.message}</span>}
         </div>
-        <div>
+        <div className="form__input--wrapper">
           <label>Facilities</label>
-          <textarea {...register("facilities")} rows="5" />
+          <textarea className="input" {...register("facilities")} rows="5" />
           {errors.facilities && <span className="error-input">{errors.facilities.message}</span>}
         </div>
         <div>
           <label>Images</label>
-          <input {...register("images")} type="file" id="image" className="image-input" accept="image/png, image/jpeg" multiple />
+          <input className="input image-input" {...register("images")} type="file" id="image" accept="image/png, image/jpeg" multiple />
           {errors.images && <span className="error-input">{errors.images.message}</span>}
         </div>
         <button type="submit" className="cta">

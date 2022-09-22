@@ -39,10 +39,13 @@
   flex-direction: column;
   margin: auto;
   align-items: center;
-
+  label {
+    font-weight: bold;
+  }
   &__input--wrapper {
     width: 100%;
     max-width: 400px;
+    margin-bottom: 10px;
   }
   .input {
     display: block;
@@ -52,6 +55,25 @@
     border: 1px solid black;
     border-radius: 5px;
     @extend %darkbox-shadow;
-    padding: 5px 5px 5px 10px;
+    padding: 5px;
+    font-size: 16px;
+    &::placeholder {
+      color: black;
+    }
+  }
+  textarea {
+    resize: none;
+  }
+  .error-input {
+    color: red;
+  }
+
+  .form__small-input--wrapper {
+    display: flex;
+    width: 50%;
+    gap: 10px;
+    .input {
+      width: 90%;
+    }
   }
 }

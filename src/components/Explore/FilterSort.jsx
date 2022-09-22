@@ -27,13 +27,13 @@ function FilterSort({ handleSubmit, priceRange, setPriceRange, sort, setSort }) 
           <Header type="sub" header="Sort" />
           {buttonList.map((button, index) => {
             return (
-              <>
-                <span key={index}>{button.title}</span>
+              <div key={index}>
+                <span>{button.title}</span>
                 <div className="filterSort__buttons">
-                  {button.btns.map((btn, index2) => {
+                  {button.btns.map((btn, index) => {
                     return (
                       <input
-                        key={index2}
+                        key={index}
                         className={`${btn.btn} sortBtn ${sort.type === button.type && sort.btn === btn.btn ? "sortBtn-active" : ""}`}
                         type="button"
                         value={btn.value}
@@ -44,7 +44,7 @@ function FilterSort({ handleSubmit, priceRange, setPriceRange, sort, setSort }) 
                     );
                   })}
                 </div>
-              </>
+              </div>
             );
           })}
         </div>

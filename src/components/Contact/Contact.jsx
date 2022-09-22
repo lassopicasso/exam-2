@@ -47,22 +47,22 @@ function Contact() {
       <form className="form contact" onSubmit={handleSubmit(onSubmit)}>
         <div className="form__input--wrapper">
           <label>Name</label>
-          <input type="text" {...register("name")} />
+          <input className="input" type="text" {...register("name")} />
           {errors.name && <span className="error-input">{errors.name.message}</span>}
         </div>
         <div className="form__input--wrapper">
           <label> Email</label>
-          <input type="email" {...register("email")} />
+          <input className="input" type="email" {...register("email")} />
           {errors.email && <span className="error-input">{errors.email.message}</span>}
         </div>
         <div className="form__input--wrapper">
           <label>Subject</label>
-          <input type="text" {...register("subject")} />
+          <input className="input" type="text" {...register("subject")} />
           {errors.subject && <span className="error-input">{errors.subject.message}</span>}
         </div>
         <div className="form__input--wrapper">
           <label>Message</label>
-          <textarea {...register("message")} rows="5" />
+          <textarea className="input" {...register("message")} rows="5" />
           {errors.message && <span className="error-input">{errors.message.message}</span>}
         </div>
         <button type="submit" className="cta">

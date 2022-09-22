@@ -3,6 +3,7 @@
   padding: 7px 0 5px 0;
   display: block;
   width: 80%;
+  min-width: 100px;
   max-width: 250px;
   @extend %darkbox-shadow;
   background-color: $color-buttons;

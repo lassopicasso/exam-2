@@ -90,7 +90,7 @@ function EnquiriesModal({ setShowModul, handleSubmit, price, errorName, setError
                 setErrorDate(false);
               }}
               placeholderText="Check-in  -  Check-out"
-              className="date"
+              className="date input"
               id="date"
             />
             {errorDate && <span className="error-input">Minimum 1 night stay</span>}
@@ -101,31 +101,31 @@ function EnquiriesModal({ setShowModul, handleSubmit, price, errorName, setError
               {adult} Adult - {children} Children - {room} Room
             </div>
             <div className="guests__expand" ref={guestsMenu} style={{ display: expandGuest ? "block" : "none" }}>
-              <div className="guest__expand_input">
+              <div className="guest__expand--wrapper">
                 <span>
                   Adult <span className="guest__label-small">{price} NOK</span>
                 </span>
-                <div>
+                <div className="guest__expand--input">
                   <i className="fas fa-minus adult" onClick={(event) => handleGuests(event)}></i>
                   <input type="number" className="adult" value={adult} disabled id="adult" />
                   <i className="fas fa-plus adult" onClick={(event) => handleGuests(event)}></i>
                 </div>
               </div>
-              <div className="guest__expand_input">
+              <div className="guest__expand--wrapper">
                 <span>
                   Children <span className="guest__label-small">{price * 0.5} NOK</span>
                 </span>
-                <div>
+                <div className="guest__expand--input">
                   <i className="fas fa-minus children" onClick={(event) => handleGuests(event)}></i>
                   <input className="children" type="number" value={children} disabled id="children" />
                   <i className="fas fa-plus children" onClick={(event) => handleGuests(event)}></i>
                 </div>
               </div>
-              <div className="guest__expand_input">
+              <div className="guest__expand--wrapper">
                 <span>
                   Room <span className="guest__label-small">Free</span>
                 </span>
-                <div>
+                <div className="guest__expand--input">
                   <i className="fas fa-minus room" onClick={(event) => handleGuests(event)}></i>
                   <input type="number" className="room" value={room} disabled id="room" />
                   <i className="fas fa-plus room" onClick={(event) => handleGuests(event)}></i>
