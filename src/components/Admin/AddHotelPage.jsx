@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import Header from "../../common/Header";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
@@ -12,24 +12,37 @@ const schema = yup.object().shape({
   distance: yup.number().typeError("Enter distance to downtown"),
   about: yup.string().required("Write about the hotel").min(20, "Minimum 20 characters"),
   facilities: yup.string().required("Write about the facilities").min(10, "Minimum 10 characters"),
-  images: yup.mixed().required("Image is required"),
+  images: yup.mixed().test("Required", "Select image(s)", (images) => {
+    return images.length > 0 ? true : false;
+  }),
 });
 
 function AddHotelPage() {
+  const [imageList, setImageList] = useState([]);
   const user = useContext(AuthContext)[0];
   const {
+    setValue,
+    getValues,
     register,
     handleSubmit,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
   });
+  function preventDefaults(event) {
+    event.preventDefault();
+    event.stopPropagation();
+    if (event.dataTransfer.files.length > 0) {
+      const files = event.dataTransfer.files;
+      setValue("images", files);
+      setImageList(event.dataTransfer.files);
+    }
+  }
 
   async function onSubmit(input) {
-    const images = input.images;
+    console.log(input.images);
     let formData = new FormData();
-
-    Array.from(images).forEach((image) => {
+    Array.from(input.images).forEach((image) => {
       console.log(image);
       formData.append("files.images", image, image.name);
     });
@@ -47,8 +60,6 @@ function AddHotelPage() {
       method: "POST",
       body: formData,
       headers: {
-        // "Content-Type": "multipart/form-data",
-        // "Content-Type": "application/json",
         Authorization: `Bearer ${user.jwt} `,
       },
     };
@@ -92,9 +103,42 @@ function AddHotelPage() {
           <textarea className="input" {...register("facilities")} rows="5" />
           {errors.facilities && <span className="error-input">{errors.facilities.message}</span>}
         </div>
-        <div>
-          <label>Images</label>
-          <input className="input image-input" {...register("images")} type="file" id="image" accept="image/png, image/jpeg" multiple />
+        <div className="form__input--wrapper">
+          <label
+            className="image__uploader"
+            htmlFor="input__image"
+            onDragEnter={(e) => {
+              preventDefaults(e);
+              e.target.classList.add("highlight");
+            }}
+            onDragOver={(e) => {
+              preventDefaults(e);
+              console.log(e.target.classList);
+              e.target.classList.add("highlight");
+            }}
+            onDrop={(e) => {
+              preventDefaults(e);
+              e.target.classList.remove("highlight");
+            }}
+            onDragLeave={(e) => {
+              preventDefaults(e);
+              e.target.classList.remove("highlight");
+            }}
+          >
+            {imageList.length ? "You have selected: " + imageList.length + " image(s)" : "Drag 'n' drop some images here, or click to select them"}
+          </label>
+          <input
+            className="input image-input"
+            id="input__image"
+            {...register("images", {
+              onChange: () => {
+                setImageList(getValues("images"));
+              },
+            })}
+            type="file"
+            accept="image/png, image/jpeg"
+            multiple
+          />
           {errors.images && <span className="error-input">{errors.images.message}</span>}
         </div>
         <button type="submit" className="cta">
@@ -104,5 +148,4 @@ function AddHotelPage() {
     </main>
   );
 }
-
 export default AddHotelPage;

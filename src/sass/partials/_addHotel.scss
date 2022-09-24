@@ -2,3 +2,29 @@
   display: flex;
   gap: 20px;
 }
+
+#input__image {
+  display: none;
+}
+
+.image__uploader {
+  display: flex !important;
+  background-color: rgba(235, 98, 78, 0.7);
+  height: 70px;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  transition: 0.5s;
+  cursor: pointer;
+  &:hover {
+    color: white;
+    background-color: rgba(235, 98, 78, 0.9);
+  }
+  p {
+    max-width: 260px;
+  }
+}
+.highlight {
+  color: white;
+  background-color: rgba(235, 98, 78, 0.9);
+}
