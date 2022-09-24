@@ -14,7 +14,7 @@ function Nav() {
     setAuth(null);
     navigate("/");
   }
-
+  console.log("fefeefe");
   return (
     <nav className="nav">
       <div className="nav__container">
