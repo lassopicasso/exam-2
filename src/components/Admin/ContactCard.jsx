@@ -50,38 +50,40 @@ function ContactCard(props) {
 
   return (
     <div className="messages__card">
-      <div>
-        <div>{date}</div>
+      <div className="messages__card--wrapper">
+        <div>
+          <div>{date}</div>
+        </div>
+        <Header type="sub" header={subject} />
+        <div>
+          <span>Name:</span> {name}
+        </div>
+        <div>
+          <span>Email:</span> {email}
+        </div>
+        {readMore ? (
+          <>
+            <div>
+              <span>Message:</span> {message}
+            </div>
+            <div className="messages__buttons">
+              <button className="cta" onClick={() => setRead(!read)}>
+                {props.filter === "read" ? "Not read" : "Mark as read"}
+              </button>
+              <button className="cta" onClick={() => setReadMore(false)}>
+                Hide
+              </button>
+            </div>
+            <a className="cta" href={`mailto:${email}`}>
+              Answer
+            </a>
+          </>
+        ) : (
+          <button className="cta" onClick={() => setReadMore(true)}>
+            Read message
+          </button>
+        )}
       </div>
-      <Header type="sub" header={subject} />
-      <div>
-        <span>Name:</span> {name}
-      </div>
-      <div>
-        <span>Email:</span> {email}
-      </div>
-      {readMore ? (
-        <>
-          <div>
-            <span>Message:</span> {message}
-          </div>
-          <div className="messages__buttons">
-            <button className="cta" onClick={() => setRead(!read)}>
-              {props.filter === "read" ? "Not read" : "Mark as read"}
-            </button>
-            <button className="cta" onClick={() => setReadMore(false)}>
-              Hide
-            </button>
-          </div>
-          <a className="cta" href={`mailto:${email}`}>
-            Answer
-          </a>
-        </>
-      ) : (
-        <button className="cta" onClick={() => setReadMore(true)}>
-          Read message
-        </button>
-      )}
     </div>
   );
 }

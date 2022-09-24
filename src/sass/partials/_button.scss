@@ -3,7 +3,7 @@
   padding: 7px 0 5px 0;
   display: block;
   width: 80%;
-  min-width: 100px;
+  min-width: 120px;
   max-width: 250px;
   @extend %darkbox-shadow;
   background-color: $color-buttons;
@@ -15,8 +15,12 @@
   border: none;
   font-family: $font-main;
   color: $color-black;
+  cursor: pointer;
+  transition: 0.5s;
+
   &:hover {
     background-color: #35b982;
+    color: white;
   }
   &__bad {
     background-color: white;

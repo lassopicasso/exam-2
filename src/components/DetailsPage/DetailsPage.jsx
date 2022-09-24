@@ -50,6 +50,7 @@ function Details() {
     carouselMargin === 0 ? setMaxedLeft(true) : setMaxedLeft(false);
     carouselMargin - 100 === images.length * -100 ? setMaxedRight(true) : setMaxedRight(false);
     setImageIndex(carouselMargin === 0 ? 1 : Math.abs(carouselMargin / 100) + 1);
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [carouselMargin]);
 
@@ -111,28 +112,38 @@ function Details() {
   }
   return (
     <>
-      <main>
-        <div className="details__carousel">
-          <div className="carousel__wrapper" style={{ marginLeft: `${carouselMargin}%` }}>
-            {images.map((image, index) => {
-              return <div className="carousel__img" key={index} style={{ backgroundImage: `url(${image.attributes.url})` }}></div>;
-            })}
-          </div>
-          <div className="carousel__elements">
-            <div className="carousel__buttons">
-              <button className="carousel__button-left" disabled={maxedLeft ? true : false} onClick={() => setCarouselMargin(carouselMargin + 100)}>
-                <i className="fas fa-chevron-left left"></i>
-              </button>
-              <button className="carousel__button-right" disabled={maxedRight ? true : false} onClick={() => setCarouselMargin(carouselMargin - 100)}>
-                <i className="fas fa-chevron-right right"></i>
-              </button>
+      <main className="details">
+        <div className="details__carousel--parent">
+          <div className="details__carousel">
+            <div className="carousel__wrapper" style={{ marginLeft: `${carouselMargin}%`, width: images.length * 100 + "%" }}>
+              {images.map((image, index) => {
+                return <div className="carousel__img" key={index} style={{ backgroundImage: `url(${image.attributes.url})` }}></div>;
+              })}
             </div>
-            <span>
-              {imageIndex} / {images.length}
-            </span>
+            <div className="carousel__elements">
+              <div className="carousel__buttons">
+                <button className="carousel__button-left" disabled={maxedLeft ? true : false} onClick={() => setCarouselMargin(carouselMargin + 100)}>
+                  <i className="fas fa-chevron-left left"></i>
+                </button>
+                <button className="carousel__button-right" disabled={maxedRight ? true : false} onClick={() => setCarouselMargin(carouselMargin - 100)}>
+                  <i className="fas fa-chevron-right right"></i>
+                </button>
+              </div>
+              <span>
+                {imageIndex} / {images.length}
+              </span>
+            </div>
+          </div>
+          <div className="smallCarousel">
+            <div className="smallCarousel__container" style={{ marginTop: imageIndex > 4 ? (imageIndex - 4) * -97 + "px" : 0 }}>
+              {/* style={{ marginTop: -97 + "px" }} */}
+              {images.map((image, index) => {
+                return <div className="carousel__smallImg" key={index} style={{ backgroundImage: `url(${image.attributes.url})`, opacity: carouselMargin / index === -100 || (carouselMargin === 0 && index === 0) ? 1 : 0.4 }}></div>;
+              })}
+            </div>
           </div>
         </div>
-        <div>
+        <div className="details__content">
           <div className="details__text">
             <div className="details__intro">
               <Header header={hotel.attributes.name} type="main" />
@@ -153,7 +164,12 @@ function Details() {
           <div className="details__order">
             <div className="details__order-text">
               <Header header="Order" type="sub" />
-              <span>{`${hotel.attributes.price} NOK pp`}</span>
+              <div>
+                <span className="details__order--price">{`${hotel.attributes.price} NOK pp`}</span>
+                <span className="details__order--children">Children - 50% discount</span>
+                <span className="details__order--children display__desktop">Pay at arrival</span>
+                <span className="details__order--children display__desktop">Free cancellation</span>
+              </div>
             </div>
             <button className="cta" onClick={() => setShowModul(true)}>
               Order

@@ -11,13 +11,6 @@
 
 .explore {
   width: 100%;
-  margin: 20px auto;
-  h1 {
-    text-align: center;
-    margin: auto;
-    max-width: 300px;
-    background-color: rgba(255, 255, 255, 0.7);
-  }
 }
 
 .filterSort {
@@ -62,74 +55,77 @@
       max-width: 400px;
     }
   }
+}
 
-  form {
-    background-color: white;
-    border-radius: 0 0 10px 10px;
-    border: 1px solid $color-main;
-    border-color: $color-main;
-    position: absolute;
-    transition: 0.6s;
-    left: 50%;
-    width: 100%;
-    transform: translateX(-50%);
+.filterSortWrapper {
+  background-color: white;
+  border-radius: 0 0 10px 10px;
+  border: 1px solid $color-main;
+  border-color: $color-main;
+  @extend %darkbox-shadow;
+  position: absolute;
+  transition: 0.6s;
+  left: 50%;
+  width: 100%;
+  transform: translateX(-50%);
+  transition: 0.5s;
+  z-index: 2;
+}
+
+.filterSort__content {
+  transition: 0.5s;
+  padding: 10px 5px 20px 5px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-around;
+  h2 {
+    margin: 0px 0px 10px 0px;
   }
+  span {
+    display: inline-block;
+    font-size: 18px;
+    margin-top: 7px;
+  }
+}
 
-  .filterSort__content {
-    padding: 10px 5px 20px 5px;
+.filterSort__filter {
+  label {
+    display: block;
+    margin-top: 10px;
+  }
+  input[type="radio"] {
+    vertical-align: middle;
+    margin: -3px 3px 0 0;
+    box-shadow: none;
+    border: 1px solid black;
+    height: 18px;
+    border-radius: 0px;
+    appearance: none;
+    width: 18px;
+    &:checked {
+      background-color: $color-buttons;
+    }
+  }
+}
+.filterSort__sort {
+  .sortBtn {
+    padding: 2px 0px;
+    text-align: center;
+    width: 60px;
+    border: 1px solid black;
     border-radius: 5px;
-    display: flex;
-    justify-content: space-around;
-    h2 {
-      margin: 0px 0px 10px 0px;
-    }
-    span {
-      display: inline-block;
-      font-size: 18px;
-      margin-top: 7px;
-    }
-  }
-
-  &__filter {
-    label {
-      display: block;
-      margin-top: 10px;
-      grid-area: "price";
-    }
-    input[type="radio"] {
-      vertical-align: middle;
-      margin: -3px 3px 0 0;
-      box-shadow: none;
-      border: 1px solid black;
-      height: 18px;
-      border-radius: 0px;
-      appearance: none;
-      width: 18px;
-      &:checked {
-        background-color: $color-buttons;
-      }
+    font-weight: bold;
+    background-color: white;
+    font-family: $font-main;
+    font-size: 16px;
+    box-shadow: none;
+    &:hover,
+    &-active {
+      background-color: $color-buttons;
     }
   }
-  &__sort {
-    .sortBtn {
-      padding: 2px 0px;
-      text-align: center;
-      width: 60px;
-      border: 1px solid black;
-      border-radius: 5px;
-      font-weight: bold;
-      background-color: white;
-      font-family: $font-main;
-      font-size: 16px;
-      box-shadow: none;
-      &:hover,
-      &-active {
-        background-color: $color-buttons;
-      }
-    }
-    .btn1 {
-      margin-right: 5px;
-    }
+  .btn1 {
+    margin-right: 5px;
   }
 }
 
@@ -140,9 +136,8 @@
   margin: 20px auto;
   .card {
     position: relative;
-    box-shadow: 0px 3px 3px rgb(0 0 0 / 10%);
-    border-radius: 5px;
-    padding: 5px;
+    box-shadow: 0px 3px 3px 3px rgb(0 0 0 / 10%);
+    border-radius: 10px;
     &__text {
       padding: 5px;
     }
@@ -189,6 +184,8 @@
       border-radius: 0 0 10px 10px;
       overflow: hidden;
       button {
+        cursor: pointer;
+        transition: 0.5s;
         border: none;
         flex: 1;
         font-size: 24px;

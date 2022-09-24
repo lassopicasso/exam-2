@@ -1,3 +1,7 @@
+.details {
+  width: 100%;
+}
+
 .details__carousel {
   position: relative;
   overflow: hidden;
@@ -7,7 +11,6 @@
     position: relative;
     display: flex;
     height: 200px;
-    width: 400%;
     transition: 0.8s;
     .carousel__img {
       position: relative;
@@ -28,9 +31,16 @@
       text-align: center;
       z-index: 10;
       button {
+        background-color: rgba(255, 255, 255, 0.5);
+        border: 1px solid black;
+        cursor: pointer;
         font-size: 20px;
         padding: 7px 50px;
         opacity: 0.9;
+        transition: 0.5s;
+        &:hover {
+          background-color: rgba(255, 255, 255, 1);
+        }
       }
       .carousel__button-left {
         border-radius: 10px 0 0 10px;
@@ -50,14 +60,38 @@
     }
   }
 }
-.details__text {
-  width: 90%;
-  margin: 20px auto;
-  margin-bottom: 60px;
+
+.smallCarousel {
+  display: none;
+  overflow: hidden;
+  height: 380px;
+  .smallCarousel__container {
+    display: grid;
+    gap: 10px;
+    position: relative;
+    transition: 0.5s;
+    .carousel__smallImg {
+      border-radius: 10px;
+      position: relative;
+      width: 100px;
+      height: 87px;
+      transition: 0.5s;
+      background-position: center;
+      background-size: cover;
+    }
+  }
 }
+
+.details__content {
+  width: 90%;
+  margin: auto;
+  margin-bottom: 110px;
+}
+
 .details__intro {
   h1 {
     margin: 10px 0;
+    padding: 0;
     background: none;
   }
   span {
@@ -71,7 +105,7 @@
 }
 
 .details__order {
-  padding: 10px;
+  padding: 20px 10px;
   position: fixed;
   left: 0;
   right: 0;
@@ -80,13 +114,31 @@
   &-text {
     display: flex;
     justify-content: space-around;
-    align-items: flex-end;
-    h2,
-    span {
-      margin: 10px;
+    align-items: baseline;
+    h2 {
+      margin: 0;
     }
-    span {
-      font-size: 18px;
+    div {
+      display: flex;
+      align-items: flex-end;
+      flex-direction: column;
+      .details__order--price {
+        font-size: 20px;
+        font-weight: bold;
+      }
+      .details__order--children {
+        font-style: italic;
+        font-size: 16px;
+      }
+      .display__desktop {
+        display: none;
+      }
     }
+    // span {
+    //   font-size: 18px;
+    // }
   }
+  // .details__order--children {
+  //   font-style: italic;
+  // }
 }

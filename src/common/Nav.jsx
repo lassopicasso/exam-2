@@ -28,7 +28,7 @@ function Nav() {
           <Link to="/explore" className={`nav__link${location === "/explore" ? "-active" : ""}`}>
             Explore
           </Link>
-          <Link to="/explore" className={`nav__link${location === "/explore" ? "-active" : ""}`}>
+          <Link to="/contact" className={`nav__link${location === "/contact" ? "-active" : ""}`}>
             <i className="fas fa-user"></i>
           </Link>
         </div>
@@ -36,7 +36,7 @@ function Nav() {
           <i className="fas fa-bars"></i>
           {dropLinks && (
             <div className="hamburger__links">
-              <Link className={`hamburger__lin${location === "/" ? "-active" : ""}`} to="/">
+              <Link className={`hamburger__link${location === "/" ? "-active" : ""}`} to="/">
                 Home
               </Link>
               <Link className={`hamburger__link${location === "/explore" ? "-active" : ""}`} to="/explore">

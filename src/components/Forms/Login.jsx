@@ -62,16 +62,16 @@ function Login() {
     <>
       <div className="login">
         <h1>Login</h1>
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form className="form" onSubmit={handleSubmit(onSubmit)}>
           {loginFailed && <div className="login__error--login">The email or password is invalid. Please try again.</div>}
-          <div>
+          <div className="form__input--wrapper">
             <label className="login__label">Email: </label>
-            <input {...register("email")} type="email" id="email" />
+            <input className="input" {...register("email")} type="email" id="email" />
             {errors.email && <span className="error-input">{errors.email.message}</span>}
           </div>
-          <div>
+          <div className="form__input--wrapper">
             <label className="login__label">Password:</label>
-            <input {...register("password")} type="password" id="password" />
+            <input className="input" {...register("password")} type="password" id="password" />
             {errors.password && <span className="error-input">{errors.password.message}</span>}
           </div>
           <button type="submit" className="btn cta">

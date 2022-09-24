@@ -14,6 +14,7 @@ function Explore() {
   const [priceRange, setPriceRange] = useState({ label: "No Limit", min: 0, max: Infinity });
   const [sort, setSort] = useState({ type: "date", btn: "btn1" });
   const apiUrl = apiHotels + "?populate=*";
+
   useEffect(() => {
     async function fetchData() {
       try {
@@ -80,19 +81,23 @@ function Explore() {
           </label>
           <input type="text" id="search__input" placeholder="Search for a place" />
         </div>
-        <div className={`filterSort ${expandFilterSort ? "filterSort-active" : ""}`}>
-          <button className={`filterSort__button ${expandFilterSort ? "filterSort__button-active" : ""}`} onClick={() => setExpandFilterSort(!expandFilterSort)}>
-            <span>Filter & Sort </span> {expandFilterSort ? <i className="fas fa-caret-up"></i> : <i className="fas fa-caret-down"></i>}
-          </button>
-          {/* <CSSTransition in={expandFilterSort} timeout={400} unmountOnExit appear> */}
-          {expandFilterSort && <FilterSort key={moment} handleSubmit={handleSubmit} setPriceRange={setPriceRange} priceRange={priceRange} sort={sort} setSort={setSort} />}
-          {/* </CSSTransition> */}
-        </div>
-        <div className="cards">
-          {sortFilterHotels.map((hotel, index) => {
-            return <Cards hotel={hotel} key={index} />;
-          })}
-          <button className="cta">Load More</button>
+        <div className="explore__content">
+          <div className={`filterSort ${expandFilterSort ? "filterSort-active" : ""}`}>
+            <button className={`filterSort__button ${expandFilterSort ? "filterSort__button-active" : ""}`} onClick={() => setExpandFilterSort(!expandFilterSort)}>
+              <span>Filter & Sort </span> {expandFilterSort ? <i className="fas fa-caret-up"></i> : <i className="fas fa-caret-down"></i>}
+            </button>
+            {/* <CSSTransition in={expandFilterSort} timeout={400} unmountOnExit appear> */}
+            {/* {expandFilterSort && <FilterSort key={moment} handleSubmit={handleSubmit} setPriceRange={setPriceRange} priceRange={priceRange} sort={sort} setSort={setSort} />} */}
+            <FilterSort expandFilterSort={expandFilterSort} key={moment} handleSubmit={handleSubmit} setPriceRange={setPriceRange} priceRange={priceRange} sort={sort} setSort={setSort} />
+
+            {/* </CSSTransition> */}
+          </div>
+          <div className="cards">
+            {sortFilterHotels.map((hotel, index) => {
+              return <Cards hotel={hotel} key={index} />;
+            })}
+            <button className="cta">Load More</button>
+          </div>
         </div>
       </main>
     </>

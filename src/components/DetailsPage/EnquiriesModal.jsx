@@ -51,6 +51,7 @@ function EnquiriesModal({ setShowModul, handleSubmit, price, errorName, setError
 
   return (
     <div className="enquiries">
+      <div className="enquiries__background"></div>
       <div className="enquiries__content">
         <h1>Reservation Enquiry</h1>
         <form className="form" onSubmit={(event) => handleSubmit(event)}>
@@ -107,7 +108,7 @@ function EnquiriesModal({ setShowModul, handleSubmit, price, errorName, setError
                 </span>
                 <div className="guest__expand--input">
                   <i className="fas fa-minus adult" onClick={(event) => handleGuests(event)}></i>
-                  <input type="number" className="adult" value={adult} disabled id="adult" />
+                  <input type="number" className="adult guest__input" value={adult} disabled id="adult" />
                   <i className="fas fa-plus adult" onClick={(event) => handleGuests(event)}></i>
                 </div>
               </div>
@@ -117,7 +118,7 @@ function EnquiriesModal({ setShowModul, handleSubmit, price, errorName, setError
                 </span>
                 <div className="guest__expand--input">
                   <i className="fas fa-minus children" onClick={(event) => handleGuests(event)}></i>
-                  <input className="children" type="number" value={children} disabled id="children" />
+                  <input className="children guest__input" type="number" value={children} disabled id="children" />
                   <i className="fas fa-plus children" onClick={(event) => handleGuests(event)}></i>
                 </div>
               </div>
@@ -127,7 +128,7 @@ function EnquiriesModal({ setShowModul, handleSubmit, price, errorName, setError
                 </span>
                 <div className="guest__expand--input">
                   <i className="fas fa-minus room" onClick={(event) => handleGuests(event)}></i>
-                  <input type="number" className="room" value={room} disabled id="room" />
+                  <input type="number" className="room guest__input" value={room} disabled id="room" />
                   <i className="fas fa-plus room" onClick={(event) => handleGuests(event)}></i>
                 </div>
               </div>

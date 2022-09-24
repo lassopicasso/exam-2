@@ -35,18 +35,18 @@ function Cards({ hotel }) {
       </div>
       <div className="card__text">
         <div className="card__text--text">
-          <Header type="sub" header={name} />
-
-          <span>{distance} km to downtown</span>
-          <span className="card__rating">
-            <i className="fas fa-star"></i> {star_rating}/10
-          </span>
-
+          <div>
+            <Header type="sub" header={name} />
+            <span>{distance} km to downtown</span>
+            <span className="card__rating">
+              <i className="fas fa-star"></i> {star_rating}/10
+            </span>
+          </div>
           <span className="card__price">From {price} NOK </span>
         </div>
         <div className="card__text--button">
           <Link className="cta" to={`/details/${hotel.id}`}>
-            Details
+            Read More
           </Link>
         </div>
       </div>

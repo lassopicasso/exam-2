@@ -1,12 +1,14 @@
 import React from "react";
 import Header from "../../common/Header";
 import { priceList, buttonList } from "../../constants/arrays";
-function FilterSort({ handleSubmit, priceRange, setPriceRange, sort, setSort }) {
+function FilterSort({ handleSubmit, priceRange, setPriceRange, sort, setSort, expandFilterSort }) {
   return (
     <form
+      className="filterSortWrapper"
       onSubmit={(e) => {
         handleSubmit(e);
       }}
+      style={{ display: expandFilterSort ? "block" : "none" }}
     >
       <div className="filterSort__content">
         <div className="filterSort__filter">
