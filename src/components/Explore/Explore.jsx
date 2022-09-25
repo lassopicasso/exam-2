@@ -95,9 +95,7 @@ function Explore() {
           </div>
           <div className="cards">
             {sortFilterHotels.map((hotel, index) => {
-              if (index < limitDisplay) {
-                return <Cards hotel={hotel} key={index} />;
-              }
+              return index < limitDisplay ? <Cards hotel={hotel} key={index} /> : "";
             })}
             <button className="cta" style={{ display: limitDisplay >= hotels.length ? "none" : "block" }} onClick={() => setLimitDisplay(limitDisplay + 5)}>
               Load More
