@@ -85,6 +85,15 @@ footer {
     }
   }
 }
+.enquiries__background {
+  position: absolute;
+  inset: 0;
+  z-index: -5;
+  background-image: url("../../img/backgroundImg.jpg");
+  background-position: center;
+  background-size: cover;
+  opacity: 0.1;
+}
 
 main {
   width: 90%;

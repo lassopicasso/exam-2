@@ -151,16 +151,13 @@
       font-weight: bold;
     }
     &__rating {
-      margin-left: 10px;
-      .fa-star {
-        color: $color-main;
-        font-size: 20px;
-      }
+      margin: 3px 0 0 0;
     }
   }
   .card__carousel {
     overflow: hidden;
     position: relative;
+    border-radius: 10px;
     height: 200px;
     width: 100%;
     .card__carousel_wrapper {

@@ -43,6 +43,8 @@ function Contact() {
 
   return (
     <main>
+      <div className="enquiries__background"></div>
+
       <Header type="main" header="Contact" />
       <form className="form contact" onSubmit={handleSubmit(onSubmit)}>
         <div className="form__input--wrapper">

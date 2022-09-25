@@ -13,6 +13,7 @@ function Explore() {
   const [error, setError] = useState(false);
   const [priceRange, setPriceRange] = useState({ label: "No Limit", min: 0, max: Infinity });
   const [sort, setSort] = useState({ type: "date", btn: "btn1" });
+  const [limitDisplay, setLimitDisplay] = useState(5);
   const apiUrl = apiHotels + "?populate=*";
 
   useEffect(() => {
@@ -94,9 +95,13 @@ function Explore() {
           </div>
           <div className="cards">
             {sortFilterHotels.map((hotel, index) => {
-              return <Cards hotel={hotel} key={index} />;
+              if (index < limitDisplay) {
+                return <Cards hotel={hotel} key={index} />;
+              }
             })}
-            <button className="cta">Load More</button>
+            <button className="cta" style={{ display: limitDisplay >= hotels.length ? "none" : "block" }} onClick={() => setLimitDisplay(limitDisplay + 5)}>
+              Load More
+            </button>
           </div>
         </div>
       </main>

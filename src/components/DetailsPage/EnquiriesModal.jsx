@@ -53,7 +53,7 @@ function EnquiriesModal({ setShowModul, handleSubmit, price, errorName, setError
     <div className="enquiries">
       <div className="enquiries__background"></div>
       <div className="enquiries__content">
-        <h1>Reservation Enquiry</h1>
+        <Header type="main" header="Reservation Enquiry" />
         <form className="form" onSubmit={(event) => handleSubmit(event)}>
           <div className="enquiries__input form__input--wrapper">
             <label htmlFor="name">Name</label>

@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import Header from "../../common/Header";
 import { apiEnquiry } from "../../constants/api";
 import EnquiriesModal from "./EnquiriesModal";
+import Reviews from "../../common/Reviews";
 
 function Details() {
   const [hotel, setHotel] = useState("");
@@ -21,6 +22,8 @@ function Details() {
   const [errorDate, setErrorDate] = useState(false);
   const [dateRange, setDateRange] = useState([null, null]);
   const [bookingPrice, setBookingPrice] = useState(null);
+  const [showReviews, setShowReviews] = useState(false);
+
   if (!id) {
     navigate("/");
   }
@@ -43,7 +46,7 @@ function Details() {
       }
     }
     fetchData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line
   }, []);
 
   useEffect(() => {
@@ -64,7 +67,7 @@ function Details() {
     const inputRoom = document.querySelector("#room").value;
     const inputMessage = document.querySelector("#message").value;
     const validated = validationForm(inputName, inputEmail);
-    console.log(validated);
+
     if (validated) {
       let data = JSON.stringify({
         data: { hotel: hotel.attributes.name, name: inputName, email: inputEmail, date: inputDate, message: inputMessage, adult: inputAdult, children: inputChildren, room: inputRoom, price: bookingPrice },
@@ -112,6 +115,7 @@ function Details() {
   }
   return (
     <>
+      <div className="modul--carousel"></div>
       <main className="details">
         <div className="details__carousel--parent">
           <div className="details__carousel">
@@ -136,9 +140,8 @@ function Details() {
           </div>
           <div className="smallCarousel">
             <div className="smallCarousel__container" style={{ marginTop: imageIndex > 4 ? (imageIndex - 4) * -97 + "px" : 0 }}>
-              {/* style={{ marginTop: -97 + "px" }} */}
               {images.map((image, index) => {
-                return <div className="carousel__smallImg" key={index} style={{ backgroundImage: `url(${image.attributes.url})`, opacity: carouselMargin / index === -100 || (carouselMargin === 0 && index === 0) ? 1 : 0.4 }}></div>;
+                return <div className="carousel__smallImg" key={index} style={{ backgroundImage: `url(${image.attributes.url})`, opacity: carouselMargin / index === -100 || (carouselMargin === 0 && index === 0) ? 1 : 0.4 }} onClick={() => setCarouselMargin(index * -100)}></div>;
               })}
             </div>
           </div>
@@ -147,10 +150,11 @@ function Details() {
           <div className="details__text">
             <div className="details__intro">
               <Header header={hotel.attributes.name} type="main" />
-              <span>{hotel.attributes.distance}km to downtown</span>
-              <span>
-                <i className="fas fa-star"></i> {hotel.attributes.star_rating === null ? 5 : hotel.attributes.star_rating}/10 Ratings
-              </span>
+              <div>{hotel.attributes.distance}km to downtown</div>
+              <div className="rating__link" onClick={() => setShowReviews(true)}>
+                <i className="fas fa-star"></i> {hotel.attributes.star_rating !== 0 ? hotel.attributes.star_rating : "?"}/10 View Ratings
+              </div>
+              {showReviews && <Reviews hotel={hotel} setShowReviews={setShowReviews} />}
             </div>
             <div>
               <Header header="About" type="content" />

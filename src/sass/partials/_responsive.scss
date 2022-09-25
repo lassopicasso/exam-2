@@ -31,10 +31,6 @@
           .card__price {
             font-size: 20px;
           }
-          .card__rating {
-            display: block;
-            margin: 5px 0 0 0;
-          }
         }
 
         .cta {
@@ -74,6 +70,7 @@
     }
     &-img {
       height: 120px;
+      border-radius: 5px;
     }
   }
 

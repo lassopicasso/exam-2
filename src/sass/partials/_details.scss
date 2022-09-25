@@ -78,6 +78,10 @@
       transition: 0.5s;
       background-position: center;
       background-size: cover;
+      cursor: pointer;
+      &:hover {
+        opacity: 1 !important;
+      }
     }
   }
 }
@@ -93,14 +97,10 @@
     margin: 10px 0;
     padding: 0;
     background: none;
+    text-align: start;
   }
-  span {
-    font-weight: bold;
-    display: block;
-    margin-bottom: 5px;
-    .fa-star {
-      color: $color-main;
-    }
+  .rating__link {
+    display: inline;
   }
 }
 
