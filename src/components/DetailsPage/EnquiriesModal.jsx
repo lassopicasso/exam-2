@@ -104,7 +104,7 @@ function EnquiriesModal({ setShowModul, handleSubmit, price, errorName, setError
               placeholderText="Check-in  -  Check-out"
               className="date input"
               id="date"
-              readonly
+              onFocus={(e) => e.target.blur()}
             />
             {errorDate && <span className="error-input">Minimum 1 night stay</span>}
           </div>
