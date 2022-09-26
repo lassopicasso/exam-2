@@ -23,7 +23,6 @@ function Cards({ hotel }) {
     carouselMargin - 100 === images.length * -100 ? setMaxedRight(true) : setMaxedRight(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [carouselMargin]);
-
   return (
     <>
       {showReviews && <Reviews hotel={hotel} setShowReviews={setShowReviews} />}
@@ -50,7 +49,7 @@ function Cards({ hotel }) {
               <Header type="sub" header={name} />
               <div>{distance} km to downtown</div>
               <div className="card__rating rating__link" onClick={() => setShowReviews(true)}>
-                <i className="fas fa-star"></i> {star_rating !== 0 ? star_rating : "?"}/10 View Ratings
+                <i className="fas fa-star"></i> {star_rating !== null ? star_rating : "?"}/10 View Ratings
               </div>
             </div>
             <span className="card__price">From {price} NOK </span>

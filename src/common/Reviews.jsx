@@ -137,7 +137,7 @@ function Reviews({ hotel, setShowReviews }) {
           </div>
         </form>
         <div className="reviews__cards">
-          {console.log(reviews)}
+          {console.log(reviews.length)}
           {reviews.length > 0 ? (
             reviews.map((review, index) => {
               // const {publishedAt, }
@@ -155,7 +155,7 @@ function Reviews({ hotel, setShowReviews }) {
               );
             })
           ) : // {return loading===true ? "sometih" : "<div>ee</div>"
-          loading ? (
+          loading && reviews.length > 0 ? (
             <div className="reviews__cards--none">Loading...</div>
           ) : (
             <div className="reviews__cards--none">Currently no reviews on this place. Will you be the first one?</div>

@@ -120,6 +120,7 @@ function Details() {
   if (error) {
     return <main className="error">{error}</main>;
   }
+  console.log(hotel.attributes.star_rating);
   return (
     <>
       <main className="details">
@@ -162,7 +163,7 @@ function Details() {
               <Header header={hotel.attributes.name} type="main" />
               <div>{hotel.attributes.distance}km to downtown</div>
               <div className="rating__link" onClick={() => setShowReviews(true)}>
-                <i className="fas fa-star"></i> {hotel.attributes.star_rating !== 0 ? hotel.attributes.star_rating : "?"}/10 View Ratings
+                <i className="fas fa-star"></i> {hotel.attributes.star_rating !== null ? hotel.attributes.star_rating : "?"}/10 View Ratings
               </div>
             </div>
             <div>

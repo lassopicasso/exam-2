@@ -114,6 +114,7 @@
     text-transform: uppercase;
     font-weight: bolder;
     color: rgba(14, 8, 7, 0.6);
+    transition: 0.5s;
     &:hover {
       color: rgba(14, 8, 7, 1);
     }

@@ -11,7 +11,8 @@
 .search__wrapper {
   display: flex;
   height: 45px;
-  width: 90%;
+  width: 100%;
+
   max-width: 400px;
   margin: 20px auto;
   label,
@@ -21,12 +22,14 @@
   }
   #search__input {
     flex: 1;
+    text-align: center;
     font-size: 20px;
-    padding-left: 10px;
+
     border-radius: 0 5px 5px 0;
     border-left: none;
   }
   label {
+    z-index: 2;
     display: flex;
     border-radius: 5px 0 0 5px;
     border-right: none;
