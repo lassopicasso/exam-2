@@ -1,6 +1,6 @@
 import moment from "moment";
 import React, { useState, useEffect } from "react";
-import { useFieldArray } from "react-hook-form";
+
 import Header from "../../common/Header";
 import { apiHotels } from "../../constants/api";
 import Cards from "./Cards";
