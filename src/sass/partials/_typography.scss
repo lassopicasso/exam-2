@@ -20,6 +20,10 @@ h1 {
   color: $color-main;
   font-size: 30px;
   @extend %darktext-shadow;
+  transition: 0.5s;
+  &:hover {
+    scale: (1.05);
+  }
 }
 
 .nav__links,

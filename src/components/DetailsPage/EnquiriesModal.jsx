@@ -2,8 +2,9 @@ import React, { useState, useRef } from "react";
 import { useEffect } from "react";
 import DatePicker from "react-datepicker";
 import Header from "../../common/Header";
+import ResponseMessage from "../../common/ResponseMessage";
 
-function EnquiriesModal({ setShowModul, handleSubmit, price, errorName, setErrorName, errorEmail, setErrorEmail, dateRange, setDateRange, errorDate, setErrorDate, bookingPrice, setBookingPrice }) {
+function EnquiriesModal({ setShowModul, handleSubmit, price, errorName, setErrorName, errorEmail, setErrorEmail, dateRange, setDateRange, errorDate, setErrorDate, bookingPrice, setBookingPrice, responseMessage, setResponseMessage }) {
   const [startDate, endDate] = dateRange;
   const [expandGuest, setExpandGuest] = useState(false);
   const [adult, setAdult] = useState(1);
@@ -46,10 +47,6 @@ function EnquiriesModal({ setShowModul, handleSubmit, price, errorName, setError
       if (target.classList.contains("room") && room !== adult) {
         setRoom(room + 1);
       }
-
-      // else {
-      //   target.classList.contains("children") ? setChildren(children + 1) : setRoom(room + 1);
-      // }
     }
   }
 
@@ -67,6 +64,7 @@ function EnquiriesModal({ setShowModul, handleSubmit, price, errorName, setError
       <div className="enquiries__background"></div>
       <div className="enquiries__content">
         <Header type="main" header="Reservation Enquiry" />
+        {responseMessage && <ResponseMessage type={responseMessage.response} message={responseMessage.message} />}
         <form className="form" onSubmit={(event) => handleSubmit(event)}>
           <div className="enquiries__input form__input--wrapper">
             <label htmlFor="name">Name</label>
@@ -81,7 +79,7 @@ function EnquiriesModal({ setShowModul, handleSubmit, price, errorName, setError
             {errorName && <span className="error-input">Minimum 3 characters</span>}
           </div>
           <div className="enquiries__input form__input--wrapper">
-            <label>Email</label>
+            <label htmlFor="email">Email</label>
             <input
               id="email"
               className="email input"
@@ -93,7 +91,7 @@ function EnquiriesModal({ setShowModul, handleSubmit, price, errorName, setError
             {errorEmail && <span className="error-input">Enter a valid email</span>}
           </div>
           <div className="enquiries__date enquiries__input form__input--wrapper">
-            <label>Date</label>
+            <label htmlFor="date">Date</label>
             <DatePicker
               selectsRange={true}
               startDate={startDate}
@@ -156,7 +154,13 @@ function EnquiriesModal({ setShowModul, handleSubmit, price, errorName, setError
             <span>{bookingPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} NOK</span>
           </div>
           <div className="enquiries__button">
-            <button className="cta cta__bad" onClick={() => setShowModul(false)}>
+            <button
+              className="cta cta__bad"
+              onClick={() => {
+                setResponseMessage(null);
+                setShowModul(false);
+              }}
+            >
               Close
             </button>
             <button className="cta" type="submit">

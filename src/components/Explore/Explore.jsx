@@ -1,9 +1,9 @@
 import moment from "moment";
 import React, { useState, useEffect } from "react";
-
 import Header from "../../common/Header";
 import { apiHotels } from "../../constants/api";
 import Cards from "./Cards";
+import Search from "../../common/Search";
 import FilterSort from "./FilterSort";
 // import { CSSTransition } from "react-transition-group";
 function Explore() {
@@ -15,6 +15,7 @@ function Explore() {
   const [priceRange, setPriceRange] = useState({ label: "No Limit", min: 0, max: Infinity });
   const [sort, setSort] = useState({ type: "date", btn: "btn1" });
   const [limitDisplay, setLimitDisplay] = useState(5);
+  const [searchResults, setSearchResults] = useState([]);
 
   const apiUrl = apiHotels + "?populate=*";
 
@@ -36,6 +37,21 @@ function Explore() {
     fetchData();
     // eslint-disable-next-line
   }, []);
+
+  function hotelSearch(event) {
+    console.log("Search box interacts");
+    let filteredSearch = hotels.filter((hotel) => {
+      hotel = hotel.attributes.name.toLowerCase();
+      let input = event.target.value.toLowerCase();
+      return hotel.includes(input);
+    });
+    console.log(filteredSearch.length);
+    if (filteredSearch.length === hotels.length) {
+      filteredSearch = [];
+      console.log("it is ZERO!");
+    }
+    setSearchResults(filteredSearch);
+  }
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -86,11 +102,19 @@ function Explore() {
       <div className="explore__hero" />
       <main className="explore">
         <Header header="Find your next stay" type="main" />
-        <div className="search__wrapper">
-          <label htmlFor="search__input">
-            <i className="fas fa-search"></i>
-          </label>
-          <input type="text" id="search__input" placeholder="Search for a place" />
+        <div className="explore__search">
+          <div className="search__wrapper">
+            <label htmlFor="search__input">
+              <i className="fas fa-search"></i>
+            </label>
+            <input type="text" id="search__input" placeholder="Search for a place" onChange={hotelSearch} />
+          </div>
+          <div className="search__results">
+            {searchResults &&
+              searchResults.slice(0, 4).map((hotel) => {
+                return <Search hotel={hotel} key={hotel.id} />;
+              })}
+          </div>
         </div>
         <div className="explore__content">
           <div className={`filterSort ${expandFilterSort ? "filterSort-active" : ""}`}>

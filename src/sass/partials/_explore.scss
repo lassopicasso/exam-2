@@ -13,6 +13,16 @@
   width: 100%;
 }
 
+.explore__search {
+  position: relative;
+  margin: auto;
+  .search__results {
+    position: absolute;
+    width: 90%;
+    z-index: 10;
+  }
+}
+
 .filterSort {
   display: block;
   position: relative;

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Header from "../../common/Header";
 import { apiHotels } from "../../constants/api";
 import Carousel from "./Carousel";
-import Search from "./Search";
+import Search from "../../common/Search";
 function Home() {
   const [hotels, setHotels] = useState([]);
   const [newHotels, setNewHotels] = useState([]);

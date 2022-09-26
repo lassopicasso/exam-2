@@ -4,6 +4,7 @@ import Header from "../../common/Header";
 import { apiEnquiry } from "../../constants/api";
 import EnquiriesModal from "./EnquiriesModal";
 import Reviews from "../../common/Reviews";
+import { Link } from "react-router-dom";
 
 function Details() {
   const [hotel, setHotel] = useState("");
@@ -23,6 +24,7 @@ function Details() {
   const [dateRange, setDateRange] = useState([null, null]);
   const [bookingPrice, setBookingPrice] = useState(null);
   const [showReviews, setShowReviews] = useState(false);
+  const [responseMessage, setResponseMessage] = useState(null);
 
   if (!id) {
     navigate("/");
@@ -60,6 +62,7 @@ function Details() {
 
   async function handleSubmit(event) {
     event.preventDefault();
+    setResponseMessage(null);
     const inputName = document.querySelector("#name").value.trim();
     const inputEmail = document.querySelector("#email").value.trim();
     const inputDate = document.querySelector("#date").value;
@@ -82,10 +85,13 @@ function Details() {
       };
       try {
         const response = await fetch(apiEnquiry, options);
-        const json = await response.json();
-        console.log(json);
+        if (response.ok) {
+          setResponseMessage({ response: "success", message: "Thank you for your enquiry!" });
+        } else {
+          setResponseMessage({ response: "error", message: "Oh no! Something wrong happened!" });
+        }
       } catch (error) {
-        console.log(error);
+        setResponseMessage({ response: "error", message: `Oh no! Following error occurred: ${error}` });
       }
     }
   }
@@ -112,11 +118,10 @@ function Details() {
     return <main>Loading...</main>;
   }
   if (error) {
-    return <main>{error}</main>;
+    return <main className="error">{error}</main>;
   }
   return (
     <>
-      <div className="modul--carousel"></div>
       <main className="details">
         <div className="details__carousel--parent">
           <div className="details__carousel">
@@ -148,14 +153,17 @@ function Details() {
           </div>
         </div>
         <div className="details__content">
+          {showReviews && <Reviews hotel={hotel} setShowReviews={setShowReviews} />}
           <div className="details__text">
+            <Link to="/explore" className="return--link">
+              Return to Explore
+            </Link>
             <div className="details__intro">
               <Header header={hotel.attributes.name} type="main" />
               <div>{hotel.attributes.distance}km to downtown</div>
               <div className="rating__link" onClick={() => setShowReviews(true)}>
                 <i className="fas fa-star"></i> {hotel.attributes.star_rating !== 0 ? hotel.attributes.star_rating : "?"}/10 View Ratings
               </div>
-              {showReviews && <Reviews hotel={hotel} setShowReviews={setShowReviews} />}
             </div>
             <div>
               <Header header="About" type="content" />
@@ -196,6 +204,8 @@ function Details() {
             setDateRange={setDateRange}
             errorDate={errorDate}
             setErrorDate={setErrorDate}
+            responseMessage={responseMessage}
+            setResponseMessage={setResponseMessage}
           />
         )}
       </main>

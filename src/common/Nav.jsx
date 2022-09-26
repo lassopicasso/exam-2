@@ -1,20 +1,30 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
 import AuthContext from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 function Nav() {
   const [dropLinks, setDropLinks] = useState(false);
   const [auth, setAuth] = useContext(AuthContext);
+  const [dropAdminLinks, setDropAdminLinks] = useState(false);
   const location = useLocation().pathname;
-
   const navigate = useNavigate();
+  const dropDown = useRef(null);
+
+  document.addEventListener("mousedown", checkClick);
+  function checkClick(event) {
+    if (dropDown.current && (dropAdminLinks || dropLinks) && !dropDown.current.contains(event.target)) {
+      dropAdminLinks ? setDropAdminLinks(false) : setDropLinks(false);
+    }
+  }
 
   function logout() {
-    console.log(auth);
-    setAuth(null);
-    navigate("/");
+    const confirmSignOut = window.confirm(`${auth.user.username}, are you sure you want to sign out?`);
+    if (confirmSignOut) {
+      setAuth(null);
+      navigate("/");
+    }
   }
-  console.log("fefeefe");
+
   return (
     <nav className="nav">
       <div className="nav__container">
@@ -22,20 +32,51 @@ function Nav() {
           Holidaze
         </Link>
         <div className="nav__links">
-          <Link to="/" className={`nav__link${location === "/" ? "-active" : ""}`}>
-            Home
-          </Link>
           <Link to="/explore" className={`nav__link${location === "/explore" ? "-active" : ""}`}>
             Explore
           </Link>
           <Link to="/contact" className={`nav__link${location === "/contact" ? "-active" : ""}`}>
-            <i className="fas fa-user"></i>
+            Contact
           </Link>
+          {!auth ? (
+            <Link to="/login" className={`nav__link${location === "/login" ? "-active" : ""}`}>
+              <i className="fas fa-user"></i>
+            </Link>
+          ) : (
+            <div className="nav__admin--wrapper" ref={dropDown}>
+              <button className={`nav__button ${location === "/messages" || location === "/add_hotel" ? "nav__button-active" : ""}`} onClick={() => setDropAdminLinks(!dropAdminLinks)}>
+                <span>{auth.user.username}</span> <i className={`${dropAdminLinks ? "fas fa-caret-up" : "fas fa-caret-down"}`}></i>
+              </button>
+              {dropAdminLinks && (
+                <div className="admin__links">
+                  {auth.user.username === "Admin" ? (
+                    <>
+                      <Link className={`admin__link${location === "/messages" ? "-active" : ""}`} to="/messages" onClick={() => setDropAdminLinks(!dropAdminLinks)}>
+                        Messages
+                      </Link>
+                      <Link className={`admin__link${location === "/add_hotel" ? "-active" : ""}`} to="/add_hotel" onClick={() => setDropAdminLinks(!dropAdminLinks)}>
+                        Add Hotel
+                      </Link>
+                    </>
+                  ) : (
+                    <>
+                      <Link className={`admin__link${location === "/messages" ? "-active" : ""}`} to="/messages" onClick={() => setDropAdminLinks(!dropAdminLinks)}>
+                        Enquiries
+                      </Link>
+                    </>
+                  )}
+                  <button className="admin__logout admin__link" onClick={logout}>
+                    Logout
+                  </button>
+                </div>
+              )}
+            </div>
+          )}
         </div>
         <div className="nav__hamburger" onClick={() => setDropLinks(!dropLinks)}>
           <i className="fas fa-bars"></i>
           {dropLinks && (
-            <div className="hamburger__links">
+            <div className="hamburger__links" ref={dropDown}>
               <Link className={`hamburger__link${location === "/" ? "-active" : ""}`} to="/">
                 Home
               </Link>

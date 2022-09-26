@@ -1,4 +1,13 @@
-/* Search Input */
+/* Search Input - Home and Explore */
+.explore__search,
+.home__search {
+  width: 90%;
+  max-width: 400px;
+  #search__input {
+    width: 100%;
+  }
+}
+
 .search__wrapper {
   display: flex;
   height: 45px;
@@ -30,8 +39,35 @@
     }
   }
 }
+.search__results {
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 0 0 5px 5px;
+  margin: -19px 20px 20px 20px;
+  .search__item {
+    padding: 5px 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
+    text-decoration: none;
+    font-family: $font-secondary;
+    color: $color-black;
+    font-size: 18px;
+    border-bottom: 1px solid black;
+    img {
+      width: 80px;
+      height: 60px;
+      object-position: center;
+      object-fit: cover;
+    }
+    &:hover {
+      color: $color-secondary;
+      background-color: rgba(0, 255, 255, 1);
+    }
+  }
+}
 
-/* Forms - enquiry, contact, add hotel*/
+/* Forms - enquiry, contact, add hotel, review*/
 .form {
   width: 100%;
   max-width: 700px;
@@ -67,18 +103,49 @@
   }
   .error-input {
     color: red;
+    font-weight: bold;
   }
 
   .form__small-input--wrapper {
     display: flex;
-    width: 50%;
     gap: 10px;
     .input {
       width: 90%;
+      max-width: 100px;
     }
   }
 }
 textarea:focus,
 input:focus {
   outline: none;
+}
+
+//Hide input number default arrows
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+//Response message when query api
+.response {
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-weight: bold;
+  font-size: 18px;
+  max-width: 300px;
+  margin: auto;
+  text-align: center;
+}
+
+.success {
+  background-color: rgba(74, 235, 168, 0.7);
+}
+.error {
+  background-color: rgba(255, 0, 0, 0.6);
 }

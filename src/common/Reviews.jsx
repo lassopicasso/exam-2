@@ -19,6 +19,7 @@ function Reviews({ hotel, setShowReviews }) {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
@@ -41,13 +42,11 @@ function Reviews({ hotel, setShowReviews }) {
         "Content-Type": "application/json",
       },
     };
-    // console.log("neooooooooo");
-    // const name = document.querySelector("#name");
-    // name.style.color = "red";
     try {
       const response = await fetch(apiRatings, options);
       if (response.ok) {
         setToggleReviews(!toggleReviews);
+        reset();
       }
     } catch (error) {
       console.log(error);
@@ -110,7 +109,7 @@ function Reviews({ hotel, setShowReviews }) {
       <div className="reviews__container">
         <Header type="main" header={`Reviews: ${hotel.attributes.name}`} />
         {/* <p>Here you can add and give a review on a hotel with a rating of 1-10.</p> */}
-        <form className="form" onSubmit={handleSubmit(onSubmit)}>
+        <form className="form form__reviews" onSubmit={handleSubmit(onSubmit)}>
           <div className="form__input--wrapper form__inputs--review">
             <div>
               <label htmlFor="name">Name</label>

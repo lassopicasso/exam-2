@@ -104,6 +104,22 @@
   }
 }
 
+.details__text {
+  position: relative;
+  .return--link {
+    position: absolute;
+    left: 0px;
+    top: -20px;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: bolder;
+    color: rgba(14, 8, 7, 0.6);
+    &:hover {
+      color: rgba(14, 8, 7, 1);
+    }
+  }
+}
+
 .details__order {
   padding: 20px 10px;
   position: fixed;
@@ -134,14 +150,7 @@
         display: none;
       }
     }
-
-    // span {
-    //   font-size: 18px;
-    // }
   }
-  // .details__order--children {
-  //   font-style: italic;
-  // }
 }
 .details .cta {
   margin-bottom: 0;

@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import AuthContext from "../../context/AuthContext";
+import ResponseMessage from "../../common/ResponseMessage";
+import Header from "../../common/Header";
 
 const schema = yup.object().shape({
   email: yup.string().required("Please enter your email"),
@@ -12,7 +14,8 @@ const schema = yup.object().shape({
 });
 function Login() {
   const [auth, setAuth] = useContext(AuthContext);
-  const [loginFailed, setLoginFailed] = useState(false);
+  const [responseMessage, setResponseMessage] = useState(null);
+  const [loading, setLoading] = useState(false);
   const {
     register,
     handleSubmit,
@@ -31,7 +34,8 @@ function Login() {
   }, [auth]);
 
   async function onSubmit(input) {
-    // event.preventDefault();
+    setLoading(true);
+    setResponseMessage(null);
     let data = JSON.stringify({
       identifier: input.email,
       password: input.password,
@@ -45,37 +49,41 @@ function Login() {
     };
     try {
       const response = await fetch(apiAuth, options);
+      if (!response.ok) {
+        setResponseMessage({ response: "error", message: `Oh no! :( Something wrong occurred!` });
+      }
       const json = await response.json();
-      console.log(json);
       if (json.user) {
-        setLoginFailed(false);
         setAuth(json);
       } else {
-        setLoginFailed(true);
+        setResponseMessage({ response: "error", message: `The email or password is incorrect` });
       }
     } catch (error) {
-      console.log(error);
+      setResponseMessage({ response: "error", message: `Oh no! :( Error occured: ${error}` });
+    } finally {
+      setLoading(false);
     }
   }
 
   return (
     <>
+      <div className="enquiries__background"></div>
       <div className="login">
-        <h1>Login</h1>
+        <Header type="main" header="Login" />
+        {responseMessage && <ResponseMessage type={responseMessage.response} message={responseMessage.message} />}
         <form className="form" onSubmit={handleSubmit(onSubmit)}>
-          {loginFailed && <div className="login__error--login">The email or password is invalid. Please try again.</div>}
           <div className="form__input--wrapper">
-            <label className="login__label">Email: </label>
+            <label htmlFor="email">Email: </label>
             <input className="input" {...register("email")} type="email" id="email" />
             {errors.email && <span className="error-input">{errors.email.message}</span>}
           </div>
           <div className="form__input--wrapper">
-            <label className="login__label">Password:</label>
+            <label htmlFor="password">Password:</label>
             <input className="input" {...register("password")} type="password" id="password" />
             {errors.password && <span className="error-input">{errors.password.message}</span>}
           </div>
           <button type="submit" className="btn cta">
-            Login
+            {loading ? "Logging in.." : "Login"}
           </button>
         </form>
       </div>

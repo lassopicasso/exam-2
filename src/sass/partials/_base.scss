@@ -20,14 +20,20 @@ footer {
 }
 .nav {
   align-items: center;
-  &__link-active {
-    color: $color-secondary;
+  &__link,
+  &__button {
+    color: $color-black;
+    &-active,
+    &:hover {
+      color: $color-secondary;
+    }
   }
+
   &__links {
     display: none;
     align-items: baseline;
     font-weight: bold;
-
+    color: $color-black !important;
     @extend %darktext-shadow;
     .fa-user {
       color: $color-main;
@@ -36,6 +42,58 @@ footer {
       &:hover {
         color: $color-secondary;
       }
+    }
+  }
+  .nav__admin--wrapper {
+    position: relative;
+    .admin__links {
+      position: absolute;
+      top: 38px;
+      margin-left: -70px;
+      display: flex;
+      flex-direction: column;
+      background-color: rgba(255, 255, 255, 0.9);
+      width: 200px;
+      .admin__link,
+      .admin__link-active {
+        text-decoration: none;
+        text-align: start;
+        padding: 10px;
+        color: $color-black;
+        box-shadow: 3px 3px 3px rgba(14, 8, 7, 0.2);
+        @extend %darktext-shadow;
+        &:hover {
+          background-color: white;
+          color: $color-secondary;
+        }
+        &-active {
+          color: $color-secondary;
+          text-decoration: none;
+        }
+      }
+    }
+  }
+  .admin__logout,
+  &__button {
+    cursor: pointer;
+    border: none;
+    font-size: 18px;
+    text-transform: uppercase;
+    background-color: transparent;
+    font-family: $font-main;
+    font-weight: bold;
+  }
+  &__button {
+    display: flex;
+    gap: 5px;
+    text-align: center;
+    @extend %darktext-shadow;
+    .fa-caret-down,
+    .fa-caret-up {
+      font-size: 24px;
+    }
+    &-active {
+      color: $color-secondary;
     }
   }
   &__container {
@@ -76,7 +134,8 @@ footer {
       color: $color-black;
       text-decoration: none;
       padding: 10px 50px;
-      border-bottom: 1px solid $color-black;
+      // border-bottom: 1px solid $color-black;
+      box-shadow: 3px 3px 3px rgba(14, 8, 7, 0.2);
       &:hover,
       &-active {
         color: $color-secondary;
