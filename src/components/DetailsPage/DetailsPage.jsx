@@ -49,6 +49,7 @@ function Details() {
     // eslint-disable-next-line
   }, []);
 
+  //Setting the carousel margin/swing position.
   useEffect(() => {
     carouselMargin === 0 ? setMaxedLeft(true) : setMaxedLeft(false);
     carouselMargin - 100 === images.length * -100 ? setMaxedRight(true) : setMaxedRight(false);

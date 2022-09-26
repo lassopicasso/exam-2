@@ -23,6 +23,10 @@ function EnquiriesModal({ setShowModul, handleSubmit, price, errorName, setError
     const target = event.target;
     if (target.classList.contains("fa-minus")) {
       if (target.classList.contains("adult") && adult > 1) {
+        //Adults can't be less than rooms.
+        if (adult === room) {
+          setRoom(adult - 1);
+        }
         setAdult(adult - 1);
       }
       if (target.classList.contains("children") && children >= 1) {
@@ -34,9 +38,18 @@ function EnquiriesModal({ setShowModul, handleSubmit, price, errorName, setError
     } else {
       if (target.classList.contains("adult")) {
         setAdult(adult + 1);
-      } else {
-        target.classList.contains("children") ? setChildren(children + 1) : setRoom(room + 1);
       }
+      if (target.classList.contains("children")) {
+        setChildren(children + 1);
+      }
+      //Adults can't be less than rooms.
+      if (target.classList.contains("room") && room !== adult) {
+        setRoom(room + 1);
+      }
+
+      // else {
+      //   target.classList.contains("children") ? setChildren(children + 1) : setRoom(room + 1);
+      // }
     }
   }
 

@@ -1,5 +1,6 @@
 import moment from "moment";
 import React, { useState, useEffect } from "react";
+import { useFieldArray } from "react-hook-form";
 import Header from "../../common/Header";
 import { apiHotels } from "../../constants/api";
 import Cards from "./Cards";
@@ -60,6 +61,13 @@ function Explore() {
         return sort.btn === "btn1" ? a.attributes.distance - b.attributes.distance : b.attributes.distance - a.attributes.distance;
       });
     }
+    //Turn "Load More" button on and off based on the filter and sort results.
+    if (priceFiltered.length < 5) {
+      setLimitDisplay(hotels.length);
+    } else {
+      setLimitDisplay(5);
+    }
+
     setSortFilterHotels(priceFiltered);
     setExpandFilterSort(!expandFilterSort);
   }

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Header from "../../common/Header";
 import { Link } from "react-router-dom";
 import Reviews from "../../common/Reviews";
-function Cards({ hotel }) {
+function Cards({ hotel, margin }) {
   const [carouselMargin, setCarouselMargin] = useState(0);
   const [maxedLeft, setMaxedLeft] = useState(true);
   const [maxedRight, setMaxedRight] = useState(false);
