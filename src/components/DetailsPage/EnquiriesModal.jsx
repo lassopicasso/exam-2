@@ -104,6 +104,7 @@ function EnquiriesModal({ setShowModul, handleSubmit, price, errorName, setError
               placeholderText="Check-in  -  Check-out"
               className="date input"
               id="date"
+              readonly
             />
             {errorDate && <span className="error-input">Minimum 1 night stay</span>}
           </div>
