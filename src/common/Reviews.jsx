@@ -15,6 +15,7 @@ const schema = yup.object().shape({
 function Reviews({ hotel, setShowReviews }) {
   const [toggleReviews, setToggleReviews] = useState(false);
   const [reviews, setReviews] = useState([]);
+  const [loading, setLoading] = useState(true);
   const {
     register,
     handleSubmit,
@@ -29,6 +30,7 @@ function Reviews({ hotel, setShowReviews }) {
   }, []);
 
   async function onSubmit(input) {
+    console.log(input);
     let data = JSON.stringify({
       data: { hotel_id: id, name: input.name, message: input.message, star_rating: input.rating },
     });
@@ -39,6 +41,9 @@ function Reviews({ hotel, setShowReviews }) {
         "Content-Type": "application/json",
       },
     };
+    // console.log("neooooooooo");
+    // const name = document.querySelector("#name");
+    // name.style.color = "red";
     try {
       const response = await fetch(apiRatings, options);
       if (response.ok) {
@@ -46,6 +51,8 @@ function Reviews({ hotel, setShowReviews }) {
       }
     } catch (error) {
       console.log(error);
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -97,7 +104,6 @@ function Reviews({ hotel, setShowReviews }) {
     fetchReviews();
     // eslint-disable-next-line
   }, [toggleReviews]);
-
   return (
     <div className="reviews">
       <div className="enquiries__background"> </div>
@@ -149,6 +155,9 @@ function Reviews({ hotel, setShowReviews }) {
                 </div>
               );
             })
+          ) : // {return loading===true ? "sometih" : "<div>ee</div>"
+          loading ? (
+            <div className="reviews__cards--none">Loading...</div>
           ) : (
             <div className="reviews__cards--none">Currently no reviews on this place. Will you be the first one?</div>
           )}
