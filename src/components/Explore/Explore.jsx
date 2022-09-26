@@ -15,6 +15,7 @@ function Explore() {
   const [priceRange, setPriceRange] = useState({ label: "No Limit", min: 0, max: Infinity });
   const [sort, setSort] = useState({ type: "date", btn: "btn1" });
   const [limitDisplay, setLimitDisplay] = useState(5);
+
   const apiUrl = apiHotels + "?populate=*";
 
   useEffect(() => {
@@ -69,6 +70,7 @@ function Explore() {
     }
 
     setSortFilterHotels(priceFiltered);
+    //Mobile view-port the filter sort container is a dropdown that collapse when submitted.
     setExpandFilterSort(!expandFilterSort);
   }
 

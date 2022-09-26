@@ -2,13 +2,21 @@ import React, { useState, useEffect } from "react";
 import Header from "../../common/Header";
 import { Link } from "react-router-dom";
 import Reviews from "../../common/Reviews";
-function Cards({ hotel, margin }) {
+function Cards({ hotel }) {
   const [carouselMargin, setCarouselMargin] = useState(0);
   const [maxedLeft, setMaxedLeft] = useState(true);
   const [maxedRight, setMaxedRight] = useState(false);
   const images = hotel.attributes.images.data;
   const [showReviews, setShowReviews] = useState(false);
   const { name, distance, price, star_rating } = hotel.attributes;
+
+  //When sortFilterButton is clicked, card carousels returns to first image.
+  const sortFilterButton = document.querySelector(".cta__update");
+  if (sortFilterButton !== null) {
+    sortFilterButton.addEventListener("click", () => {
+      setCarouselMargin(0);
+    });
+  }
 
   useEffect(() => {
     carouselMargin === 0 ? setMaxedLeft(true) : setMaxedLeft(false);

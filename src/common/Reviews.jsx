@@ -58,7 +58,8 @@ function Reviews({ hotel, setShowReviews }) {
 
   useEffect(() => {
     async function fetchReviews() {
-      const apiUrl = apiRatings + "?pagination[pageSize]=100&populate=*";
+      //Use filter equal method in url and set the max limit from 25 to 100
+      const apiUrl = apiRatings + `?pagination[pageSize]=100&populate=*&filters[hotel_id][$eq]=${id}`;
       try {
         const response = await fetch(apiUrl);
         if (response.ok) {
@@ -66,7 +67,6 @@ function Reviews({ hotel, setShowReviews }) {
           console.log(data.data);
           //Sort Reviews
           let sortedReviews = data.data
-            .filter((review) => review.attributes.hotel_id === id)
             .map((review) => {
               return { ...review, date: new Date(review.attributes.publishedAt) };
             })
