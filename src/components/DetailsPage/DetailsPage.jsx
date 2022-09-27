@@ -6,7 +6,7 @@ import Reviews from "../../common/Reviews";
 import { Link } from "react-router-dom";
 import ResponseMessage from "../../common/ResponseMessage";
 import DetailsCarousel from "./DetailsCarousel";
-
+import Head from "../../common/Head";
 function Details() {
   const [hotel, setHotel] = useState("");
   const [images, setImages] = useState([]);
@@ -56,6 +56,7 @@ function Details() {
   return (
     <>
       <main className="details">
+        <Head title={hotel.attributes.name} description={`Welcome to beautiful ${hotel.attributes.name}. Take a look at what it can offer, and what earlier guests have written about this accommodation.`} addPostFixTitle={true} />
         <DetailsCarousel images={images} />
         <div className="details__content">
           {showReviews && <Reviews hotel={hotel} setShowReviews={setShowReviews} />}

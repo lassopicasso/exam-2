@@ -6,6 +6,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { apiHotels } from "../../constants/api";
 import AuthContext from "../../context/AuthContext";
 import ResponseMessage from "../../common/ResponseMessage";
+import Head from "../../common/Head";
 
 const schema = yup.object().shape({
   name: yup.string().required("Enter hotel name").min(5, "Minimum 5 characters"),
@@ -85,6 +86,7 @@ function AddHotelPage() {
 
   return (
     <main>
+      <Head title="Add Accommodation" description="Add a new accommodation to this website" addPostFixTitle={true} />
       <div className="enquiries__background"></div>
       <Header type="main" header="Add Hotel" />
       {responseMessage && <ResponseMessage type={responseMessage.response} message={responseMessage.message} />}

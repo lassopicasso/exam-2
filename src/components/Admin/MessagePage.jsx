@@ -3,6 +3,7 @@ import Header from "../../common/Header";
 import AuthContext from "../../context/AuthContext";
 import MessageList from "./MessageList";
 import { useNavigate } from "react-router-dom";
+import Head from "../../common/Head";
 
 function MessagePage() {
   const user = useContext(AuthContext)[0];
@@ -10,9 +11,10 @@ function MessagePage() {
   if (!user) {
     navigate("/");
   }
-
+  console.log(user.user.username);
   return (
     <main>
+      <Head title={user.user.username === "Admin" ? "Messages" : "Enquiries"} description={user.user.username === "Admin" ? "Read messages from the visitors" : "Read enquiries for your hotel"} addPostFixTitle={true} />
       <Header type="main" header={user.user.username === "Admin" ? "Messages" : "Enquiries"} />
       <MessageList user={user} />
     </main>

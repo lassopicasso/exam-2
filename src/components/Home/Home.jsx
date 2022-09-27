@@ -3,6 +3,8 @@ import Header from "../../common/Header";
 import { apiHotels } from "../../constants/api";
 import Carousel from "./Carousel";
 import Search from "../../common/Search";
+import Head from "../../common/Head";
+
 function Home() {
   const [hotels, setHotels] = useState([]);
   const [newHotels, setNewHotels] = useState([]);
@@ -61,6 +63,7 @@ function Home() {
 
   return (
     <>
+      <Head />
       <div className="home__backgroundImg" />
       <main className="home__main">
         <div className="home__carousel">

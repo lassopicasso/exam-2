@@ -7,6 +7,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import AuthContext from "../../context/AuthContext";
 import ResponseMessage from "../../common/ResponseMessage";
 import Header from "../../common/Header";
+import Head from "../../common/Head";
 
 const schema = yup.object().shape({
   email: yup.string().email().required("Please enter your email"),
@@ -67,6 +68,7 @@ function Login() {
 
   return (
     <>
+      <Head title="Login" description="Login as a admin or a user where you can read messages/enquiries and add new hotels if you are admin." addPostFixTitle={true} />
       <div className="enquiries__background"></div>
       <div className="login">
         <Header type="main" header="Login" />

@@ -5,7 +5,7 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { apiContact } from "../../constants/api";
 import ResponseMessage from "../../common/ResponseMessage";
-
+import Head from "../../common/Head";
 const schema = yup.object().shape({
   name: yup.string().required("Please enter your first name").min(3, "Minimum 3 characters"),
   email: yup.string().email().required("Please enter your email"),
@@ -56,6 +56,7 @@ function Contact() {
 
   return (
     <main>
+      <Head title="Contact" description="Contact the owners of this page if you have any question or feedback" addPostFixTitle={true} />
       <div className="enquiries__background"></div>
       <Header type="main" header="Contact" />
       {responseMessage && <ResponseMessage type={responseMessage.response} message={responseMessage.message} />}

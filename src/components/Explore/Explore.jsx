@@ -5,6 +5,7 @@ import { apiHotels } from "../../constants/api";
 import Cards from "./Cards";
 import Search from "../../common/Search";
 import FilterSort from "./FilterSort";
+import Head from "../../common/Head";
 // import { CSSTransition } from "react-transition-group";
 function Explore() {
   const [expandFilterSort, setExpandFilterSort] = useState(false);
@@ -108,6 +109,7 @@ function Explore() {
 
   return (
     <>
+      <Head title="Explore" description="Explore our accommodations in Bergen by searching, filter and sort." addPostFixTitle={true} />
       <div className="explore__hero" />
       <main className="explore">
         <Header header="Find your next stay" type="main" />
