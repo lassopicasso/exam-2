@@ -28,7 +28,7 @@ function ContactCard(props) {
         },
       };
       try {
-        const response = await fetch(api, options);
+        await fetch(api, options);
         setReadMore(false);
       } catch (error) {
         console.log(error);
