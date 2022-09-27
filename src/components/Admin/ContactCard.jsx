@@ -6,7 +6,6 @@ import { apiContact } from "../../constants/api";
 function ContactCard(props) {
   const [readMore, setReadMore] = useState(false);
   const [read, setRead] = useState(props.contact.attributes.read);
-  console.log(props.contact);
   const date = moment(props.contact.attributes.publishedAt).format("MMM Do YYYY, h:mm a");
   const subject = props.contact.attributes.subject;
   const name = props.contact.attributes.name;
@@ -20,7 +19,6 @@ function ContactCard(props) {
       let data = JSON.stringify({
         data: { read: read },
       });
-      console.log(data);
       const options = {
         method: "PUT",
         body: data,
@@ -31,7 +29,6 @@ function ContactCard(props) {
       };
       try {
         const response = await fetch(api, options);
-        console.log(response);
         setReadMore(false);
       } catch (error) {
         console.log(error);
