@@ -67,7 +67,8 @@ function Contact() {
         </div>
         <div className="form__input--wrapper">
           <label htmlFor="email"> Email</label>
-          <input className="input" id="email" type="email" {...register("email")} />
+
+          <input className="input" id="email" type="text" {...register("email")} />
           {errors.email && <span className="error-input">{errors.email.message}</span>}
         </div>
         <div className="form__input--wrapper">

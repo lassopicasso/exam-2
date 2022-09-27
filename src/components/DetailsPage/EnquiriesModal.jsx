@@ -3,23 +3,74 @@ import { useEffect } from "react";
 import DatePicker from "react-datepicker";
 import Header from "../../common/Header";
 import ResponseMessage from "../../common/ResponseMessage";
+import { apiEnquiry } from "../../constants/api";
+import { useForm } from "react-hook-form";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+const schema = yup.object().shape({
+  guestName: yup.string().required("Please enter your first name").min(3, "Minimum 3 characters"),
+  email: yup.string().email().required("Please enter your email"),
+  date: yup.number().min(1, "Minimum 1 night"),
+});
 
-function EnquiriesModal({ setShowModul, handleSubmit, price, errorName, setErrorName, errorEmail, setErrorEmail, dateRange, setDateRange, errorDate, setErrorDate, bookingPrice, setBookingPrice, responseMessage, setResponseMessage }) {
-  const [startDate, endDate] = dateRange;
+function EnquiriesModal({ hotel, setShowModul, price }) {
+  const [dateRange, setDateRange] = useState([null, null]);
+  let [startDate, endDate] = dateRange;
   const [expandGuest, setExpandGuest] = useState(false);
   const [adult, setAdult] = useState(1);
   const [children, setChildren] = useState(0);
+  const [responseMessage, setResponseMessage] = useState(null);
+  const [bookingPrice, setBookingPrice] = useState(price);
   const [room, setRoom] = useState(1);
   const guestsMenu = useRef(null);
+  const {
+    setValue,
+    reset,
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(schema),
+  });
+  async function onSubmit(input) {
+    setResponseMessage(null);
+    const dates = document.querySelector("#date").value;
+    let data = JSON.stringify({
+      data: { hotel: hotel, name: input.guestName, email: input.email, date: dates, message: input.message, adult: input.adult, children: input.children, room: input.room, price: bookingPrice },
+    });
+    const options = {
+      method: "POST",
+      body: data,
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    try {
+      const response = await fetch(apiEnquiry, options);
+      if (response.ok) {
+        reset();
+        setRoom(1);
+        setChildren(0);
+        setAdult(1);
+        [startDate, endDate] = [null, null];
 
+        setResponseMessage({ response: "success", message: "Thank you for your enquiry!" });
+      } else {
+        setResponseMessage({ response: "error", message: "Oh no! Something wrong happened!" });
+      }
+    } catch (error) {
+      setResponseMessage({ response: "error", message: `Oh no! Following error occurred: ${error}` });
+    }
+  }
+
+  //Close guestsMenu if clicked outside of the guests container
   document.addEventListener("mousedown", checkClick);
-
   function checkClick(event) {
     if (guestsMenu.current && expandGuest && !guestsMenu.current.contains(event.target)) {
       setExpandGuest(false);
     }
   }
-
+  //Change guests input and handle restrictions on amount of adults vs rooms.
   function handleGuests(event) {
     const target = event.target;
     if (target.classList.contains("fa-minus")) {
@@ -51,9 +102,18 @@ function EnquiriesModal({ setShowModul, handleSubmit, price, errorName, setError
   }
 
   useEffect(() => {
+    setValue("adult", adult);
+    setValue("children", children);
+    setValue("room", room);
+    // eslint-disable-next-line
+  }, [adult, children, room]);
+
+  //Calculate BookingPrice
+  useEffect(() => {
     let sumPrice = adult * price + parseInt(children * (price * 0.5));
     //Amount of nights, 8.64e7 milliseconds in 1 day.
     let days = (dateRange[1] - dateRange[0]) / 8.64e7;
+    setValue("date", days);
     days = days >= 1 ? days : 1;
     setBookingPrice(sumPrice * days);
     // eslint-disable-next-line
@@ -65,48 +125,21 @@ function EnquiriesModal({ setShowModul, handleSubmit, price, errorName, setError
       <div className="enquiries__content">
         <Header type="main" header="Reservation Enquiry" />
         {responseMessage && <ResponseMessage type={responseMessage.response} message={responseMessage.message} />}
-        <form className="form" onSubmit={(event) => handleSubmit(event)}>
+        <form className="form" onSubmit={handleSubmit(onSubmit)}>
           <div className="enquiries__input form__input--wrapper">
             <label htmlFor="name">Name</label>
-            <input
-              className="input name"
-              id="name"
-              type="text"
-              onChange={() => {
-                setErrorName(false);
-              }}
-            />
-            {errorName && <span className="error-input">Minimum 3 characters</span>}
+            <input className="input name" id="name" type="text" {...register("guestName")} />
+            {errors.guestName && <span className="error-input">{errors.guestName.message}</span>}
           </div>
           <div className="enquiries__input form__input--wrapper">
             <label htmlFor="email">Email</label>
-            <input
-              id="email"
-              className="email input"
-              type="email"
-              onChange={() => {
-                setErrorEmail(false);
-              }}
-            />
-            {errorEmail && <span className="error-input">Enter a valid email</span>}
+            <input id="email" className="email input" type="email" {...register("email")} />
+            {errors.email && <span className="error-input">{errors.email.message}</span>}
           </div>
           <div className="enquiries__date enquiries__input form__input--wrapper">
             <label htmlFor="date">Date</label>
-            <DatePicker
-              selectsRange={true}
-              startDate={startDate}
-              endDate={endDate}
-              minDate={new Date()}
-              onChange={(update) => {
-                setDateRange(update);
-                setErrorDate(false);
-              }}
-              placeholderText="Check-in  -  Check-out"
-              className="date input"
-              id="date"
-              onFocus={(e) => e.target.blur()}
-            />
-            {errorDate && <span className="error-input">Minimum 1 night stay</span>}
+            <DatePicker selectsRange={true} startDate={startDate} endDate={endDate} minDate={new Date()} onChange={(update) => setDateRange(update)} placeholderText="Check-in  -  Check-out" className="date input" id="date" />
+            {errors.date && <span className="error-input">{errors.date.message}</span>}
           </div>
           <div className="guests__container enquiries__input form__input--wrapper">
             <label>Guests</label>
@@ -148,7 +181,7 @@ function EnquiriesModal({ setShowModul, handleSubmit, price, errorName, setError
           </div>
           <div className="enquiries__input form__input--wrapper">
             <label>Message</label>
-            <textarea className="input" rows="5" cols="20" placeholder="Comment on your booking (optional)" id="message" />
+            <textarea className="input" {...register("message")} rows="5" cols="20" placeholder="Comment on your booking (optional)" id="message" />
           </div>
           <div className="enquiries__price">
             <Header type="sub" header="Total Price" />

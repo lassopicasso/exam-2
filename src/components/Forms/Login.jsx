@@ -9,7 +9,7 @@ import ResponseMessage from "../../common/ResponseMessage";
 import Header from "../../common/Header";
 
 const schema = yup.object().shape({
-  email: yup.string().required("Please enter your email"),
+  email: yup.string().email().required("Please enter your email"),
   password: yup.string().required("Please enter your password").min(5, "Minimum 5 characters"),
 });
 function Login() {

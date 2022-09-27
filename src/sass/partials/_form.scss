@@ -87,7 +87,7 @@
   &__input--wrapper {
     width: 100%;
     max-width: 400px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
   }
   .input,
   .image__uploader {
@@ -121,9 +121,10 @@
     }
   }
 }
-textarea:focus,
-input:focus {
-  outline: none;
+
+.input:focus,
+#search__input:focus {
+  outline-color: $color-buttons;
 }
 
 //Hide input number default arrows
@@ -156,5 +157,5 @@ input[type="number"] {
   background-color: rgba(255, 0, 0, 0.6);
 }
 .info {
-  background-color: rgba(235, 98, 78, 0.6);
+  background-color: rgba(235, 98, 78, 0.5);
 }
