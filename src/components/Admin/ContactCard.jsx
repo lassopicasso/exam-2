@@ -65,7 +65,7 @@ function ContactCard(props) {
             </div>
             <div className="messages__buttons">
               <button className="cta" onClick={() => setRead(!read)}>
-                {props.filter === "read" ? "Not read" : "Mark as read"}
+                {props.filter === "read" ? "Not read" : "Read"}
               </button>
               <button className="cta" onClick={() => setReadMore(false)}>
                 Hide
