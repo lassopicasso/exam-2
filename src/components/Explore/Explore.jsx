@@ -1,5 +1,5 @@
 import moment from "moment";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Header from "../../common/Header";
 import { apiHotels } from "../../constants/api";
 import Cards from "./Cards";
@@ -15,9 +15,18 @@ function Explore() {
   const [priceRange, setPriceRange] = useState({ label: "No Limit", min: 0, max: Infinity });
   const [sort, setSort] = useState({ type: "date", btn: "btn1" });
   const [limitDisplay, setLimitDisplay] = useState(5);
-  const [searchResults, setSearchResults] = useState([]);
+  const [searchResults, setSearchResults] = useState(null);
+  const dropDownSearch = useRef(null);
 
   const apiUrl = apiHotels + "?populate=*";
+
+  document.addEventListener("mousedown", checkClick);
+  function checkClick(event) {
+    if (dropDownSearch.current && searchResults && !dropDownSearch.current.contains(event.target)) {
+      setSearchResults(null);
+      document.querySelector("#search__input").value = "";
+    }
+  }
 
   useEffect(() => {
     async function fetchData() {
@@ -109,9 +118,9 @@ function Explore() {
             </label>
             <input type="text" id="search__input" placeholder="Search for a place" onChange={hotelSearch} />
           </div>
-          <div className="search__results">
+          <div className="search__results" ref={dropDownSearch}>
             {searchResults &&
-              searchResults.slice(0, 4).map((hotel) => {
+              searchResults.map((hotel) => {
                 return <Search hotel={hotel} key={hotel.id} />;
               })}
           </div>

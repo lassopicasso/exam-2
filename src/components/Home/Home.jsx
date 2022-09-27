@@ -64,7 +64,7 @@ function Home() {
       <div className="home__backgroundImg" />
       <main className="home__main">
         <div className="home__carousel">
-          <Header header="New Offers" type="main" />
+          <Header header="New Offers in Bergen" type="main" />
           <div className="home__carousel-wrapper">
             <div className="home__carousel-content">
               {newHotels.map((hotel) => {
@@ -78,11 +78,11 @@ function Home() {
             <label htmlFor="search__input">
               <i className="fas fa-search"></i>
             </label>
-            <input type="text" id="search__input" placeholder="Search for a stay in Bergen" onChange={hotelSearch} />
+            <input type="text" id="search__input" placeholder="Search for accommodation" onChange={hotelSearch} />
           </div>
           <div className="search__results">
             {searchResults &&
-              searchResults.slice(0, 4).map((hotel) => {
+              searchResults.map((hotel) => {
                 return <Search hotel={hotel} key={hotel.id} />;
               })}
           </div>

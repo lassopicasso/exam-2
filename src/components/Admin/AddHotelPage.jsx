@@ -44,6 +44,7 @@ function AddHotelPage() {
   }
 
   async function onSubmit(input) {
+    setLoading(true);
     setResponseMessage(null);
     let formData = new FormData();
     Array.from(input.images).forEach((image) => {
