@@ -3,13 +3,13 @@ import { apiEnquiry } from "../../constants/api";
 import { apiContact } from "../../constants/api";
 import EnquiryCard from "./EnquiryCard";
 import ContactCard from "./ContactCard";
-import ResponseMessage from "../../common/ResponseMessage";
+// import ResponseMessage from "../../common/ResponseMessage";
 
 function MessageList({ user }) {
   const [loading, setLoading] = useState(true);
   const [messages, setMessages] = useState([]);
   const [filterButton, setFilterButton] = useState("unread");
-  const [responseMessage, setResponseMessage] = useState(false);
+  // const [responseMessage, setResponseMessage] = useState(false);
   console.log(user.user.username);
   const apiMessages = user.user.username === "Admin" ? apiContact + "?populate=*" : apiEnquiry + "?populate=*";
   useEffect(() => {
@@ -30,20 +30,20 @@ function MessageList({ user }) {
             })
             .sort((a, b) => b.date - a.date);
           setMessages(sortedMessages);
-          console.log(sortedMessages);
-          console.log(messages.length);
-          console.log(messages.length === 0);
+          // console.log(sortedMessages);
+          // console.log(messages.length);
+          // console.log(messages.length === 0);
 
           // const messageArray = messages.filter((message) => message.attributes.read && filterButton === "unread");
           // console.log(messageArray);
-          if (messages.length === 0) {
-            setResponseMessage({ response: "info", message: `Oh no! :/ ${user.user.username === "Admin" ? `There are no messages to ${messages.read ? "unread" : "read"} here.` : `There are no enquiries to ${messages.read ? "unread" : "read"} here.`}` });
-          }
+          // if (messages.length === 0) {
+          //   // setResponseMessage({ response: "info", message: `Oh no! :/ ${user.user.username === "Admin" ? `There are no messages to ${messages.read ? "unread" : "read"} here.` : `There are no enquiries to ${messages.read ? "unread" : "read"} here.`}` });
+          // }
         } else {
-          setResponseMessage({ response: "error", message: `Oh no! :/ ${response.status === 401 ? "Please relogin and try again" : "An error occured"}` });
+          // setResponseMessage({ response: "error", message: `Oh no! :/ ${response.status === 401 ? "Please relogin and try again" : "An error occured"}` });
         }
       } catch (error) {
-        setResponseMessage({ response: "error", message: `Oh no! :/ Following error occured: ${error}` });
+        // setResponseMessage({ response: "error", message: `Oh no! :/ Following error occured: ${error}` });
       } finally {
         setLoading(false);
       }
@@ -66,7 +66,7 @@ function MessageList({ user }) {
       </main>
     );
   }
-  console.log(responseMessage ? "true" : "no");
+  // console.log(responseMessage ? "true" : "no");
   return (
     <>
       <div className="messages">
@@ -84,7 +84,7 @@ function MessageList({ user }) {
           </button>
         </div>
         <div className="messages__list">
-          {responseMessage && <ResponseMessage type={responseMessage.response} message={responseMessage.message} />}
+          {/* {responseMessage && <ResponseMessage type={responseMessage.response} message={responseMessage.message} />} */}
           {user.user.username === "Admin"
             ? messages.map((contact, index) => {
                 return <ContactCard contact={contact} user={user} filter={filterButton} key={index} />;
