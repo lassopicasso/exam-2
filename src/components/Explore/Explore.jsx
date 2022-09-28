@@ -1,33 +1,25 @@
 import moment from "moment";
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import Header from "../../common/Header";
 import { apiHotels } from "../../constants/api";
 import Cards from "./Cards";
 import Search from "../../common/Search";
 import FilterSort from "./FilterSort";
 import Head from "../../common/Head";
+import ResponseMessage from "../../common/ResponseMessage";
 // import { CSSTransition } from "react-transition-group";
 function Explore() {
   const [expandFilterSort, setExpandFilterSort] = useState(false);
   const [hotels, setHotels] = useState([]);
   const [sortFilterHotels, setSortFilterHotels] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
+  const [responseMessage, setResponseMessage] = useState(null);
   const [priceRange, setPriceRange] = useState({ label: "No Limit", min: 0, max: Infinity });
   const [sort, setSort] = useState({ type: "date", btn: "btn1" });
   const [limitDisplay, setLimitDisplay] = useState(5);
   const [searchResults, setSearchResults] = useState(null);
-  const dropDownSearch = useRef(null);
 
   const apiUrl = apiHotels + "?populate=*";
-
-  document.addEventListener("mousedown", checkClick);
-  function checkClick(event) {
-    if (dropDownSearch.current && searchResults && !dropDownSearch.current.contains(event.target)) {
-      setSearchResults(null);
-      document.querySelector("#search__input").value = "";
-    }
-  }
 
   useEffect(() => {
     async function fetchData() {
@@ -37,9 +29,11 @@ function Explore() {
           const data = await response.json();
           setHotels(data.data);
           setSortFilterHotels(data.data);
+        } else {
+          setResponseMessage({ response: "error", message: `Oh no! The following error occurred: ${response.statusText}` });
         }
       } catch (error) {
-        setError(error);
+        setResponseMessage({ response: "error", message: `Oh no! The following error occurred: ${error}` });
       } finally {
         setLoading(false);
       }
@@ -57,7 +51,7 @@ function Explore() {
     });
     console.log(filteredSearch.length);
     if (filteredSearch.length === hotels.length) {
-      filteredSearch = [];
+      filteredSearch = null;
       console.log("it is ZERO!");
     }
     setSearchResults(filteredSearch);
@@ -103,8 +97,8 @@ function Explore() {
   if (loading) {
     return <main>Loading...</main>;
   }
-  if (error) {
-    return <main>{error}</main>;
+  if (responseMessage) {
+    <ResponseMessage type={responseMessage.response} message={responseMessage.message} />;
   }
 
   return (
@@ -120,12 +114,7 @@ function Explore() {
             </label>
             <input type="text" id="search__input" placeholder="Search for a place" onChange={hotelSearch} />
           </div>
-          <div className="search__results" ref={dropDownSearch}>
-            {searchResults &&
-              searchResults.map((hotel) => {
-                return <Search hotel={hotel} key={hotel.id} />;
-              })}
-          </div>
+          {searchResults && <Search searchResults={searchResults} setSearchResults={setSearchResults} />}
         </div>
         <div className="explore__content">
           <div className={`filterSort ${expandFilterSort ? "filterSort-active" : ""}`}>

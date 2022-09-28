@@ -4,13 +4,14 @@ import { apiHotels } from "../../constants/api";
 import Carousel from "./Carousel";
 import Search from "../../common/Search";
 import Head from "../../common/Head";
+import ResponseMessage from "../../common/ResponseMessage";
 
 function Home() {
   const [hotels, setHotels] = useState([]);
   const [newHotels, setNewHotels] = useState([]);
-  const [searchResults, setSearchResults] = useState([]);
+  const [searchResults, setSearchResults] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [responseMessage, setResponseMessage] = useState(null);
   const apiUrl = apiHotels + "?populate=*";
   useEffect(() => {
     async function fetchData() {
@@ -18,19 +19,18 @@ function Home() {
         const response = await fetch(apiUrl);
         if (response.ok) {
           const data = await response.json();
-          console.log(data.data);
           let sortedHotels = data.data
             .map((hotel) => {
               return { ...hotel, date: new Date(hotel.attributes.publishedAt) };
             })
             .sort((a, b) => b.date - a.date);
-          console.log(newHotels);
           setHotels(sortedHotels);
-          console.log(sortedHotels);
           setNewHotels(sortedHotels.slice(0, 4));
+        } else {
+          setResponseMessage({ response: "error", message: `Oh no! The following error occurred: ${response.statusText}` });
         }
       } catch (error) {
-        setError(error);
+        setResponseMessage({ response: "error", message: `Oh no! The following error occurred: ${error}` });
       } finally {
         setLoading(false);
       }
@@ -40,7 +40,6 @@ function Home() {
   }, []);
 
   function hotelSearch(event) {
-    console.log("Search box interacts");
     let filteredSearch = hotels.filter((hotel) => {
       hotel = hotel.attributes.name.toLowerCase();
       let input = event.target.value.toLowerCase();
@@ -48,8 +47,7 @@ function Home() {
     });
     console.log(filteredSearch.length);
     if (filteredSearch.length === hotels.length) {
-      filteredSearch = [];
-      console.log("it is ZERO!");
+      filteredSearch = null;
     }
     setSearchResults(filteredSearch);
   }
@@ -57,8 +55,12 @@ function Home() {
   if (loading) {
     return <main>Loading...</main>;
   }
-  if (error) {
-    return <main>{error}</main>;
+  if (responseMessage) {
+    return (
+      <main>
+        <ResponseMessage type={responseMessage.response} message={responseMessage.message} />
+      </main>
+    );
   }
 
   return (
@@ -83,12 +85,7 @@ function Home() {
             </label>
             <input type="text" id="search__input" placeholder="Search for accommodation" onChange={hotelSearch} />
           </div>
-          <div className="search__results">
-            {searchResults &&
-              searchResults.map((hotel) => {
-                return <Search hotel={hotel} key={hotel.id} />;
-              })}
-          </div>
+          {searchResults && <Search searchResults={searchResults} setSearchResults={setSearchResults} />}
         </div>
       </main>
     </>

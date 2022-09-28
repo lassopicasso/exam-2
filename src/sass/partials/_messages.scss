@@ -14,16 +14,8 @@
     margin: 20px auto;
   }
   &__card--wrapper {
-    // border: 1px solid black;
-    border-radius: 5px;
-    box-shadow: 0px 3px 3px rgb(0 0 0 / 10%);
-    background-color: rgba(255, 255, 255, 0.4);
-    border-radius: 5px;
-    // width: 100%;
-    margin: 0;
-    // max-width: 350px;
+    @extend %card;
     padding: 10px 20px;
-    transition: 1.5s;
     span {
       font-weight: bold;
     }

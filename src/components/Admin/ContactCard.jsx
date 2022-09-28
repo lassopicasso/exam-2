@@ -2,15 +2,14 @@ import React, { useState, useEffect } from "react";
 import moment from "moment/moment";
 import Header from "../../common/Header";
 import { apiContact } from "../../constants/api";
-
+import ResponseMessage from "../../common/ResponseMessage";
 function ContactCard(props) {
   const [readMore, setReadMore] = useState(false);
   const [read, setRead] = useState(props.contact.attributes.read);
+  const [responseMessage, setResponseMessage] = useState(null);
   const date = moment(props.contact.attributes.publishedAt).format("MMM Do YYYY, h:mm a");
-  const subject = props.contact.attributes.subject;
-  const name = props.contact.attributes.name;
-  const email = props.contact.attributes.email;
-  const message = props.contact.attributes.message;
+  const { subject, name, email, message } = props.contact.attributes;
+
   const id = props.contact.id;
   const api = apiContact + "/" + id;
 
@@ -28,10 +27,13 @@ function ContactCard(props) {
         },
       };
       try {
-        await fetch(api, options);
+        const response = await fetch(api, options);
         setReadMore(false);
+        if (!response.ok) {
+          setResponseMessage({ response: "error", message: `Oh no! The following error occurred: ${response.statusText}` });
+        }
       } catch (error) {
-        console.log(error);
+        setResponseMessage({ response: "error", message: `Oh no! The following error occurred: ${error}` });
       }
     }
     updateRead();
@@ -43,6 +45,9 @@ function ContactCard(props) {
   }
   if (props.filter === "read" && read === false) {
     return "";
+  }
+  if (responseMessage) {
+    return <ResponseMessage type={responseMessage.response} message={responseMessage.message} />;
   }
 
   return (

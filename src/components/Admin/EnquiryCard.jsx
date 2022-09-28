@@ -2,17 +2,15 @@ import React, { useState, useEffect } from "react";
 import moment from "moment/moment";
 import Header from "../../common/Header";
 import { apiEnquiry } from "../../constants/api";
-
+import ResponseMessage from "../../common/ResponseMessage";
 function EnquiryCard(props) {
   const [readMore, setReadMore] = useState(false);
   const [read, setRead] = useState(props.enquiry.attributes.read);
+  const [responseMessage, setResponseMessage] = useState(null);
+  const { hotel, date: bookingDate, name, email, adult, children, room } = props.enquiry.attributes;
+  const guests = `${adult} Adult - ${children} Children - ${room} Room`;
   const date = moment(props.enquiry.attributes.publishedAt).format("MMM Do YYYY, h:mm a");
-  const hotel = props.enquiry.attributes.hotel;
-  const bookingDate = props.enquiry.attributes.date;
-  const guests = `${props.enquiry.attributes.adult} Adult - ${props.enquiry.attributes.children} Children - ${props.enquiry.attributes.room} Room`;
   const price = `${props.enquiry.attributes.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} NOK`;
-  const name = props.enquiry.attributes.name;
-  const email = props.enquiry.attributes.email;
   const message = props.enquiry.attributes.message.length > 0 ? props.enquiry.attributes.message : "No message";
   const id = props.enquiry.id;
   const api = apiEnquiry + "/" + id;
@@ -31,10 +29,13 @@ function EnquiryCard(props) {
     };
     async function updateRead() {
       try {
-        await fetch(api, options);
+        const response = await fetch(api, options);
         setReadMore(false);
+        if (!response.ok) {
+          setResponseMessage({ response: "error", message: `Oh no! The following error occurred: ${response.statusText}` });
+        }
       } catch (error) {
-        console.log(error);
+        setResponseMessage({ response: "error", message: `Oh no! The following error occurred: ${error}` });
       }
     }
     updateRead();
@@ -46,6 +47,10 @@ function EnquiryCard(props) {
   }
   if (props.filter === "read" && read === false) {
     return "";
+  }
+
+  if (responseMessage) {
+    return <ResponseMessage type={responseMessage.response} message={responseMessage.message} />;
   }
 
   return (

@@ -9,7 +9,6 @@
     .card {
       height: 250px;
       display: flex;
-      background-color: rgba(255, 255, 255, 0.8);
       &__carousel {
         height: 100%;
         max-width: 400px;
@@ -61,6 +60,7 @@
     width: 800px;
     height: 210px;
     padding: 0 10px;
+    box-shadow: 3px 6px 6px rgba(14, 8, 7, 0.2);
     &-wrapper {
       overflow: auto;
     }
@@ -84,7 +84,8 @@
   .details__carousel--parent {
     margin-top: 20px;
     padding: 20px;
-    background-color: rgba(255, 255, 255, 0.9);
+    background-color: rgba(255, 255, 255, 0.8);
+    box-shadow: 3px 6px 6px rgba(14, 8, 7, 0.2);
     display: flex;
     gap: 20px;
     border-radius: 10px;
@@ -103,7 +104,8 @@
     align-items: flex-start;
   }
   .details__text {
-    background: rgba(255, 255, 255, 0.9);
+    background: rgba(255, 255, 255, 0.8);
+    box-shadow: 3px 6px 6px rgba(14, 8, 7, 0.2);
     padding: 20px;
     border-radius: 10px;
     grid-column: 7 span;
@@ -119,6 +121,8 @@
     grid-column: 3 span;
     border-radius: 10px;
     position: static;
+    background: rgba(255, 255, 255, 0.8);
+    box-shadow: 3px 6px 6px rgba(14, 8, 7, 0.2);
     &-text {
       flex-direction: column;
       align-items: flex-start;

@@ -7,9 +7,6 @@ const defaultDescription = "Holidaze, we offers accommodations in Bergen. Take a
 const postfixTitle = " - Holidaze";
 
 export default function Head({ title = defaultTitle, description = defaultDescription, addPostFixTitle }) {
-  console.log(addPostFixTitle);
-  console.log(addPostFixTitle ? "hello" : "aa");
-
   const metaTitle = addPostFixTitle ? title + postfixTitle : title;
   const metaDesc = description;
   return (

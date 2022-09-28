@@ -6,3 +6,10 @@
 %darkbox-shadow {
   box-shadow: 3px 6px 6px rgba(14, 8, 7, 0.2);
 }
+
+%card {
+  @extend %darkbox-shadow;
+  background-color: rgba(255, 255, 255, 0.8);
+  margin: 0;
+  border-radius: 10px;
+}

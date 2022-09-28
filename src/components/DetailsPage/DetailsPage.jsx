@@ -46,7 +46,7 @@ function Details() {
   if (loading) {
     return <main>Loading...</main>;
   }
-  if (responseMessage && responseMessage.response === "error") {
+  if (responseMessage) {
     return (
       <main>
         <ResponseMessage type={responseMessage.response} message={responseMessage.message} />
