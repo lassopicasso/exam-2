@@ -45,7 +45,6 @@ function Home() {
       let input = event.target.value.toLowerCase();
       return hotel.includes(input);
     });
-    console.log(filteredSearch.length);
     if (filteredSearch.length === hotels.length) {
       filteredSearch = null;
     }

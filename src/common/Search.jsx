@@ -20,10 +20,10 @@ function Search({ setSearchResults, searchResults }) {
   } else {
     return (
       <div className="search__results" ref={dropDownSearch}>
-        {searchResults.map((hotel) => {
+        {searchResults.map((hotel, index) => {
           let hotelImg = hotel.attributes.images.data[0].attributes.url;
           return (
-            <Link className="search__item" to={`/details/${hotel.id}`}>
+            <Link className="search__item" to={`/details/${hotel.id}`} key={index}>
               {hotel.attributes.name} <img src={hotelImg} alt={`${hotel.attributes.name}`}></img>
             </Link>
           );
