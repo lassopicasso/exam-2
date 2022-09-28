@@ -100,7 +100,9 @@ function EnquiriesModal({ hotel, setShowModul, price }) {
       }
     }
   }
-
+  useEffect(() => {
+    window.scrollTo({ top: 50, behavior: "smooth" });
+  }, []);
   useEffect(() => {
     setValue("adult", adult);
     setValue("children", children);
