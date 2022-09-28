@@ -16,6 +16,7 @@ export default function Head({ title = defaultTitle, description = defaultDescri
     <Helmet>
       <title>{metaTitle}</title>
       <meta name="description" content={metaDesc} />
+      <meta property="og:image" content="%PUBLIC_URL%/backgroundImg.jpg" />
     </Helmet>
   );
 }
