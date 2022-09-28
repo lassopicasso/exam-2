@@ -29,11 +29,13 @@ function Cards({ hotel }) {
 
       <div className="card">
         <div className="card__carousel" id={hotel.id}>
-          <div className="card__carousel_wrapper" style={{ width: images.length * 100 + "%", marginLeft: `${carouselMargin}%` }}>
-            {images.map((image, index) => {
-              return <div className="card__img" key={index} style={{ backgroundImage: `url(${image.attributes.url})` }}></div>;
-            })}
-          </div>
+          <Link to={`/details/${hotel.id}`}>
+            <div className="card__carousel_wrapper" style={{ width: images.length * 100 + "%", marginLeft: `${carouselMargin}%` }}>
+              {images.map((image, index) => {
+                return <div className="card__img" key={index} style={{ backgroundImage: `url(${image.attributes.url})` }}></div>;
+              })}
+            </div>
+          </Link>
           <div className="card__buttons">
             <button className="carousel__button-left" disabled={maxedLeft ? true : false} onClick={() => setCarouselMargin(carouselMargin + 100)}>
               <i className="fas fa-chevron-left left"></i>
