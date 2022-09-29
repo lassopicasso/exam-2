@@ -4,7 +4,7 @@ import { Helmet } from "react-helmet-async";
 const defaultTitle = "Holidaze";
 const defaultDescription = "Holidaze, we offers accommodations in Bergen. Take a look and see what we can offer.";
 
-const postfixTitle = " - Holidaze";
+const postfixTitle = " | Holidaze";
 
 export default function Head({ title = defaultTitle, description = defaultDescription, addPostFixTitle }) {
   const metaTitle = addPostFixTitle ? title + postfixTitle : title;
