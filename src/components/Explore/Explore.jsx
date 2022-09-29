@@ -7,7 +7,8 @@ import Search from "../../common/Search";
 import FilterSort from "./FilterSort";
 import Head from "../../common/Head";
 import ResponseMessage from "../../common/ResponseMessage";
-// import { CSSTransition } from "react-transition-group";
+import Loading from "../../common/Loading";
+
 function Explore() {
   const [expandFilterSort, setExpandFilterSort] = useState(false);
   const [hotels, setHotels] = useState([]);
@@ -95,7 +96,7 @@ function Explore() {
   }
 
   if (loading) {
-    return <main>Loading...</main>;
+    return <Loading />;
   }
   if (responseMessage) {
     <ResponseMessage type={responseMessage.response} message={responseMessage.message} />;
@@ -121,11 +122,7 @@ function Explore() {
             <button className={`filterSort__button ${expandFilterSort ? "filterSort__button-active" : ""}`} onClick={() => setExpandFilterSort(!expandFilterSort)}>
               <span>Filter & Sort </span> {expandFilterSort ? <i className="fas fa-caret-up"></i> : <i className="fas fa-caret-down"></i>}
             </button>
-            {/* <CSSTransition in={expandFilterSort} timeout={400} unmountOnExit appear> */}
-            {/* {expandFilterSort && <FilterSort key={moment} handleSubmit={handleSubmit} setPriceRange={setPriceRange} priceRange={priceRange} sort={sort} setSort={setSort} />} */}
             <FilterSort expandFilterSort={expandFilterSort} key={moment} handleSubmit={handleSubmit} setPriceRange={setPriceRange} priceRange={priceRange} sort={sort} setSort={setSort} />
-
-            {/* </CSSTransition> */}
           </div>
           <div className="cards">
             {sortFilterHotels.map((hotel, index) => {

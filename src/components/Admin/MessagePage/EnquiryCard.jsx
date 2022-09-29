@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import moment from "moment/moment";
-import Header from "../../common/Header";
-import { apiEnquiry } from "../../constants/api";
-import ResponseMessage from "../../common/ResponseMessage";
+
+import Header from "../../../common/Header";
+import { apiEnquiry } from "../../../constants/api";
+import ResponseMessage from "../../../common/ResponseMessage";
+
 function EnquiryCard(props) {
   const [readMore, setReadMore] = useState(false);
   const [read, setRead] = useState(props.enquiry.attributes.read);

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import moment from "moment/moment";
-import Header from "../../common/Header";
-import { apiContact } from "../../constants/api";
-import ResponseMessage from "../../common/ResponseMessage";
+import Header from "../../../common/Header";
+import { apiContact } from "../../../constants/api";
+import ResponseMessage from "../../../common/ResponseMessage";
 function ContactCard(props) {
   const [readMore, setReadMore] = useState(false);
   const [read, setRead] = useState(props.contact.attributes.read);

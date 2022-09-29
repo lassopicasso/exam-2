@@ -40,3 +40,16 @@ export const buttonList = [
     ],
   },
 ];
+
+export const loader = (
+  <div id="load--wrapper">
+    <div>E</div>
+    <div>Z</div>
+    <div>A</div>
+    <div>D</div>
+    <div>I</div>
+    <div>L</div>
+    <div>O</div>
+    <div>H</div>
+  </div>
+);

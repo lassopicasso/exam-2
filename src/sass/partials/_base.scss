@@ -8,6 +8,7 @@ body {
   grid-template-rows: auto 1fr auto;
   background: linear-gradient(180deg, #d1e7ec 20%, rgba(209, 231, 236, 0.9) 35%, rgba(209, 231, 236, 1) 60%, rgba(114, 185, 196, 0.5) 70%, rgba(96, 175, 188, 0.62) 80%, rgba(68, 158, 175, 0.81) 100%);
   z-index: 0;
+  overflow-x: hidden;
 }
 nav {
   z-index: 20;

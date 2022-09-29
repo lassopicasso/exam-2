@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { apiEnquiry } from "../../constants/api";
-import { apiContact } from "../../constants/api";
+import { apiEnquiry } from "../../../constants/api";
+import { apiContact } from "../../../constants/api";
 import EnquiryCard from "./EnquiryCard";
 import ContactCard from "./ContactCard";
-import ResponseMessage from "../../common/ResponseMessage";
+import ResponseMessage from "../../../common/ResponseMessage";
+import Loading from "../../../common/Loading";
 
 function MessageList({ user }) {
   const [loading, setLoading] = useState(true);
@@ -54,11 +55,7 @@ function MessageList({ user }) {
   }, [filterButton]);
 
   if (loading) {
-    return (
-      <main>
-        <div>Loading...</div>
-      </main>
-    );
+    return <Loading />;
   }
 
   return (

@@ -7,7 +7,7 @@ import Nav from "../common/Nav/Nav";
 import Footer from "../common/Footer";
 import Details from "./DetailsPage/DetailsPage";
 import Explore from "./Explore/Explore";
-import MessagePage from "./Admin/MessagePage";
+import MessagePage from "./Admin/MessagePage/MessagePage";
 import AddHotelPage from "./Admin/AddHotelPage/AddHotelPage";
 
 function Layout() {

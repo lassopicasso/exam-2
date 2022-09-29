@@ -5,7 +5,8 @@ import Carousel from "./Carousel";
 import Search from "../../common/Search";
 import Head from "../../common/Head";
 import ResponseMessage from "../../common/ResponseMessage";
-
+import { loader } from "../../constants/arrays";
+import Loading from "../../common/Loading";
 function Home() {
   const [hotels, setHotels] = useState([]);
   const [newHotels, setNewHotels] = useState([]);
@@ -51,8 +52,10 @@ function Home() {
     setSearchResults(filteredSearch);
   }
 
+  console.log(loader);
+
   if (loading) {
-    return <main>Loading...</main>;
+    return <Loading />;
   }
   if (responseMessage) {
     return (

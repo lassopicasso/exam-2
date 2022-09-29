@@ -19,7 +19,8 @@ function FilterSort({ handleSubmit, priceRange, setPriceRange, sort, setSort, ex
               return (
                 <label key={index}>
                   <input type="radio" name="filter_price" checked={priceRange.label === price.label} onChange={() => setPriceRange(price)} />
-                  {price.label}
+                  {price.label + " "}
+                  {priceRange.label === price.label && <i class="fas fa-check-square"></i>}
                 </label>
               );
             })}

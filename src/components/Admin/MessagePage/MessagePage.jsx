@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
-import Header from "../../common/Header";
-import AuthContext from "../../context/AuthContext";
+import Header from "../../../common/Header";
+import AuthContext from "../../../context/AuthContext";
 import MessageList from "./MessageList";
 import { useNavigate } from "react-router-dom";
-import Head from "../../common/Head";
+import Head from "../../../common/Head";
 
 function MessagePage() {
   const user = useContext(AuthContext)[0];

@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import ResponseMessage from "../../common/ResponseMessage";
 import DetailsCarousel from "./DetailsCarousel";
 import Head from "../../common/Head";
+import Loading from "../../common/Loading";
 function Details() {
   const [hotel, setHotel] = useState("");
   const [images, setImages] = useState([]);
@@ -44,7 +45,7 @@ function Details() {
   }, []);
 
   if (loading) {
-    return <main>Loading...</main>;
+    return <Loading />;
   }
   if (responseMessage) {
     return (
