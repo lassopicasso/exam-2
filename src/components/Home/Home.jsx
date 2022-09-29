@@ -36,7 +36,8 @@ function Home() {
         setLoading(false);
       }
     }
-    fetchData();
+    setTimeout(fetchData, "50000");
+    // fetchData();
     // eslint-disable-next-line
   }, []);
 
