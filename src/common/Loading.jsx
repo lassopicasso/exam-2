@@ -1,5 +1,6 @@
 import React from "react";
 
+//Loading screen
 function Loading() {
   return (
     <main id="loader">

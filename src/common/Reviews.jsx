@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import moment from "moment/moment";
+// import ResponseMessage from "./ResponseMessage";
 
 const schema = yup.object().shape({
   name: yup.string().required("Please enter a name").min(3, "Minimum 3 characters"),
@@ -16,6 +17,7 @@ function Reviews({ hotel, setShowReviews }) {
   const [toggleReviews, setToggleReviews] = useState(false);
   const [reviews, setReviews] = useState([]);
   const [loading, setLoading] = useState(true);
+
   const {
     register,
     handleSubmit,
@@ -27,7 +29,7 @@ function Reviews({ hotel, setShowReviews }) {
   const id = hotel.id;
 
   useEffect(() => {
-    window.scrollTo(0, 0);
+    window.scrollTo(0, 50);
   }, []);
 
   async function onSubmit(input) {
@@ -90,6 +92,7 @@ function Reviews({ hotel, setShowReviews }) {
             try {
               const response = await fetch(apiHotels + "/" + hotel.id, options2);
               console.log(response);
+              // setResponseMessage({ response: "success", message: `There you go, added accommodation: ${input.name}` });
             } catch (error) {
               console.log(error);
             }
