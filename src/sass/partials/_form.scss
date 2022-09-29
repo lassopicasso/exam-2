@@ -17,7 +17,7 @@
     left: 0;
     right: 0;
     transform: translateX(0);
-    height: 100%;
+    height: calc(100% - 50px);
     .search__wrapper,
     .search__results {
       width: 95% !important;
