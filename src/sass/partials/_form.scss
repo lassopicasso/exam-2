@@ -1,11 +1,29 @@
 /* Search Input - Home and Explore */
 .explore__search,
 .home__search {
-  transition: 0.5s;
+  transition: 0.2s;
   width: 90%;
   max-width: 400px;
   #search__input {
     width: 100%;
+  }
+  &:focus-within {
+    z-index: 5;
+    position: absolute;
+    background: rgba(0, 0, 0, 0.6);
+    top: 50px;
+    width: 100%;
+    max-width: 500px;
+    left: 0;
+    right: 0;
+    transform: translateX(0);
+    height: 100%;
+    .search__wrapper,
+    .search__results {
+      width: 95% !important;
+      margin: auto;
+      position: relative;
+    }
   }
 }
 
@@ -43,7 +61,6 @@
 .search__results {
   border-radius: 0 0 5px 5px;
   margin: -19px auto 0 auto;
-  // margin-top: -19px;
   max-height: 200px;
   background: transparent;
   overflow-y: scroll;

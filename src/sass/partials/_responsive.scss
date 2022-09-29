@@ -1,25 +1,34 @@
-// @media screen and (min-width: 400px) {
-//   .home__search:focus-within {
-//     background-color: transparent;
-//     top: 40%;
-//     left: 50%;
-//     transform: translateX(-50%);
-//     width: 90%;
-//     height: auto;
-//   }
-// }
-
 @media screen and (min-width: 500px) {
   .home__carousel-content {
     width: 150%;
   }
-  .home__search:focus-within {
+  .home__search:focus-within,
+  .explore__search:focus-within {
+    width: 90%;
+    max-width: 400px;
+    height: auto;
     background-color: transparent;
+    .search__wrapper,
+    .search__results {
+      width: 100% !important;
+    }
+  }
+  .home__search:focus-within {
     top: 40%;
     left: 50%;
     transform: translateX(-50%);
-    width: 90%;
-    height: auto;
+    .search__wrapper {
+      margin-top: 20px;
+    }
+  }
+  .explore__search:focus-within {
+    top: 0;
+    left: 0;
+    position: relative;
+    margin: 20px auto;
+    .search__results {
+      position: absolute;
+    }
   }
 }
 
