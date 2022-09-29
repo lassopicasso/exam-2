@@ -1,6 +1,25 @@
+// @media screen and (min-width: 400px) {
+//   .home__search:focus-within {
+//     background-color: transparent;
+//     top: 40%;
+//     left: 50%;
+//     transform: translateX(-50%);
+//     width: 90%;
+//     height: auto;
+//   }
+// }
+
 @media screen and (min-width: 500px) {
   .home__carousel-content {
     width: 150%;
+  }
+  .home__search:focus-within {
+    background-color: transparent;
+    top: 40%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    height: auto;
   }
 }
 
