@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import moment from "moment/moment";
-// import ResponseMessage from "./ResponseMessage";
+import ResponseMessage from "./ResponseMessage";
 
 const schema = yup.object().shape({
   name: yup.string().required("Please enter a name").min(3, "Minimum 3 characters"),
@@ -17,6 +17,7 @@ function Reviews({ hotel, setShowReviews }) {
   const [toggleReviews, setToggleReviews] = useState(false);
   const [reviews, setReviews] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [responseMessage, setResponseMessage] = useState(null);
 
   const {
     register,
@@ -32,8 +33,8 @@ function Reviews({ hotel, setShowReviews }) {
     window.scrollTo(0, 50);
   }, []);
 
+  //Add review, then update the reviews list
   async function onSubmit(input) {
-    console.log(input);
     let data = JSON.stringify({
       data: { hotel_id: id, name: input.name, message: input.message, star_rating: input.rating },
     });
@@ -49,14 +50,18 @@ function Reviews({ hotel, setShowReviews }) {
       if (response.ok) {
         setToggleReviews(!toggleReviews);
         reset();
+        setResponseMessage({ response: "success", message: `Thank you for your review, ${input.name}` });
+      } else {
+        setResponseMessage({ response: "error", message: `Oh no :/ Following error occurred: ${response.statusText}` });
       }
     } catch (error) {
-      console.log(error);
+      setResponseMessage({ response: "error", message: `Oh no :/ Following error occurred: ${error}` });
     } finally {
       setLoading(false);
     }
   }
 
+  //Adding the new review rating to the backend and calculate the new average review rating for the accommodation.
   useEffect(() => {
     async function fetchReviews() {
       //Use filter equal method in url and set the max limit from 25 to 100
@@ -65,7 +70,6 @@ function Reviews({ hotel, setShowReviews }) {
         const response = await fetch(apiUrl);
         if (response.ok) {
           const data = await response.json();
-          console.log(data.data);
           //Sort Reviews
           let sortedReviews = data.data
             .map((review) => {
@@ -90,17 +94,17 @@ function Reviews({ hotel, setShowReviews }) {
           };
           if (sortedReviews.length > 0) {
             try {
-              const response = await fetch(apiHotels + "/" + hotel.id, options2);
-              console.log(response);
-              // setResponseMessage({ response: "success", message: `There you go, added accommodation: ${input.name}` });
+              await fetch(apiHotels + "/" + hotel.id, options2);
             } catch (error) {
-              console.log(error);
+              //I chose not to display any error for the user here. Because the user probably won't notice it. It's more of a backend where the new average rating is set.
+              console.log("Adding average ratings on the accommodation failed :/");
             }
           }
           setReviews(sortedReviews);
         }
       } catch (error) {
-        console.log(error);
+        //I chose not to display any error for the user here. Because the user probably won't notice it. It's more of a backend where the new average rating is set.
+        console.log("Fetching the ratings on this accommodation failed :/");
       }
     }
     fetchReviews();
@@ -111,7 +115,7 @@ function Reviews({ hotel, setShowReviews }) {
       <div className="enquiries__background"> </div>
       <div className="reviews__container">
         <Header type="main" header={`Reviews: ${hotel.attributes.name}`} />
-        {/* <p>Here you can add and give a review on a hotel with a rating of 1-10.</p> */}
+        {responseMessage && <ResponseMessage type={responseMessage.response} message={responseMessage.message} />}
         <form className="form form__reviews" onSubmit={handleSubmit(onSubmit)}>
           <div className="form__input--wrapper form__inputs--review">
             <div>
@@ -140,10 +144,8 @@ function Reviews({ hotel, setShowReviews }) {
           </div>
         </form>
         <div className="reviews__cards">
-          {console.log(reviews.length)}
           {reviews.length > 0 ? (
             reviews.map((review, index) => {
-              // const {publishedAt, }
               return (
                 <div className="review__card" key={index}>
                   <div className="review__card--header">
@@ -157,8 +159,7 @@ function Reviews({ hotel, setShowReviews }) {
                 </div>
               );
             })
-          ) : // {return loading===true ? "sometih" : "<div>ee</div>"
-          loading && reviews.length > 0 ? (
+          ) : loading && reviews.length > 0 ? (
             <div className="reviews__cards--none">Loading...</div>
           ) : (
             <div className="reviews__cards--none">Currently no reviews on this place. Will you be the first one?</div>

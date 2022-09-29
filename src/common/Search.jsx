@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 
 function Search({ setSearchResults, searchResults }) {
   const dropDownSearch = useRef(null);
+
+  //If clicked outside of the search input and results the search input resets
   document.addEventListener("mousedown", checkClick);
   function checkClick(event) {
     if (dropDownSearch.current && searchResults && !dropDownSearch.current.contains(event.target)) {
