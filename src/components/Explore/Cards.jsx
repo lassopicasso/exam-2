@@ -37,10 +37,10 @@ function Cards({ hotel }) {
             </div>
           </Link>
           <div className="card__buttons">
-            <button className="carousel__button-left" disabled={maxedLeft ? true : false} onClick={() => setCarouselMargin(carouselMargin + 100)}>
+            <button className="carousel__button-left" disabled={maxedLeft ? true : false} onClick={() => setCarouselMargin(carouselMargin + 100)} aria-label="slide-left">
               <i className="fas fa-chevron-left left"></i>
             </button>
-            <button className="carousel__button-right" disabled={maxedRight ? true : false} onClick={() => setCarouselMargin(carouselMargin - 100)}>
+            <button className="carousel__button-right" disabled={maxedRight ? true : false} onClick={() => setCarouselMargin(carouselMargin - 100)} aria-label="slide-right">
               <i className="fas fa-chevron-right right"></i>
             </button>
           </div>
@@ -51,7 +51,7 @@ function Cards({ hotel }) {
               <Header type="sub" header={name} />
               <div>{distance} km to downtown</div>
               <div className="card__rating rating__link" onClick={() => setShowReviews(true)}>
-                <i className="fas fa-star"></i> {star_rating !== null ? star_rating : "?"}/10 View Ratings
+                <i className="fas fa-star" aria-label="reviews"></i> {star_rating !== null ? star_rating : "?"}/10 View Ratings
               </div>
             </div>
             <span className="card__price">From {price} NOK </span>

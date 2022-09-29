@@ -24,10 +24,10 @@ function DetailsCarousel({ images }) {
         </div>
         <div className="carousel__elements">
           <div className="carousel__buttons">
-            <button className="carousel__button-left" disabled={maxedLeft ? true : false} onClick={() => setCarouselMargin(carouselMargin + 100)}>
+            <button className="carousel__button-left" disabled={maxedLeft ? true : false} onClick={() => setCarouselMargin(carouselMargin + 100)} aria-label="slide-left">
               <i className="fas fa-chevron-left left"></i>
             </button>
-            <button className="carousel__button-right" disabled={maxedRight ? true : false} onClick={() => setCarouselMargin(carouselMargin - 100)}>
+            <button className="carousel__button-right" disabled={maxedRight ? true : false} onClick={() => setCarouselMargin(carouselMargin - 100)} aria-label="slide-right">
               <i className="fas fa-chevron-right right"></i>
             </button>
           </div>

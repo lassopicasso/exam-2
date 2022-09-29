@@ -135,12 +135,12 @@ footer {
       color: $color-black;
       text-decoration: none;
       padding: 10px 50px;
-      // border-bottom: 1px solid $color-black;
+      font-weight: bold;
       box-shadow: 3px 3px 3px rgba(14, 8, 7, 0.2);
       &:hover,
       &-active {
         color: $color-secondary;
-        background-color: rgba(0, 255, 255, 0.9);
+        background-color: white;
       }
     }
   }

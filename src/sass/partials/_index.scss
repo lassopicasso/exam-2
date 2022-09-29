@@ -81,4 +81,13 @@
   top: 40%;
   left: 50%;
   transform: translateX(-50%);
+  &:focus-within {
+    background: rgba(0, 0, 0, 0.6);
+    top: 50px;
+    width: 99%;
+    left: 0;
+    right: 0;
+    transform: translateX(0);
+    height: 100%;
+  }
 }

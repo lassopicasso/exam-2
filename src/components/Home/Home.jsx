@@ -83,7 +83,7 @@ function Home() {
         <div className="home__search">
           <div className="search__wrapper">
             <label htmlFor="search__input">
-              <i className="fas fa-search"></i>
+              <i className="fas fa-search" aria-label="search"></i>
             </label>
             <input type="text" id="search__input" placeholder="Search for accommodation" onChange={hotelSearch} />
           </div>

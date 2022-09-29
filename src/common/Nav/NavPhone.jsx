@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 function NavPhone({ auth, location, logout, dropBurgerLinks }) {
   return (
     <>
-      <i className="fas fa-bars"></i>
+      <i className="fas fa-bars" aria-label="bar-dropdown"></i>
       {dropBurgerLinks && (
         <div className="hamburger__links">
           <Link className={`hamburger__link${location === "/" ? "-active" : ""}`} to="/">
@@ -31,7 +31,6 @@ function NavPhone({ auth, location, logout, dropBurgerLinks }) {
                   Enquiries
                 </Link>
               )}
-
               <button className="hamburger__link" onClick={logout}>
                 Logout
               </button>

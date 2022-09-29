@@ -117,12 +117,9 @@
     appearance: none;
     width: 18px;
     transition: 0.5s;
-    border-radius: 3px;
     &:checked {
       background-color: $color-buttons;
-      -webkit-appearance: checkbox; /* Chrome, Safari, Opera */
-      -moz-appearance: checkbox; /* Firefox */
-      -ms-appearance: checkbox;
+      border-radius: 50%;
     }
   }
   input[type="radio"]:hover {
@@ -146,6 +143,7 @@
     &:hover,
     &-active {
       background-color: $color-buttons;
+      text-decoration: underline;
     }
   }
   .btn1 {

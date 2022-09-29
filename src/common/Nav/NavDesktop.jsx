@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 function NavDesktop({ auth, location, logout }) {
   const [dropAdminLinks, setDropAdminLinks] = useState(false);
   const dropDown = useRef(null);
+
+  //Check if user click outside of menu, if so, close menu
   document.addEventListener("mousedown", checkClick);
   function checkClick(event) {
     if (dropDown.current && dropAdminLinks && !dropDown.current.contains(event.target)) {
@@ -21,7 +23,7 @@ function NavDesktop({ auth, location, logout }) {
       </Link>
       {!auth ? (
         <Link to="/login" className={`nav__link${location === "/login" ? "-active" : ""}`}>
-          <i className="fas fa-user"></i>
+          <i className="fas fa-user" aria-label="login"></i>
         </Link>
       ) : (
         <div className="nav__admin--wrapper" onClick={() => setDropAdminLinks(!dropAdminLinks)} ref={dropDown}>

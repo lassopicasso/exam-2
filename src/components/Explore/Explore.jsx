@@ -110,7 +110,7 @@ function Explore() {
         <Header header="Find your next stay" type="main" />
         <div className="explore__search">
           <div className="search__wrapper">
-            <label htmlFor="search__input">
+            <label htmlFor="search__input" aria-label="search">
               <i className="fas fa-search"></i>
             </label>
             <input type="text" id="search__input" placeholder="Search for a place" onChange={hotelSearch} />
@@ -119,7 +119,7 @@ function Explore() {
         </div>
         <div className="explore__content">
           <div className={`filterSort ${expandFilterSort ? "filterSort-active" : ""}`}>
-            <button className={`filterSort__button ${expandFilterSort ? "filterSort__button-active" : ""}`} onClick={() => setExpandFilterSort(!expandFilterSort)}>
+            <button className={`filterSort__button ${expandFilterSort ? "filterSort__button-active" : ""}`} onClick={() => setExpandFilterSort(!expandFilterSort)} aria-label="filter-sort">
               <span>Filter & Sort </span> {expandFilterSort ? <i className="fas fa-caret-up"></i> : <i className="fas fa-caret-down"></i>}
             </button>
             <FilterSort expandFilterSort={expandFilterSort} key={moment} handleSubmit={handleSubmit} setPriceRange={setPriceRange} priceRange={priceRange} sort={sort} setSort={setSort} />
