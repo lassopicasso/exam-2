@@ -1,5 +1,4 @@
-import React, { useState, useRef } from "react";
-import { useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import DatePicker from "react-datepicker";
 import Header from "../../common/Header";
 import ResponseMessage from "../../common/ResponseMessage";
@@ -7,6 +6,7 @@ import { apiEnquiry } from "../../constants/api";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+
 const schema = yup.object().shape({
   guestName: yup.string().required("Please enter your first name").min(3, "Minimum 3 characters"),
   email: yup.string().email().required("Please enter your email"),
@@ -15,13 +15,14 @@ const schema = yup.object().shape({
 
 function EnquiriesModal({ hotel, setShowModul, price }) {
   const [dateRange, setDateRange] = useState([null, null]);
-  let [startDate, endDate] = dateRange;
   const [expandGuest, setExpandGuest] = useState(false);
   const [adult, setAdult] = useState(1);
   const [children, setChildren] = useState(0);
   const [responseMessage, setResponseMessage] = useState(null);
   const [bookingPrice, setBookingPrice] = useState(price);
   const [room, setRoom] = useState(1);
+
+  let [startDate, endDate] = dateRange;
   const guestsMenu = useRef(null);
   const {
     setValue,
@@ -32,6 +33,8 @@ function EnquiriesModal({ hotel, setShowModul, price }) {
   } = useForm({
     resolver: yupResolver(schema),
   });
+
+  //Add enquiry to the api
   async function onSubmit(input) {
     setResponseMessage(null);
     const dates = document.querySelector("#date").value;
@@ -49,6 +52,7 @@ function EnquiriesModal({ hotel, setShowModul, price }) {
       const response = await fetch(apiEnquiry, options);
       if (response.ok) {
         reset();
+        //Need some manual resets to, back to default values.
         setRoom(1);
         setChildren(0);
         setAdult(1);
@@ -100,9 +104,12 @@ function EnquiriesModal({ hotel, setShowModul, price }) {
       }
     }
   }
+  //Smooth scroll to the top of the page
   useEffect(() => {
     window.scrollTo({ top: 50, behavior: "smooth" });
   }, []);
+
+  //Need to setValue instead of register in their respective inputs, because of the custom build minus/plus interactions
   useEffect(() => {
     setValue("adult", adult);
     setValue("children", children);

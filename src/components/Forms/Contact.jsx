@@ -6,6 +6,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { apiContact } from "../../constants/api";
 import ResponseMessage from "../../common/ResponseMessage";
 import Head from "../../common/Head";
+
 const schema = yup.object().shape({
   name: yup.string().required("Please enter your first name").min(3, "Minimum 3 characters"),
   email: yup.string().email().required("Please enter your email"),
@@ -16,6 +17,7 @@ const schema = yup.object().shape({
 function Contact() {
   const [responseMessage, setResponseMessage] = useState(null);
   const [loading, setLoading] = useState(false);
+
   const {
     register,
     handleSubmit,
@@ -25,13 +27,14 @@ function Contact() {
     resolver: yupResolver(schema),
   });
 
+  //Submit the message to the api
   async function onSubmit(input) {
     setResponseMessage(null);
     setLoading(true);
     let data = JSON.stringify({
       data: { name: input.name, email: input.email, subject: input.subject, message: input.message },
     });
-    console.log(data);
+
     const options = {
       method: "POST",
       body: data,

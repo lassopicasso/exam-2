@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import moment from "moment/moment";
-
 import Header from "../../../common/Header";
 import { apiEnquiry } from "../../../constants/api";
 import ResponseMessage from "../../../common/ResponseMessage";
@@ -44,13 +43,14 @@ function EnquiryCard(props) {
     // eslint-disable-next-line
   }, [read]);
 
+  //If the user/admin has clicked on only display "not read" messages, and the card is "read" dont display it. Next statement similar.
   if (props.filter === "unread" && read === true) {
     return "";
   }
   if (props.filter === "read" && read === false) {
     return "";
   }
-
+  //If the query of the card failed, display error message.
   if (responseMessage) {
     return <ResponseMessage type={responseMessage.response} message={responseMessage.message} />;
   }

@@ -13,10 +13,12 @@ const schema = yup.object().shape({
   email: yup.string().email().required("Please enter your email"),
   password: yup.string().required("Please enter your password").min(5, "Minimum 5 characters"),
 });
+
 function Login() {
   const [auth, setAuth] = useContext(AuthContext);
   const [responseMessage, setResponseMessage] = useState(null);
   const [loading, setLoading] = useState(false);
+
   const {
     register,
     handleSubmit,
@@ -25,15 +27,16 @@ function Login() {
     resolver: yupResolver(schema),
   });
 
+  //If admin or user is logged in, redirects to messages/enqueries page
   const navigate = useNavigate();
   useEffect(() => {
-    console.log(auth);
     if (auth) {
       navigate("/messages");
     }
     // eslint-disable-next-line
   }, [auth]);
 
+  //Submit login data
   async function onSubmit(input) {
     setLoading(true);
     setResponseMessage(null);

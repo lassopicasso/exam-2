@@ -11,7 +11,6 @@ function MessagePage() {
   if (!user) {
     navigate("/");
   }
-  console.log(user.user.username);
   return (
     <main>
       <Head title={user.user.username === "Admin" ? "Messages" : "Enquiries"} description={user.user.username === "Admin" ? "Read messages from the visitors" : "Read enquiries for your hotel"} addPostFixTitle={true} />

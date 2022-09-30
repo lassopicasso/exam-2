@@ -2,6 +2,8 @@ import React, { useState } from "react";
 
 function AddHotelForm({ setValue, getValues, register, errors, handleSubmit, onSubmit, loading }) {
   const [imageList, setImageList] = useState([]);
+
+  //Custom Image Click/Drop handler - This function handle the drop so that the image is saved in the area and not displayed in the internet browser.
   function preventDefaults(event) {
     event.preventDefault();
     event.stopPropagation();
@@ -51,7 +53,6 @@ function AddHotelForm({ setValue, getValues, register, errors, handleSubmit, onS
           }}
           onDragOver={(e) => {
             preventDefaults(e);
-            console.log(e.target.classList);
             e.target.classList.add("highlight");
           }}
           onDrop={(e) => {

@@ -63,6 +63,7 @@ function Reviews({ hotel, setShowReviews }) {
 
   //Adding the new review rating to the backend and calculate the new average review rating for the accommodation.
   useEffect(() => {
+    setLoading(true);
     async function fetchReviews() {
       //Use filter equal method in url and set the max limit from 25 to 100
       const apiUrl = apiRatings + `?pagination[pageSize]=100&populate=*&filters[hotel_id][$eq]=${id}`;
@@ -105,11 +106,14 @@ function Reviews({ hotel, setShowReviews }) {
       } catch (error) {
         //I chose not to display any error for the user here. Because the user probably won't notice it. It's more of a backend where the new average rating is set.
         console.log("Fetching the ratings on this accommodation failed :/");
+      } finally {
+        setLoading(false);
       }
     }
     fetchReviews();
     // eslint-disable-next-line
   }, [toggleReviews]);
+
   return (
     <div className="reviews">
       <div className="enquiries__background"> </div>
@@ -144,7 +148,11 @@ function Reviews({ hotel, setShowReviews }) {
           </div>
         </form>
         <div className="reviews__cards">
-          {reviews.length > 0 ? (
+          {reviews.length === 0 ? (
+            <div className="reviews__cards--none">Currently no reviews on this place. Will you be the first one?</div>
+          ) : loading ? (
+            <div className="reviews__cards--none">Loading...</div>
+          ) : (
             reviews.map((review, index) => {
               return (
                 <div className="review__card" key={index}>
@@ -159,10 +167,6 @@ function Reviews({ hotel, setShowReviews }) {
                 </div>
               );
             })
-          ) : loading && reviews.length > 0 ? (
-            <div className="reviews__cards--none">Loading...</div>
-          ) : (
-            <div className="reviews__cards--none">Currently no reviews on this place. Will you be the first one?</div>
           )}
         </div>
       </div>

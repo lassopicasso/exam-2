@@ -5,15 +5,18 @@ import Carousel from "./Carousel";
 import Search from "../../common/Search";
 import Head from "../../common/Head";
 import ResponseMessage from "../../common/ResponseMessage";
-import { loader } from "../../constants/arrays";
 import Loading from "../../common/Loading";
+
 function Home() {
   const [hotels, setHotels] = useState([]);
   const [newHotels, setNewHotels] = useState([]);
   const [searchResults, setSearchResults] = useState(null);
   const [loading, setLoading] = useState(true);
   const [responseMessage, setResponseMessage] = useState(null);
+
   const apiUrl = apiHotels + "?populate=*";
+
+  //Fetch accommodations and sort them by date so we can display the 4 newest accommodations in the homepage
   useEffect(() => {
     async function fetchData() {
       try {
@@ -40,19 +43,20 @@ function Home() {
     // eslint-disable-next-line
   }, []);
 
+  //When search input changes, this function filter for accommodations from api that match the inputs.
   function hotelSearch(event) {
     let filteredSearch = hotels.filter((hotel) => {
       hotel = hotel.attributes.name.toLowerCase();
       let input = event.target.value.toLowerCase();
       return hotel.includes(input);
     });
+    //Checks if user has removed input, if that case the search results won't display / render the component <Search/> below.
+    //This is kinda a hack - should probably put this in a useeffect instead so it gives more sense. Where it only checks input.length
     if (filteredSearch.length === hotels.length) {
       filteredSearch = null;
     }
     setSearchResults(filteredSearch);
   }
-
-  console.log(loader);
 
   if (loading) {
     return <Loading />;

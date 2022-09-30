@@ -1,7 +1,9 @@
 import React from "react";
 import Header from "../../common/Header";
 import { priceList, buttonList } from "../../constants/arrays";
+
 function FilterSort({ handleSubmit, priceRange, setPriceRange, sort, setSort, expandFilterSort }) {
+  //When filterSort button is interacted, scroll to the first card at top of the card list
   function scrollUp() {
     window.scrollTo({ top: 50, behavior: "smooth" });
   }

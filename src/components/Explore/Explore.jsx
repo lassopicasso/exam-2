@@ -1,5 +1,5 @@
-import moment from "moment";
 import React, { useState, useEffect } from "react";
+import moment from "moment";
 import Header from "../../common/Header";
 import { apiHotels } from "../../constants/api";
 import Cards from "./Cards";
@@ -22,6 +22,7 @@ function Explore() {
 
   const apiUrl = apiHotels + "?populate=*";
 
+  //Fetch accommodations
   useEffect(() => {
     async function fetchData() {
       try {
@@ -43,21 +44,22 @@ function Explore() {
     // eslint-disable-next-line
   }, []);
 
+  //When search input changes, this function filter for accommodations from api that match the inputs.
   function hotelSearch(event) {
-    console.log("Search box interacts");
     let filteredSearch = hotels.filter((hotel) => {
       hotel = hotel.attributes.name.toLowerCase();
       let input = event.target.value.toLowerCase();
       return hotel.includes(input);
     });
-    console.log(filteredSearch.length);
+    //Checks if user has removed input, if that case the search results won't display / render the component <Search/> below.
+    //This is kinda a hack - should probably put this in a useeffect instead so it gives more sense. Where it only checks input.length
     if (filteredSearch.length === hotels.length) {
       filteredSearch = null;
-      console.log("it is ZERO!");
     }
     setSearchResults(filteredSearch);
   }
 
+  //Display's accommodations based on sort and filter buttons.
   function handleSubmit(e) {
     e.preventDefault();
     const priceFiltered = hotels.filter((hotel) => {
@@ -83,6 +85,7 @@ function Explore() {
         return sort.btn === "btn1" ? a.attributes.distance - b.attributes.distance : b.attributes.distance - a.attributes.distance;
       });
     }
+
     //Turn "Load More" button on and off based on the filter and sort results.
     if (priceFiltered.length < 5) {
       setLimitDisplay(hotels.length);

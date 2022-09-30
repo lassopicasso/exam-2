@@ -6,7 +6,7 @@ function DetailsCarousel({ images }) {
   const [maxedRight, setMaxedRight] = useState(false);
   const [imageIndex, setImageIndex] = useState(1);
 
-  //Setting the carousel margin/swing position.
+  //Setting the carousel margin/swing position and image index (counter)
   useEffect(() => {
     carouselMargin === 0 ? setMaxedLeft(true) : setMaxedLeft(false);
     carouselMargin - 100 === images.length * -100 ? setMaxedRight(true) : setMaxedRight(false);

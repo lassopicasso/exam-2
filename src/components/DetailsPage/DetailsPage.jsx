@@ -1,23 +1,24 @@
 import React, { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import Header from "../../common/Header";
 import EnquiriesModal from "./EnquiriesModal";
 import Reviews from "../../common/Reviews";
-import { Link } from "react-router-dom";
 import ResponseMessage from "../../common/ResponseMessage";
 import DetailsCarousel from "./DetailsCarousel";
 import Head from "../../common/Head";
 import Loading from "../../common/Loading";
+
 function Details() {
   const [hotel, setHotel] = useState("");
   const [images, setImages] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showModul, setShowModul] = useState(false);
-  const { id } = useParams();
-  const navigate = useNavigate();
   const [showReviews, setShowReviews] = useState(false);
   const [responseMessage, setResponseMessage] = useState(null);
 
+  //if id doesn't exist, return user to homepage
+  const { id } = useParams();
+  const navigate = useNavigate();
   if (!id) {
     navigate("/");
   }

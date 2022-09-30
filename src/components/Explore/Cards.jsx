@@ -2,15 +2,17 @@ import React, { useState, useEffect } from "react";
 import Header from "../../common/Header";
 import { Link } from "react-router-dom";
 import Reviews from "../../common/Reviews";
+
 function Cards({ hotel }) {
   const [carouselMargin, setCarouselMargin] = useState(0);
   const [maxedLeft, setMaxedLeft] = useState(true);
-  const [maxedRight, setMaxedRight] = useState(false);
   const images = hotel.attributes.images.data;
+  const [maxedRight, setMaxedRight] = useState(false);
   const [showReviews, setShowReviews] = useState(false);
   const { name, distance, price, star_rating } = hotel.attributes;
 
   //When sortFilterButton is clicked, card carousels returns to first image.
+  //This also prevents a bug where the carouselswing can have a wrong position if interacted and then the sortFilterButton is clicked.
   const sortFilterButton = document.querySelector(".cta__update");
   if (sortFilterButton !== null) {
     sortFilterButton.addEventListener("click", () => {
@@ -18,15 +20,16 @@ function Cards({ hotel }) {
     });
   }
 
+  //Checks if left or right button in carousel-card should be disabled
   useEffect(() => {
     carouselMargin === 0 ? setMaxedLeft(true) : setMaxedLeft(false);
     carouselMargin - 100 === images.length * -100 ? setMaxedRight(true) : setMaxedRight(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [carouselMargin]);
+
   return (
     <>
       {showReviews && <Reviews hotel={hotel} setShowReviews={setShowReviews} />}
-
       <div className="card">
         <div className="card__carousel" id={hotel.id}>
           <Link to={`/details/${hotel.id}`}>

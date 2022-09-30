@@ -40,7 +40,6 @@ function AddHotelPage() {
     setResponseMessage(null);
     let formData = new FormData();
     Array.from(input.images).forEach((image) => {
-      console.log(image);
       formData.append("files.images", image, image.name);
     });
 

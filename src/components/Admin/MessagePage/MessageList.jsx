@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { apiEnquiry } from "../../../constants/api";
-import { apiContact } from "../../../constants/api";
+import { apiEnquiry, apiContact } from "../../../constants/api";
 import EnquiryCard from "./EnquiryCard";
 import ContactCard from "./ContactCard";
 import ResponseMessage from "../../../common/ResponseMessage";
@@ -11,6 +10,8 @@ function MessageList({ user }) {
   const [messages, setMessages] = useState([]);
   const [filterButton, setFilterButton] = useState("unread");
   const [responseMessage, setResponseMessage] = useState(null);
+
+  //Send query to fetch either messages or enquiries (checks if it is user or admin that is logged in)
   const apiMessages = user.user.username === "Admin" ? apiContact + "?populate=*" : apiEnquiry + "?populate=*";
   useEffect(() => {
     async function fetchData() {
@@ -33,6 +34,7 @@ function MessageList({ user }) {
             setResponseMessage({ response: "info", message: `There are no unread ${user.user.username === "Admin" ? "messages." : "enquiries."}` });
           }
         } else {
+          //The server "cancel" the authorization after 20-30min logged in. This is why the code especially checks for 401 error
           setResponseMessage({ response: "error", message: `Oh no! :/ ${response.status === 401 ? "Please relogin and try again" : "An error occured"}` });
         }
       } catch (error) {
@@ -45,6 +47,7 @@ function MessageList({ user }) {
     // eslint-disable-next-line
   }, []);
 
+  //When clicked on one of the filter buttons, it checks if there are any "read/unread" messages/queries. If no messages/queries - display message
   useEffect(() => {
     setResponseMessage(null);
     const messagesContainer = document.querySelector(".messages__list") !== null && document.querySelector(".messages__list").childElementCount;
