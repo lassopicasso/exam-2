@@ -77,7 +77,7 @@ function AddHotelPage() {
   return (
     <main>
       <Head title="Add Accommodation" description="Add a new accommodation to this website" addPostFixTitle={true} />
-      <div className="enquiries__background"></div>
+      <div className="background__img"></div>
       <Header type="main" header="Add Hotel" />
       {responseMessage && <ResponseMessage type={responseMessage.response} message={responseMessage.message} />}
       <AddHotelForm setValue={setValue} getValues={getValues} register={register} errors={errors} handleSubmit={handleSubmit} onSubmit={onSubmit} loading={loading} />

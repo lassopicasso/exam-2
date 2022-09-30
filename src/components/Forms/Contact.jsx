@@ -60,7 +60,7 @@ function Contact() {
   return (
     <main>
       <Head title="Contact" description="Contact the owners of this page if you have any question or feedback" addPostFixTitle={true} />
-      <div className="enquiries__background"></div>
+      <div className="background__img"></div>
       <Header type="main" header="Contact" />
       {responseMessage && <ResponseMessage type={responseMessage.response} message={responseMessage.message} />}
       <form className="form contact" onSubmit={handleSubmit(onSubmit)}>

@@ -10,6 +10,12 @@ body {
   z-index: 0;
   overflow-x: hidden;
 }
+main {
+  width: 90%;
+  margin: 0 auto;
+  max-width: 1100px;
+}
+
 nav {
   z-index: 20;
   height: 50px;
@@ -18,155 +24,6 @@ nav,
 footer {
   max-width: 100%;
   background-color: rgba(255, 255, 255, 0.8);
-}
-.nav {
-  align-items: center;
-  &__link,
-  &__button {
-    color: $color-black;
-    &-active,
-    &:hover {
-      color: $color-secondary;
-    }
-  }
-  &__links {
-    display: none;
-    align-items: center;
-    font-weight: bold;
-    color: $color-black !important;
-    @extend %darktext-shadow;
-    .fa-user {
-      color: $color-main;
-      cursor: pointer;
-      font-size: 25px;
-      &:hover {
-        color: $color-secondary;
-      }
-    }
-  }
-  .nav__admin--wrapper {
-    position: relative;
-    .admin__links {
-      position: absolute;
-      top: 38px;
-      margin-left: -70px;
-      display: flex;
-      flex-direction: column;
-      background-color: rgba(255, 255, 255, 0.9);
-      width: 200px;
-      .admin__link,
-      .admin__link-active {
-        text-decoration: none;
-        text-align: start;
-        padding: 10px;
-        color: $color-black;
-        box-shadow: 3px 3px 3px rgba(14, 8, 7, 0.2);
-        @extend %darktext-shadow;
-        &:hover {
-          background-color: white;
-          color: $color-secondary;
-        }
-        &-active {
-          color: $color-secondary;
-          text-decoration: none;
-        }
-      }
-    }
-  }
-  .admin__logout,
-  &__button {
-    cursor: pointer;
-    border: none;
-    font-size: 18px;
-    text-transform: uppercase;
-    background-color: transparent;
-    font-family: $font-main;
-    font-weight: bold;
-  }
-  &__button {
-    display: flex;
-    gap: 5px;
-    text-align: center;
-    @extend %darktext-shadow;
-    .fa-caret-down,
-    .fa-caret-up {
-      font-size: 24px;
-    }
-    &-active {
-      color: $color-secondary;
-    }
-  }
-  &__container {
-    height: 100%;
-    display: flex;
-    width: 80%;
-    max-width: 1100px;
-    justify-content: space-between;
-    margin: auto;
-    align-items: center;
-  }
-  &__hamburger {
-    cursor: pointer;
-    font-size: 24px;
-    color: $color-main;
-    @extend %darktext-shadow;
-    .hamburger__links {
-      position: absolute;
-      left: 0;
-      top: 50px;
-      width: 100%;
-      background-color: rgba(255, 255, 255, 0.9);
-      display: flex;
-      flex-direction: column;
-      text-align: start;
-      z-index: 1;
-    }
-    button.hamburger__link {
-      border: none;
-      text-align: start;
-      font-size: 18px;
-      background-color: transparent;
-      font-family: $font-main;
-    }
-    .hamburger__link,
-    .hamburger__link-active,
-    button.hamburger__link {
-      color: $color-black;
-      text-decoration: none;
-      padding: 10px 50px;
-      font-weight: bold;
-      box-shadow: 3px 3px 3px rgba(14, 8, 7, 0.2);
-      &:hover,
-      &-active {
-        color: $color-secondary;
-        background-color: white;
-      }
-    }
-  }
-}
-.enquiries__background {
-  position: absolute;
-  inset: 0;
-  z-index: -5;
-  background-image: url("../../img/backgroundImg.jpg");
-  background-position: center;
-  background-size: cover;
-  opacity: 0.1;
-}
-
-main {
-  width: 90%;
-  margin: 0 auto;
-  max-width: 1100px;
-}
-h1 {
-  text-align: center;
-  margin: 20px auto;
-  width: 95%;
-  max-width: 320px;
-  padding: 5px;
-  border-radius: 5px;
-  background-color: rgba(255, 255, 255, 0.7);
 }
 
 footer {
@@ -183,4 +40,14 @@ footer {
       display: block;
     }
   }
+}
+
+.background__img {
+  position: absolute;
+  inset: 0;
+  z-index: -5;
+  background-image: url("../../img/backgroundImg.jpg");
+  background-position: center;
+  background-size: cover;
+  opacity: 0.1;
 }

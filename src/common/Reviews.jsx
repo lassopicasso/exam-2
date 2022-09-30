@@ -116,7 +116,7 @@ function Reviews({ hotel, setShowReviews }) {
 
   return (
     <div className="reviews">
-      <div className="enquiries__background"> </div>
+      <div className="background__img"> </div>
       <div className="reviews__container">
         <Header type="main" header={`Reviews: ${hotel.attributes.name}`} />
         {responseMessage && <ResponseMessage type={responseMessage.response} message={responseMessage.message} />}

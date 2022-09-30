@@ -1,4 +1,6 @@
 @media screen and (min-width: 500px) {
+  //Adjusting search input when wider than 500px.
+  //Force not to jump to top anymore when focused
   .home__carousel-content {
     width: 150%;
   }
@@ -33,6 +35,7 @@
 }
 
 @media screen and (min-width: 600px) {
+  //Explore - cards
   .cards {
     .card {
       height: 250px;
@@ -41,16 +44,17 @@
         height: 100%;
         max-width: 400px;
       }
-      &__text {
+      &__text,
+      &__text--text {
         display: flex;
         justify-content: space-between;
+      }
+      &__text {
         width: 100%;
         align-items: flex-end;
         padding: 10px;
         &--text {
-          display: flex;
           flex-direction: column;
-          justify-content: space-between;
           height: 100%;
           h2 {
             margin-top: 0;
@@ -59,7 +63,6 @@
             font-size: 20px;
           }
         }
-
         .cta {
           margin: 0;
         }

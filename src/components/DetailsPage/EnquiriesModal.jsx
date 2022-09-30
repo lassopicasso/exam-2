@@ -130,7 +130,7 @@ function EnquiriesModal({ hotel, setShowModul, price }) {
 
   return (
     <div className="enquiries">
-      <div className="enquiries__background"></div>
+      <div className="background__img"></div>
       <div className="enquiries__content">
         <Header type="main" header="Reservation Enquiry" />
         {responseMessage && <ResponseMessage type={responseMessage.response} message={responseMessage.message} />}
