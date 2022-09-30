@@ -101,6 +101,7 @@
   label {
     display: block;
     margin-top: 10px;
+
     cursor: pointer;
     &:hover {
       font-weight: bold;
@@ -109,7 +110,10 @@
   input[type="radio"] {
     cursor: pointer;
     vertical-align: middle;
-    margin: -3px 3px 0 0;
+    margin-top: -4px;
+    margin-right: 10px;
+    // margin: -3px 3px 0 0;
+    padding: -3px 3px 0 0;
     box-shadow: none;
     border: 1px solid black;
     height: 18px;
@@ -117,7 +121,8 @@
     appearance: none;
     width: 18px;
     transition: 0.5s;
-    &:checked {
+    &:checked,
+    &:hover {
       background-color: $color-buttons;
       border-radius: 50%;
     }
