@@ -15,7 +15,7 @@ function NavDesktop({ auth, location, logout }) {
 
   return (
     <>
-      <Link to="/explore" className={`nav__link${location === "/explore" ? "-active" : ""}`}>
+      <Link to="/explore" className={`nav__link${location === "/explore" ? "-active" : ""} nav__link nav__link-glowing`}>
         Explore
       </Link>
       <Link to="/contact" className={`nav__link${location === "/contact" ? "-active" : ""}`}>

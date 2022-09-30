@@ -29,7 +29,6 @@ footer {
       color: $color-secondary;
     }
   }
-
   &__links {
     display: none;
     align-items: center;
@@ -177,6 +176,8 @@ footer {
     margin: 10px;
     font-size: 18px;
     font-weight: bold;
+    font-family: $font-secondary;
+    @extend %darktext-shadow;
     span {
       display: block;
     }

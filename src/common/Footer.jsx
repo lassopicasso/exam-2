@@ -4,7 +4,7 @@ function Footer() {
   return (
     <footer>
       <div>
-        <span>Holidaze</span> Est. since 2022
+        <span>Holidaze</span> Est. in 2022 - Lars Walderhaug
       </div>
     </footer>
   );
