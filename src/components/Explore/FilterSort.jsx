@@ -2,6 +2,10 @@ import React from "react";
 import Header from "../../common/Header";
 import { priceList, buttonList } from "../../constants/arrays";
 function FilterSort({ handleSubmit, priceRange, setPriceRange, sort, setSort, expandFilterSort }) {
+  function scrollUp() {
+    window.scrollTo({ top: 50, behavior: "smooth" });
+  }
+
   return (
     <form
       className="filterSortWrapper"
@@ -51,7 +55,7 @@ function FilterSort({ handleSubmit, priceRange, setPriceRange, sort, setSort, ex
           })}
         </div>
       </div>
-      <button className="cta__update cta" type="submit">
+      <button className="cta__update cta" type="submit" onClick={() => scrollUp()}>
         Update
       </button>
     </form>
