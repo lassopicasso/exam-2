@@ -67,7 +67,7 @@ function Login() {
   }
 
   return (
-    <>
+    <main>
       <Head title="Login" description="Login as a admin or a user where you can read messages/enquiries and add new hotels if you are admin." addPostFixTitle={true} />
       <div className="enquiries__background"></div>
       <div className="login">
@@ -89,7 +89,7 @@ function Login() {
           </button>
         </form>
       </div>
-    </>
+    </main>
   );
 }
 
