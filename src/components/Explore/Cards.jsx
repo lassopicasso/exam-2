@@ -21,10 +21,6 @@ function Cards({ hotel }) {
   useEffect(() => {
     carouselMargin === 0 ? setMaxedLeft(true) : setMaxedLeft(false);
     carouselMargin - 100 === images.length * -100 ? setMaxedRight(true) : setMaxedRight(false);
-
-    // While doing my daily bug hunt I recognized that hotels with only one image ruin the carousel. This fix it.
-    images.length === 0 && setMaxedRight(true);
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [carouselMargin]);
   return (
