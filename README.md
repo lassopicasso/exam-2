@@ -1,132 +1,118 @@
-## Login
+# Holidaze - Project Exam 2
 
-https://holidays.netlify.app/
+![Explore | Holidaze](/src/img/holidaze.jpg?raw=true "Explore | Holidaze")
 
-- Admin - admin@admin.com Admin123
-- User - user@user.com User123
+Website: [Holidaze](https://holidays.netlify.app)
 
-# Project Exam 2
+This was my final bigger project in my Front End Dev studies.
+The goal was to create a website called "Holidaze" for a tourism agency in Bergen.
+The website let visitors be able to find hotels, B&Bs and guesthouses in the area, and let accommodation owners to receive enquiries.
+There are a three parts of this project. One for the visitors, one for accommodation owners and one for website owner.
 
-There are two options with this Project Exam.
-You need to only choose one and please follow the deliveries carefully.
+## Description
 
-## Goal
+This project is designed to make it easy to navigate for different viewports. It offers only necessary elements to give it a nice user flow. And with a combination of a stylish clean website that consits of many features, it is also set to give a good user journey.
 
-To take the skills learned over the last two years and take on an extensive project where the finished product should reflect the candidate's general development capabilities, in addition to visual and technical skills.
-
-## Brief
-
-For this assignment you have the choice between getting a real world client that you will manage and build a website for, or a case study to make a hotel booking website.
-
-Whatever project you choose, the final submission must have the following:
-
-- A Gantt chart planning the project
-- A style guide
-- An Adobe XD prototype
-- Use a CSS Pre-processor and BEM if not using CSS Modules, Styled Components, etc
-- Use a React.js or Next.js
-- You can use regular JS or TypeScript
-- Please use create-react-app or create-next-app to generate a skeleton project for yourself
-- A fully working website that fulfils the brief
-
-## Option 1: Real World Client
-
-Make a website or application for a real world client. The project should offer a significant enough scope to be able to show off your skills as a developer, and hopefully the project can form a central part of your portfolio for when you start applying for jobs.
-
-The process followed for the project will differ depending on the client and the requirements of their project.
-
-Note: The project has to have a big enough scope to show off the skills learned over your studies. An example of the level we’re expecting would be a website where administrators can add, update, remove products, and users can search, filter, and contact administrators. If you are unsure if your potential client’s brief is strong enough for the Project Exam 2, please message your tutors. Use of a JavaScript Framework is a requirement.
-
-If you do a Real World Client, your project will need to have the following:
-
-### Visitor side:
-
-- Home page
-- Search bar typeahead (auto dropdown to match the products or services the real world client has)
-- A list of products or services either on the home page or a dedicated page
-- A specific page for a product or service
-- A contact form that sends a message and which can be viewed on the admin side. This can be a modal or a page.
-- An enquiry page, either as a modal or separate page
-
-### Admin side:
-
-- Login section that makes use of JWT tokens
-- List of enquiries and new enquiries appear when user submits the form on the enquiry page
-- List of messages from the contact form
-- The admin can create a new product/service
-
-### Recommended Process
-
-Week 1 to 3: Finding client, Planning and Design
-Week 4 to 6: Coding
-Week 7: Bug Fixing
-
-### Level 1 Process
-
-- Use your networks and connections to find a client that needs a website or application built.
-- Understand their requirements and come up with a functional specification for the project. You can write the functional specification using “System shall” statements. For example, “The system shall allow visitors to search for an article”
-- Create a Gantt chart for the project, planning out your deliverables for the client.
-- Make a design style guide and then take this style guide and create an Adobe XD prototype. Present to the client for feedback.
-- Develop the site ensuring you deliver all that is listed in your functional specification.
-- Test the website on various platforms and browsers. Ensure the site is bug-free and working before presenting to the client.
-- Go through a final round of changes before going live with the website.
-- Write a report on your process and decisions for the project. Please use the report template provided.
-
-### Submission
-
-End of week 3: Functional specification, Gantt chart, style guide, and Adobe XD prototype
-End of week 7: Report with link to website, and all files in a compressed ZIP
-
-## Option 2: Hotel Booking Website
-
-A local tourism agency in Bergen is launching a new website called ‘Holidaze’ for visitors to the area to be able to find hotels, B&Bs and guesthouses, and for the accommodation owners to receive enquiries.
-
-The project requires you to create the visitor side of the website where users can search accommodation and make enquiries, as well as the administration side where properties can be added and enquiries managed.
-
-You will need to create an API to store the data for the establishments, enquiries and contact submissions. You can choose to use WordPress or Strapi as a Headless CMS, but it is very important that the API is deployed and publicly available. Please do not submit any files for your API. Only submit the website you have created.
-
-## Requirements for the Website
-
-### Visitor Side
+The project can offer the following webpages and modals for visitors:
 
 - Homepage
-- Search bar typeahead (auto dropdown with hotel names that match what has been typed)
-- A results page with all hotels
-- The hotel specific page which displays all details about the hotel
-- An enquiry page either modal or separate page
-- A contact page (different to enquiry page) which goes to the admin for Holidaze
+- Explore page (list of accommodations)
+- Details page
+- Two modals (reviews and enquiry)
+- Contact Page
+- Login (website admin or accommodation owner)
 
-### Admin side
+For the admin or accommodation owner:
 
-- Create a login section that makes use of JWT tokens
-- List of enquiries and new enquiries appear when user submits the form on the enquiry page
-- List of messages from contact form
-- The admin can create a new establishment
+- Add hotel page (Admin)
+- Messages (Admin)
+- Enquiries (Accommodation owner)
 
-### Recommended Process
+### Example of a user journey of this webpage.
 
-Week 1 and 2: Planning and Design
-Week 3 to 6: Coding
-Week 7: Bug Fixing
+Enters the homepage where there are two main elements. A search bar typehead that filters through the list of accommodations fetched from the api. A list of the 4 newest accommodations, that is transformed to a draggable carousel in mobile viewport. The user can either click on one of the matched results from the search bar or one of the new offers, and be redirected to details page of this accommodation.
 
-### Level 1 Process
+Details page offers, in desktop viewport, a combination of two image carousels (horizontal and vertical). They are both interactive, and functions together based on index counting, width and margin length.
 
-- Start by planning out the project.
-- Next begin your research of likely users and browse competitor websites for ideas.
-- Create a style guide
-- Build an Adobe XD prototype (or you can use Sketch or Figma).
-- Start coding.
-- Once you’ve finished development, start looking for bugs and ensure the site functions well on all viewports. Test the code on different devices. Because your API is public, the code shouldn’t rely on a local API.
-- Refactor your code.
-- Ask another student to look over your code and ask them if they can see how it might be better implemented. This is important to get an outside view on your code. Please attach this feedback to your report.
-- Add the login details for your admin side at the top of this README.md file so that it's easy for the marker to spot.
+The page also contains links to two modals, reviews and enquiries.
+The reviews modal offers a form where a review and rating can be posted, or read reviews from other guests.
+If the information and reviews about the accomodation sounds good, the user can enter the enquiry modal. This contains a form where the guest can send a enquiry to the owner. It consists of inputs such as number of guests (adults, children, rooms), date to check-in and check-out and other necessary information. All forms is supported by the npm's packages, react hook form and yup validation.
 
-### Submission
+If the guest instead want to see what other accommodations are offered, the guest can navigate to the explore page from the navbar.
+The explore page consists of a list of cards, a search bar typehead and a container of filter and sort features. Each card constists of a image carousel, link to reviews modal and some other necessary information.
 
-End of week 7: Report with link to website or a Github link and feedback from code review, and all files in a compressed ZIP. Login details added to the README.md.
+If the user has any questions to the admin, a form on the contact page can be used. All enquiries and contact messages are posted in different content-types in strapi.
 
-### Resources
+The website offers two types of authenticated users, admin and accommodation owner. Both admin and accommodation owner have access to a message page, but with different content; contact messages or enquiries, which are structured in a list of cards sorted by newest. For each card there are different options of actions. One of them is to update the status of the card to read/unread. All read/processed messages/enquiries are grouped together. There are buttons on the page that offers to switch between the two groups - unread or read.
+The admin has also access to a form that adds new accommodations. Including all the necessary information, there is a also a custom made file input for images, that let the user to either add images by click or drop.
 
-Report template included in the repo.
+## Built With
 
-[Video on deploying Strapi to Heroku](https://vimeo.com/689226140/9b378e06b2)
+The project is built with following tech stack.
+
+Front-end:
+
+- [React.js](https://reactjs.org/)
+- [Sass](https://sass-lang.com/)
+
+Back-end:
+
+- [Strapi Headless CMS](https://strapi.io/)
+- [Heroku Server](https://dashboard.heroku.com/)
+
+Other NPM's:
+
+- [React Router Dom](https://www.npmjs.com/package/react-router-dom)
+- [React Datepicker](https://reactdatepicker.com/)
+- [React Hook Form](https://react-hook-form.com/)
+- [Yup Validation](https://www.npmjs.com/package/yup)
+- [Moment](https://momentjs.com/)
+- [React Helment](https://www.npmjs.com/package/react-helmet-async)
+
+## Getting Started
+
+To install and run this React project locally, you can do the following:
+
+1. Clone the repo:
+
+```bash
+git clone git@github.com:lassopicasso/exam-2.git
+```
+
+2. Install the dependencies:
+
+```
+npm install
+```
+
+3. To run the app, run the following command:
+
+```bash
+npm run start
+```
+
+4. Login credentials to restricted pages
+
+Admin:
+
+```bash
+admin@admin.com
+Admin123
+```
+
+Accommodation owner:
+
+```bash
+user@user.com
+User123
+```
+
+## Contact
+
+[My Portfolio](https://lars-walderhaug.netlify.app)
+
+[My LinkedIn page](https://www.linkedin.com/in/lars-walderhaug-5924a349/)
+
+## Acknowledgments
+
+Code Review - Monica Nikolaisen [GitHub Profile](https://github.com/mmunkvold)
